@@ -18,7 +18,6 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<sitemesh.version>2.4.1</sitemesh.version>
 		<jstl.version>1.2</jstl.version>
 	</properties>
 
