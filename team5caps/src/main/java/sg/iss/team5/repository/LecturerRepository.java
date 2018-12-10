@@ -6,4 +6,6 @@ import sg.iss.team5.model.Lecturer;
 
 public interface LecturerRepository extends JpaRepository<Lecturer, String>{
 
+
+
 }
