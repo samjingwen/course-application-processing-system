@@ -1,9 +1,9 @@
 package sg.iss.team5.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-import com.fasterxml.jackson.databind.Module;
-
+import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Studentcourse;
 
 public interface StudentService {
@@ -14,5 +14,7 @@ public interface StudentService {
 	ArrayList<Module> findAllModule();
 	
 	ArrayList<Module> findModuleByStudentId(String sid);
+	
+	ArrayList<Module> findModuleByAcademicYear(Date d);
 
 }

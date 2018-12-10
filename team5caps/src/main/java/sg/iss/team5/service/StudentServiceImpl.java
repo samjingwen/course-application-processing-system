@@ -1,6 +1,7 @@
 package sg.iss.team5.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -38,5 +39,9 @@ public class StudentServiceImpl implements StudentService {
 	
 	public ArrayList<Module> findModuleByStudentId(String sid){
 		return moduleRepository.findModuleByStudentId(sid);
+	}
+	
+	public ArrayList<Module> findModulebyAcademicYear(Date d){
+		return moduleRepository.findModuleByAcademicYear(d);
 	}
 }
