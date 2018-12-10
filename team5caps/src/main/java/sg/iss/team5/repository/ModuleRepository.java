@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.fasterxml.jackson.databind.Module;
+import sg.iss.team5.model.Module;
+
 
 public interface ModuleRepository extends JpaRepository<Module, String> {
 
