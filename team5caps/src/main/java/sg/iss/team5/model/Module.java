@@ -105,9 +105,9 @@ public class Module implements Serializable {
 		return this.studentcourses;
 	}
 
-	public void setStudentcourses(List<Studentcourse> studentcourses) {
+/*	public void setStudentcourses(List<Studentcourse> studentcourses) {
 		this.studentcourses = studentcourses;
-	}
+	}*/
 
 	public Studentcourse addStudentcours(Studentcourse studentcours) {
 		getStudentcourses().add(studentcours);

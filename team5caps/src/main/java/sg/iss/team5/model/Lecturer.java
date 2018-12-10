@@ -60,9 +60,9 @@ public class Lecturer implements Serializable {
 		return this.modules;
 	}
 
-	public void setModules(List<Module> modules) {
+/*	public void setModules(List<Module> modules) {
 		this.modules = modules;
-	}
+	}*/
 
 	public Module addModule(Module module) {
 		getModules().add(module);
