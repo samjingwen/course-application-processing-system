@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.Module;
 
-import sg.iss.team5.model.Lecturer;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.repository.StudentcourseRepository;
@@ -37,6 +36,12 @@ public class LecturerServiceImpl implements LecturerService {
 	public ArrayList<Module> findModuleByAcademicYear(Date year) {
 		// TODO Auto-generated method stub
 		return moduleRepository.findModuleByAcademicYear(year);
+	}
+
+	@Override
+	public ArrayList<Module> findAllModule() {
+		// TODO Auto-generated method stub
+		return (ArrayList<Module>)moduleRepository.findAll();
 	}
 	
 	
