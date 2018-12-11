@@ -6,6 +6,7 @@ import java.util.Date;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Studentcourse;
 
+
 public interface StudentService {
 	ArrayList<Studentcourse> findCourseByStudentId(String sid);
 	
@@ -16,5 +17,8 @@ public interface StudentService {
 	ArrayList<Module> findModuleByStudentId(String sid);
 	
 	ArrayList<Module> findModuleByAcademicYear(Date d);
+
+	ArrayList<Module> findModuleByLecturerId(String lid);
+
 
 }
