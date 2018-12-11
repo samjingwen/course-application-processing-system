@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table>
+<table border = "3">
 <tr>
 <td>#</td>
 <td>Course Name</td>
@@ -22,5 +22,6 @@
 </tr>
 </c:forEach>
 </table>
+<h3>GPA: ${gpa}</h3>
 </body>
 </html>

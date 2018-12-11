@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Module;
@@ -67,6 +67,22 @@ public class StudentServiceImpl implements StudentService {
 	public ArrayList<Coursedetail> findAllCoursedetail() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public double getGpa(ArrayList<Studentcourse> courses) {
+		double gpa = 0;
+		for (Studentcourse course : courses) {
+			switch(course.getGrade()) {
+				case "A":gpa+=5.0;break;
+				case "B":gpa+=4.0;break;
+				case "C":gpa+=3.0;break;
+				case "D":gpa+=2.0;break;
+				case "E":gpa+=1.0;break;
+				default:break;
+			}		
+		}
+		gpa/=courses.size();
+		return gpa;
 	}
 
 }
