@@ -25,9 +25,19 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 	protected String[] getServletMappings() {
 		return new String[] { "/" };
 	}
+<<<<<<< HEAD
 	
 	@Override
 	protected Filter[] getServletFilters() {
+=======
+	@Override
+	protected Filter[] getServletFilters() {
+
+		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+		characterEncodingFilter.setEncoding("UTF-8");
+		return new Filter[] { characterEncodingFilter, new SiteMeshFilter() };
+	}
+>>>>>>> branch 'master' of https://github.com/jwjwjw123/team5javaca.git
 
 		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
 		characterEncodingFilter.setEncoding("UTF-8");

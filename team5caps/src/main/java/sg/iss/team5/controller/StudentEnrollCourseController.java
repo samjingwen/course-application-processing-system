@@ -20,15 +20,15 @@ import sg.iss.team5.service.StudentService;
 public class StudentEnrollCourseController {
 
 	@Autowired
-	ModuleRepository stuservice;
+	StudentService stuservice;
 	
 	@RequestMapping(value= "/modules", method= RequestMethod.GET)
 	
 	public ModelAndView listAll() throws ParseException{
 		//Date year = new SimpleDateFormat("yyyy").parse("2017");
 		//ArrayList<Module> mlist = stuservice.findModuleByAcademicYear(year);
-		//ArrayList<Module>mlist = (ArrayList<Module>) stuservice.findAll();
-		ArrayList<Module> mlist = (ArrayList<Module>)stuservice.findModuleByLecturerId("L00001");
+		ArrayList<Module> mlist = (ArrayList<Module>) stuservice.findAllModule();
+		//ArrayList<Module> mlist = (ArrayList<Module>)stuservice.findModuleByLecturerId("L00001");
 		ModelAndView mav = new ModelAndView("availablemods");
 		mav.addObject("modules", mlist);
 		return mav;

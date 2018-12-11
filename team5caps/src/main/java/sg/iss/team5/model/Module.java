@@ -53,7 +53,22 @@ public class Module implements Serializable {
 	private List<Studentcourse> studentcourses;
 
 	public Module() {
+		super();
 	}
+	
+
+	public Module(String moduleID, Date academicYear, int dayofWeek, int timeslot, String venue,
+			Coursedetail coursedetail, Lecturer lecturer) {
+		super();
+		this.moduleID = moduleID;
+		this.academicYear = academicYear;
+		this.dayofWeek = dayofWeek;
+		this.timeslot = timeslot;
+		this.venue = venue;
+		this.coursedetail = coursedetail;
+		this.lecturer = lecturer;
+	}
+
 
 	public String getModuleID() {
 		return this.moduleID;

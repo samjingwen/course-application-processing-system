@@ -3,10 +3,9 @@ package sg.iss.team5.service;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.annotation.Resource;
-import javax.transaction.Transactional;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Module;
@@ -18,49 +17,49 @@ import sg.iss.team5.repository.StudentcourseRepository;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-	@Resource
-	private StudentcourseRepository studentcourseRepository;
-	@Resource
-	private ModuleRepository moduleRepository;
-	@Resource
-	private CoursedetailRepository coursedetailRepository;
-
-	@Override
+	@Autowired
+	StudentcourseRepository studentcourseRepository;
+	@Autowired
+	ModuleRepository moduleRepository;
+	@Autowired
+	CoursedetailRepository coursedetailRepository;
 
 	public ArrayList<Studentcourse> findCourseByStudentId(String sid) {
-		return studentcourseRepository.findCourseByStudentId(sid);
+		return (ArrayList<Studentcourse>) studentcourseRepository.findCourseByStudentId(sid);
 	}
 
-	@Override
-	@Transactional
 	public int saveStudentCourse(Studentcourse sc) {
 		studentcourseRepository.save(sc);
 		return 1;
 	}
 
-	@Override
-
 	public ArrayList<Module> findAllModule() {
-		return (ArrayList<Module>) moduleRepository.findAll();
+		ArrayList<Module> mlist = (ArrayList<Module>) moduleRepository.findAll();
+		return mlist;
 	}
-
-	@Override
 
 	public ArrayList<Module> findModuleByStudentId(String sid) {
-		return moduleRepository.findModuleByStudentId(sid);
+		ArrayList<Module> mlist = (ArrayList<Module>) moduleRepository.findModuleByStudentId(sid);
+		return mlist;
+
 	}
 
-	@Override
-
 	public ArrayList<Module> findModuleByAcademicYear(Date d) {
-		ArrayList<Module> mlist = new ArrayList<Module>();
-		mlist.addAll(moduleRepository.findModuleByAcademicYear(d));
+		ArrayList<Module> mlist = (ArrayList<Module>) moduleRepository.findModuleByAcademicYear(d);
 		return mlist;
-		
+
+	}
+
+	public ArrayList<Module> findModuleByLecturerId(String lid) {
+		ArrayList<Module> mlist = (ArrayList<Module>) moduleRepository.findModuleByLecturerId(lid);
+		return mlist;
+
 	}
 
 	@Override
 	public ArrayList<Coursedetail> findAllCoursedetail() {
-		return (ArrayList<Coursedetail>) coursedetailRepository.findAllCoursedetail();
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }
