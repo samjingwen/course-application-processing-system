@@ -40,7 +40,7 @@ public class StudentServiceImpl implements StudentService {
 		return moduleRepository.findModuleByStudentId(sid);
 	}
 	
-	public ArrayList<Module> findModulebyAcademicYear(Date d){
+	public ArrayList<Module> findModuleByAcademicYear(Date d){
 		return moduleRepository.findModuleByAcademicYear(d);
 	}
 }
