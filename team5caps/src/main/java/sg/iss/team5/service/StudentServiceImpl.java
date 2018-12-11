@@ -8,20 +8,22 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Module;
-import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.repository.CoursedetailRepository;
 import sg.iss.team5.repository.ModuleRepository;
-import sg.iss.team5.repository.StudentRepository;
 import sg.iss.team5.repository.StudentcourseRepository;
 
 @Service
-@Transactional
 public class StudentServiceImpl implements StudentService {
 
 	@Resource
 	private StudentcourseRepository studentcourseRepository;
+	@Resource
 	private ModuleRepository moduleRepository;
+	@Resource
+	private CoursedetailRepository coursedetailRepository;
 
 	@Override
 
@@ -30,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-
+	@Transactional
 	public int saveStudentCourse(Studentcourse sc) {
 		studentcourseRepository.save(sc);
 		return 1;
@@ -55,5 +57,10 @@ public class StudentServiceImpl implements StudentService {
 		mlist.addAll(moduleRepository.findModuleByAcademicYear(d));
 		return mlist;
 		
+	}
+
+	@Override
+	public ArrayList<Coursedetail> findAllCoursedetail() {
+		return (ArrayList<Coursedetail>) coursedetailRepository.findAllCoursedetail();
 	}
 }

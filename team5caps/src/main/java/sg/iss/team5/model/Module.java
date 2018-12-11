@@ -1,9 +1,19 @@
 package sg.iss.team5.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -105,9 +115,9 @@ public class Module implements Serializable {
 		return this.studentcourses;
 	}
 
-/*	public void setStudentcourses(List<Studentcourse> studentcourses) {
+	public void setStudentcourses(List<Studentcourse> studentcourses) {
 		this.studentcourses = studentcourses;
-	}*/
+	}
 
 	public Studentcourse addStudentcours(Studentcourse studentcours) {
 		getStudentcourses().add(studentcours);
