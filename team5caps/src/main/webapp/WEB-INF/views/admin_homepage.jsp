@@ -13,17 +13,16 @@
 	rel="stylesheet">
 </head>
 <body>
-	List of students with not currently enrolled:
-	<h1>Students List</h1>
+	
+	<h1>Not enrolled</h1>
 	<div class="container">
 		<table class="table table-striped">
-			<caption></caption>
+			<caption>List of students with not currently enrolled:</caption>
 			<thead>
 				<tr>
 					<td>#</td>
 					<td>Student ID</td>
-					<td>Student First Name</td>
-					<td>Student Last Name</td>
+					<td>Student Name</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,8 +31,7 @@
 					<tr>
 						<td>${index.count}</td>
 						<td>${student.studentID}</td>
-						<td>${student.user.firstName}</td>
-						<td>${student.user.lastName}</td>
+						<td>${student.user.firstName} ${student.user.lastName}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
