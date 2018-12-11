@@ -1,12 +1,21 @@
 package sg.iss.team5.repository;
 
+import java.util.ArrayList;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import sg.iss.team5.model.Student;
 
-@Repository
 public interface StudentRepository extends JpaRepository<Student, String> {
+	
+	@Query(value = "select * from students", nativeQuery = true)
+	ArrayList<Student> findAllStudents();
+	
+	@Query(value="select * from students s where s.studentid =: sid", nativeQuery = true)
+	Student findStudentById(@Param("sid") String sid);
+	
 //
 //	if custom methods are needed, add the interface method down below and 
 	//use another implementation with the following convention
