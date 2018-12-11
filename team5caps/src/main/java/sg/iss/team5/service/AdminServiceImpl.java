@@ -32,25 +32,25 @@ public class AdminServiceImpl implements AdminService {
 		return studentRepository.findAllStudents();
 	}
 
-	@Transactional
 	public Student findStudent(String sid) {
 		Student student = studentRepository.findStudentById(sid);
 		System.out.println(student.toString());
 		return student;
 	}
 
+	@Transactional
 	public Student createStudent(Student student) {
 		studentRepository.save(student);
 		return student;
 	}
 
-
+	@Transactional
 	public Student updateStudent(Student student) {
 		studentRepository.save(student);
 		return student;
 	}
 
-
+	@Transactional
 	public void removeStudent(Student student) {
 		studentRepository.delete(student);
 		
