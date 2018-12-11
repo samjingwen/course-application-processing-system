@@ -19,6 +19,7 @@ public interface StudentService {
 	
 	ArrayList<Module> findModuleByAcademicYear(Date d);
 	
+	ArrayList<Module> findModuleNotEnrolled(String sid, Date d);
 	
 	ArrayList<Coursedetail> findAllCoursedetail();
 
