@@ -21,12 +21,12 @@ public class Lecturer implements Serializable {
 	private String position;
 
 	//bi-directional one-to-one association to User
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name="LecturerID")
 	private User user;
 
 	//bi-directional many-to-one association to Module
-	@OneToMany(mappedBy="lecturer")
+	@OneToMany
 	private List<Module> modules;
 
 	public Lecturer() {

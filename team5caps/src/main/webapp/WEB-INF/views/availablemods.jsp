@@ -22,8 +22,8 @@
 			<tr>
 				<td>${modules.academicYear}</td>
 				<td>${modules.moduleID}</td>
-<%-- 				<td>${modules.coursedetail.courseName}</td> --%>
-				<td>${users.firstName}</td>
+				<td>${modules.coursedetail.courseName}</td>
+				<td>${modules.lecturer.user.firstName}</td>
 				<td>${modules.dayofWeek}</td>
 				<td>${modules.timeslot}</td>
 				<td>${modules.venue}</td>

@@ -39,12 +39,12 @@ public class Module implements Serializable {
 	private String venue;
 
 	//bi-directional many-to-one association to Coursedetail
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="CourseID")
 	private Coursedetail coursedetail;
 
 	//bi-directional many-to-one association to Lecturer
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="LecturerID")
 	private Lecturer lecturer;
 
