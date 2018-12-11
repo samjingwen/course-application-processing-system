@@ -1,5 +1,6 @@
 package sg.iss.team5.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,18 +14,25 @@ import org.springframework.web.servlet.ModelAndView;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.service.StudentService;
 
-@RequestMapping(value ="/studentenroll")
 @Controller
+@RequestMapping(value ="/studentenroll")
 public class StudentEnrollCourseController {
 
 	@Autowired
 	StudentService stuservice;
 	
 	@RequestMapping(value= "/modules", method= RequestMethod.GET)
-	public ModelAndView listAll() throws Exception {
-		Date year = new SimpleDateFormat("yyyy").parse("2018");
+	
+	public ModelAndView listAll() throws ParseException{
+		Date year = new SimpleDateFormat("yyyy").parse("2017");
 		ArrayList<Module> mlist = stuservice.findModuleByAcademicYear(year);
 		ModelAndView mav = new ModelAndView("availablemods");
-		return mav.addObject("modules", mlist);
+		mav.addObject("modules", mlist);
+		return mav;
+	}
+	
+	@RequestMapping(value= "/home", method= RequestMethod.GET)
+	public String home() {
+		return "index";
 	}
 }

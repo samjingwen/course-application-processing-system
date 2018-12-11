@@ -12,12 +12,12 @@ import sg.iss.team5.model.Module;
 
 public interface ModuleRepository extends JpaRepository<Module, String> {
 
-	@Query("select m from module m where m.moduleid in(select s.moduleid from studentcourse s where s.studentid = :sid)")
+	@Query(value = "select m from module m where m.moduleid in(select s.moduleid from studentcourse s where s.studentid = :sid)", nativeQuery = true)
 	ArrayList<Module> findModuleByStudentId(@Param("sid") String sid);
 	
-	@Query("select m from Module m where m.lecturer = :lid")
-	ArrayList<Module> findModuleByLecturerId(@Param("lct") String lid);
+	@Query(value = "select m from Module m where m.lecturer = :lid", nativeQuery = true)
+	ArrayList<Module> findModuleByLecturerId(@Param("lid") String lid);
 	
-	@Query("select m from Module m where m.academicYear = :year")
-	ArrayList<Module> findModuleByAcademicYear(@Param("lct") Date year);
+	@Query(value="select m from Module m where m.academicYear = :year", nativeQuery = true)
+	ArrayList<Module> findModuleByAcademicYear(@Param("year") Date year);
 }

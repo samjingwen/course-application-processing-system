@@ -10,7 +10,7 @@ import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.model.StudentcoursePK;
 
 public interface StudentcourseRepository extends JpaRepository<Studentcourse, StudentcoursePK> {
-	@Query("select s from studentcourse s where s.studentid = :sid")
+	@Query(value="select s from studentcourse s where s.studentid = :sid", nativeQuery = true)
 	ArrayList<Studentcourse> findCourseByStudentId(@Param("sid") String sid);
 
 }
