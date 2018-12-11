@@ -29,7 +29,7 @@ public class Student implements Serializable {
 	private List<Studentcourse> studentcourses;
 
 	//bi-directional one-to-one association to User
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name="StudentID")
 	private User user;
 

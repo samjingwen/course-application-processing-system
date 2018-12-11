@@ -1,9 +1,19 @@
 package sg.iss.team5.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -29,12 +39,12 @@ public class Module implements Serializable {
 	private String venue;
 
 	//bi-directional many-to-one association to Coursedetail
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="CourseID")
 	private Coursedetail coursedetail;
 
 	//bi-directional many-to-one association to Lecturer
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="LecturerID")
 	private Lecturer lecturer;
 
@@ -43,7 +53,22 @@ public class Module implements Serializable {
 	private List<Studentcourse> studentcourses;
 
 	public Module() {
+		super();
 	}
+	
+
+	public Module(String moduleID, Date academicYear, int dayofWeek, int timeslot, String venue,
+			Coursedetail coursedetail, Lecturer lecturer) {
+		super();
+		this.moduleID = moduleID;
+		this.academicYear = academicYear;
+		this.dayofWeek = dayofWeek;
+		this.timeslot = timeslot;
+		this.venue = venue;
+		this.coursedetail = coursedetail;
+		this.lecturer = lecturer;
+	}
+
 
 	public String getModuleID() {
 		return this.moduleID;
@@ -105,9 +130,9 @@ public class Module implements Serializable {
 		return this.studentcourses;
 	}
 
-/*	public void setStudentcourses(List<Studentcourse> studentcourses) {
+	public void setStudentcourses(List<Studentcourse> studentcourses) {
 		this.studentcourses = studentcourses;
-	}*/
+	}
 
 	public Studentcourse addStudentcours(Studentcourse studentcours) {
 		getStudentcourses().add(studentcours);
