@@ -18,26 +18,27 @@ import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.service.StudentService;
 
 @Controller
-@RequestMapping(value ="/studentenroll")
+@RequestMapping(value = "/studentenroll")
 public class StudentEnrollCourseController {
 
 	@Autowired
 	StudentService stuservice;
-	
-	@RequestMapping(value= "/modules/{sid}", method= RequestMethod.GET)
-	public ModelAndView listAllNotTaken(@PathVariable String sid) throws ParseException{
-		//ArrayList<Module> mlist = stuservice.findModuleByAcademicYear(Calendar.getInstance().getTime());
-		//ArrayList<Module> mlist = (ArrayList<Module>) stuservice.findAllModule();
-		//ArrayList<Module> mlist = (ArrayList<Module>)stuservice.findModuleByStudentId(sid);
+
+	@RequestMapping(value = "/modules/{sid}", method = RequestMethod.GET)
+	public ModelAndView listAllNotTaken(@PathVariable String sid) throws ParseException {
+		// ArrayList<Module> mlist =
+		// stuservice.findModuleByAcademicYear(Calendar.getInstance().getTime());
+		// ArrayList<Module> mlist = (ArrayList<Module>) stuservice.findAllModule();
+		// ArrayList<Module> mlist =
+		// (ArrayList<Module>)stuservice.findModuleByStudentId(sid);
 		Date date = Calendar.getInstance().getTime();
 		ArrayList<Module> mlist = (ArrayList<Module>) stuservice.findModuleNotEnrolled(sid, date);
 		ModelAndView mav = new ModelAndView("availablemods");
 		mav.addObject("modules", mlist);
+		ArrayList<String> dlist = new ArrayList<String>();
+		dlist = stuservice.getDay(mlist);
+		mav.addObject("dlist",dlist);
 		return mav;
 	}
-	
-	@RequestMapping(value= "/home", method= RequestMethod.GET)
-	public String home() {
-		return "index";
-	}
+
 }
