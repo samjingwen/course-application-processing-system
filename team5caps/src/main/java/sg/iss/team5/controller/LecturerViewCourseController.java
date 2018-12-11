@@ -22,7 +22,7 @@ public class LecturerViewCourseController {
 	
 	@RequestMapping(value ="/courselist/{lid}", method=RequestMethod.GET)
 	public ModelAndView listAll(@PathVariable String lid) {
-		ArrayList<com.fasterxml.jackson.databind.Module> mlist = lectservice.findModuleByLecturerId(lid);
+		ArrayList<Module> mlist = lectservice.findModuleByLecturerId(lid);
 		ModelAndView mav = new ModelAndView("ViewModules");
 		mav.addObject("modules",mlist);
 		return mav;
@@ -33,7 +33,7 @@ public class LecturerViewCourseController {
 	public ModelAndView lsitAll() {
 		//ArrayList<Module> mlist = lectservice.findAllModule();
 		ModelAndView mav = new ModelAndView("ViewModules");
-		ArrayList<com.fasterxml.jackson.databind.Module> mlist = lectservice.findAllModule();
+		ArrayList<Module> mlist = lectservice.findAllModule();
 		mav.addObject("modules",mlist);
 		return mav;
 	}
