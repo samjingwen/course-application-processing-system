@@ -58,8 +58,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public ArrayList<Coursedetail> findAllCoursedetail() {
-		// TODO Auto-generated method stub
-		return null;
+		return coursedetailRepository.findAllCoursedetail();
 	}
 
 }
