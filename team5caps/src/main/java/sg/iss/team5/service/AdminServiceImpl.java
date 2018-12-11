@@ -20,21 +20,18 @@ import sg.iss.team5.repository.StudentRepository;
 public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
+	UserRepository userRepository;
+	@Autowired
 	StudentRepository studentRepository;
 
 	public ArrayList<Student> findNotEnrolled(){
 		return studentRepository.findNotEnrolled();
 	}
-	
-	@Autowired
-	UserRepository userRepository;
 
-	@Override
 	public ArrayList<Student> findAllStudents() {
 		return studentRepository.findAllStudents();
 	}
 
-	@Override
 	@Transactional
 	public Student findStudent(String sid) {
 		Student student = studentRepository.findStudentById(sid);
@@ -42,4 +39,20 @@ public class AdminServiceImpl implements AdminService {
 		return student;
 	}
 
+	public Student createStudent(Student student) {
+		studentRepository.save(student);
+		return student;
+	}
+
+
+	public Student updateStudent(Student student) {
+		studentRepository.save(student);
+		return student;
+	}
+
+
+	public void removeStudent(Student student) {
+		studentRepository.delete(student);
+		
+	}
 }

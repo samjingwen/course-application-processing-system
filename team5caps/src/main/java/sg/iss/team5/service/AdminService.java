@@ -22,6 +22,4 @@ public interface AdminService {
 
 	void removeStudent(Student s);
 
-	ArrayList<Student> findStudentsByCriteria(Student student);
-
 }
