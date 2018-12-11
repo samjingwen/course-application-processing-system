@@ -5,26 +5,35 @@ import java.util.ArrayList;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Student;
+import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.repository.CoursedetailRepository;
 import sg.iss.team5.repository.StudentRepository;
+import sg.iss.team5.repository.StudentcourseRepository;
 import sg.iss.team5.repository.UserRepository;
-
 
 import sg.iss.team5.model.Student;
 import sg.iss.team5.repository.StudentRepository;
 
 @Service
 public class AdminServiceImpl implements AdminService {
-	
+
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
 	StudentRepository studentRepository;
+	@Autowired
+	CoursedetailRepository coursedetailRepository;
+	@Autowired
+	StudentcourseRepository studentcourseRepository;
 
-	public ArrayList<Student> findNotEnrolled(){
+	public ArrayList<Student> findNotEnrolled() {
 		return studentRepository.findNotEnrolled();
 	}
 
@@ -53,6 +62,18 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public void removeStudent(Student student) {
 		studentRepository.delete(student);
-		
+	}
+
+	public ArrayList<Coursedetail> getCourseDetailList() {
+		return coursedetailRepository.findAllCoursedetail();
+	}
+
+	public Integer getEnrolledCapacity(String courseId) {
+		return coursedetailRepository.getCurrentEnrolledCapacity(courseId);
+	}
+
+	public ArrayList<Studentcourse> findCourseByCourseId(String cid) {
+		System.out.println(cid);
+		return studentcourseRepository.findCourseByCourseId(cid);
 	}
 }
