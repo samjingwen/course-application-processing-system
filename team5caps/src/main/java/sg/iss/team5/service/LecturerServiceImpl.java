@@ -8,8 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.Module;
-
+import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.repository.StudentcourseRepository;
