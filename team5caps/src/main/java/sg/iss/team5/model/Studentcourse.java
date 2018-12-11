@@ -35,7 +35,7 @@ public class Studentcourse implements Serializable {
 	private Module module;
 
 	//bi-directional many-to-one association to Student
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="StudentID")
 	private Student student;
 
