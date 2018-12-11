@@ -7,19 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.repository.CoursedetailRepository;
 import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.repository.StudentcourseRepository;
 
 @Service
-@Transactional
 public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	StudentcourseRepository studentcourseRepository;
 	@Autowired
 	ModuleRepository moduleRepository;
+	@Autowired
+	CoursedetailRepository coursedetailRepository;
 
 	public ArrayList<Studentcourse> findCourseByStudentId(String sid) {
 		return (ArrayList<Studentcourse>) studentcourseRepository.findCourseByStudentId(sid);
@@ -51,6 +54,12 @@ public class StudentServiceImpl implements StudentService {
 		ArrayList<Module> mlist = (ArrayList<Module>) moduleRepository.findModuleByLecturerId(lid);
 		return mlist;
 
+	}
+
+	@Override
+	public ArrayList<Coursedetail> findAllCoursedetail() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
