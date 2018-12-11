@@ -18,15 +18,15 @@
 			<td>Time Slot</td>
 			<td>Venue</td>
 		</tr>
-		<c:forEach items="${modules}" var="module" varStatus="index">
+		<c:forEach items="${modules}" var="modules" varStatus="index">
 			<tr>
-				<td>${module.academicyear}</td>
-				<td>${module.moduleID}</td>
-				<td>${module.coursedetail.courseName}</td>
-				<td>${module.lecturer.users.firstName}</td>
-				<td>${module.dayofWeek}</td>
-				<td>${module.timeslot}</td>
-				<td>${module.venue}</td>
+				<%-- <td>${modules.academicyear}</td> --%>
+				<td>${modules.moduleID}</td>
+				<%-- <td>${modules.coursedetail.courseName}</td> --%>
+				<%-- <td>${modules.lecturer.users.firstName}</td> --%>
+				<td>${modules.dayofWeek}</td>
+				<td>${modules.timeslot}</td>
+				<td>${modules.venue}</td>
 			</tr>
 		</c:forEach>
 	</table>

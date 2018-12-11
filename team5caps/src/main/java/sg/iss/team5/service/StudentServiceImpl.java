@@ -22,25 +22,38 @@ public class StudentServiceImpl implements StudentService {
 	@Resource
 	private StudentcourseRepository studentcourseRepository;
 	private ModuleRepository moduleRepository;
-	
-	public ArrayList<Studentcourse> findCourseByStudentId(String sid){
+
+	@Override
+
+	public ArrayList<Studentcourse> findCourseByStudentId(String sid) {
 		return studentcourseRepository.findCourseByStudentId(sid);
 	}
-	
+
+	@Override
+
 	public int saveStudentCourse(Studentcourse sc) {
 		studentcourseRepository.save(sc);
 		return 1;
 	}
-	
-	public ArrayList<Module> findAllModule(){
-		return (ArrayList<Module>)moduleRepository.findAll();
+
+	@Override
+
+	public ArrayList<Module> findAllModule() {
+		return (ArrayList<Module>) moduleRepository.findAll();
 	}
-	
-	public ArrayList<Module> findModuleByStudentId(String sid){
+
+	@Override
+
+	public ArrayList<Module> findModuleByStudentId(String sid) {
 		return moduleRepository.findModuleByStudentId(sid);
 	}
-	
-	public ArrayList<Module> findModuleByAcademicYear(Date d){
-		return moduleRepository.findModuleByAcademicYear(d);
+
+	@Override
+
+	public ArrayList<Module> findModuleByAcademicYear(Date d) {
+		ArrayList<Module> mlist = new ArrayList<Module>();
+		mlist.addAll(moduleRepository.findModuleByAcademicYear(d));
+		return mlist;
+		
 	}
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import sg.iss.team5.model.Module;
+import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.service.StudentService;
 
 @Controller
@@ -19,13 +20,15 @@ import sg.iss.team5.service.StudentService;
 public class StudentEnrollCourseController {
 
 	@Autowired
-	StudentService stuservice;
+	ModuleRepository stuservice;
 	
 	@RequestMapping(value= "/modules", method= RequestMethod.GET)
 	
 	public ModelAndView listAll() throws ParseException{
-		Date year = new SimpleDateFormat("yyyy").parse("2017");
-		ArrayList<Module> mlist = stuservice.findModuleByAcademicYear(year);
+		//Date year = new SimpleDateFormat("yyyy").parse("2017");
+		//ArrayList<Module> mlist = stuservice.findModuleByAcademicYear(year);
+		//ArrayList<Module>mlist = (ArrayList<Module>) stuservice.findAll();
+		ArrayList<Module> mlist = (ArrayList<Module>)stuservice.findModuleByLecturerId("L00001");
 		ModelAndView mav = new ModelAndView("availablemods");
 		mav.addObject("modules", mlist);
 		return mav;
