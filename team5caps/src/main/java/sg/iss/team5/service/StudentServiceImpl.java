@@ -1,6 +1,7 @@
 package sg.iss.team5.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public ArrayList<Module> findModuleByStudentId(String sid) {
-		ArrayList<Module> mlist = (ArrayList<Module>) moduleRepository.findModuleByStudentId(sid);
-		return mlist;
+		ArrayList<Module> slist = (ArrayList<Module>) moduleRepository.findModuleByStudentId(sid);
+		return slist;
 
 	}
 
@@ -56,6 +57,12 @@ public class StudentServiceImpl implements StudentService {
 
 	}
 
+	public ArrayList<Module> findModuleNotEnrolled(String sid, Date year){
+		year = Calendar.getInstance().getTime();
+		ArrayList<Module> mlist = (ArrayList<Module>) moduleRepository.findModuleNotEnrolled(sid, year);
+		return mlist;
+	}
+	
 	@Override
 	public ArrayList<Coursedetail> findAllCoursedetail() {
 		// TODO Auto-generated method stub
