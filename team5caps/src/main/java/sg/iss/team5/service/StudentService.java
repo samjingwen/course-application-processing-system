@@ -3,9 +3,12 @@ package sg.iss.team5.service;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.Module;
+import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
 
 
@@ -32,6 +35,10 @@ public interface StudentService {
 	
 	String getTime(Module mods);
 	
+	int getYear(Module mods);
+	
 	ArrayList<FormattedModule> getFormat(ArrayList<Module> mods);
+
+	void enrollStudent(Module mod, Student stu);
 
 }

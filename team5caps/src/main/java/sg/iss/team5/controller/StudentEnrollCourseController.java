@@ -1,7 +1,6 @@
 package sg.iss.team5.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import sg.iss.team5.model.FormattedModule;
-import sg.iss.team5.model.Module;
-import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.service.StudentService;
 
 @Controller
@@ -36,6 +33,13 @@ public class StudentEnrollCourseController {
 
 		mav.addObject("formattedmodules", mlist);
 		return mav;
+	}
+
+	@RequestMapping(value = "/student/enroll/{sid}", method = RequestMethod.POST)
+	public ModelAndView enrollStudent()
+	{
+		return null;
+	
 	}
 
 }

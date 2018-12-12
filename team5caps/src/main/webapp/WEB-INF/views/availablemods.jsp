@@ -21,13 +21,15 @@
 				<td><b>Day of Week</b></td>
 				<td><b>Time Slot</b></td>
 				<td><b>Venue</b></td>
+				<td><b>Enroll</b></td>
 			</tr>
 			</thread>
 			<tbody>
-				<c:forEach items="${formattedmodules}" var="formattedmodules" varStatus="index">
-				
+				<c:forEach items="${formattedmodules}" var="formattedmodules"
+					varStatus="index">
+
 					<tr>
-						<td>${formattedmodules.academicYear}</td>
+						<td>${formattedmodules.getYear()}</td>
 						<td>${formattedmodules.moduleID}</td>
 						<td>${formattedmodules.coursedetail.courseName}</td>
 						<td>${formattedmodules.lecturer.user.firstName}
@@ -35,6 +37,10 @@
 						<td>${formattedmodules.getDay()}</td>
 						<td>${formattedmodules.getTime()}</td>
 						<td>${formattedmodules.venue}</td>
+						<td><a
+							href="${pageContext.request.contextPath}/student/enroll/${student.sid}.html">
+								<b>Enroll </b>
+						</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
