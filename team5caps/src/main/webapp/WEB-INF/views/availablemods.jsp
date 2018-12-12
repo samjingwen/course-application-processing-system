@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +19,10 @@
 
 <title>Available Modules</title>
 </head>
-<form:form action="${pageContext.request.contextPath}/studentenroll/modules/{sid}" method="POST">
+
 <body>
 
-
+	<form:form method="POST" modelAttribute="enroll" action="${pageContext.request.contextPath}/studentenroll/enrollin">
 	<div name="availm">
 		<table id="AvailMods" class="display">
 			<caption>List of available modules:</caption>
@@ -51,13 +52,16 @@
 						<td>${formattedmodules.getDay()}</td>
 						<td>${formattedmodules.getTime()}</td>
 						<td>${formattedmodules.venue}</td>
-						<td align="center"><input type="checkbox" name="modid" value="${formattedmodules.moduleID}"></td>
+						<td align="center"><input type="checkbox" name="modid"
+							value="${formattedmodules.moduleID}"></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	<input type = "submit" name="Enroll" value="Enroll">
+
+		<input type="submit" name="enroll" value="Enroll" class="button" />
+	</form:form>
 </body>
-</form:form>
+
 </html>
