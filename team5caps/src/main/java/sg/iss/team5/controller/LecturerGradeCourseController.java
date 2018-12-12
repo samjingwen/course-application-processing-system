@@ -27,7 +27,7 @@ public class LecturerGradeCourseController {
 	public ModelAndView listAllStudentcourse(){
 		 ModelAndView mav = new ModelAndView("gradebook");
 		 String lid="L00007";
-		 //String lid =session.getAttribute("ID").toString();
+		 //String lid =session.getAttribute("USERSESSION").toString();
 		 ArrayList<Module>sm=new ArrayList<Module>();
 		 ArrayList<String>cList=new ArrayList<String>();
 		 sm=lService.findModuleByLecturerId(lid);
@@ -46,21 +46,6 @@ public class LecturerGradeCourseController {
 		return "index";
 	}
 	
-	@RequestMapping(value= "/courselist")
-	@Transactional
-	public ModelAndView ShowCourseList(HttpSession session) {
-		 ModelAndView mav = new ModelAndView("gradebook");
-		 String lid="L00003";
-		 //String lid =session.getAttribute("ID").toString();
-		 ArrayList<Module>sm=new ArrayList<Module>();
-		 ArrayList<String>cList=new ArrayList<String>();
-		 sm=lService.findModuleByLecturerId(lid);
-		 for (Module module : sm) {
-			 String eachcourse=module.getCoursedetail().getCourseName();
-			 cList.add(eachcourse);
-		}
-		 mav.addObject("courselist", cList); 
-		 return mav;
-	}
+	
 	
 }
