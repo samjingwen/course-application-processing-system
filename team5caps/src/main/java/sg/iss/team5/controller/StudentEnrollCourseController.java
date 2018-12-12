@@ -22,6 +22,7 @@ import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.model.StudentcoursePK;
 import sg.iss.team5.model.User;
 import sg.iss.team5.service.AdminService;
 import sg.iss.team5.service.StudentService;
@@ -60,7 +61,8 @@ public class StudentEnrollCourseController {
 		
 		ArrayList<Studentcourse> clist = stuservice.enrollCourse(mlist, s);
 		for(Studentcourse sc : clist) {
-			stuservice.saveStudentCourse("Test",Calendar.getInstance().getTime(),"0117A0006","S00008");
+			sc.setId(new StudentcoursePK(sc.getModule().getModuleID(), sc.getStudent().getStudentID()));
+			stuservice.saveStudentCourse(sc);
 		}
 		
 		ModelAndView mav = new ModelAndView("studentenrollment");
