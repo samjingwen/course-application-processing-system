@@ -15,4 +15,6 @@ public interface StudentcourseRepository extends JpaRepository<Studentcourse, St
 
 	@Query(value="select * from studentcourse sc where sc.moduleid like %:cid", nativeQuery = true)
 	ArrayList<Studentcourse> findCourseByCourseId(@Param("cid") String cid);
+	
+	ArrayList<Studentcourse> findByModule_ModuleIDContaining(String cid);
 }

@@ -74,6 +74,7 @@ public class AdminServiceImpl implements AdminService {
 
 	public ArrayList<Studentcourse> findCourseByCourseId(String cid) {
 		System.out.println(cid);
-		return studentcourseRepository.findCourseByCourseId(cid);
+		return studentcourseRepository.findByModule_ModuleIDContaining(cid);
+//		return studentcourseRepository.findCourseByCourseId(cid);
 	}
 }

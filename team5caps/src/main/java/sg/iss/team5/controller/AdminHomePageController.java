@@ -64,6 +64,7 @@ public class AdminHomePageController {
 	@RequestMapping(value = "/manage/courses/{cid}")
 	public ModelAndView listStudentsInCourse(@PathVariable String cid) {
 		ArrayList<Studentcourse> sclist = adminService.findCourseByCourseId(cid);
+		System.out.println(sclist);
 		ModelAndView mav = new ModelAndView("admin_coursedetails");
 		mav.addObject("studentcourse",sclist);
 		return mav;

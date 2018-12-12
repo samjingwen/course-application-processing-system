@@ -7,21 +7,31 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+
+
+
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script>
 	$(document).ready(function() {
-		$('#example').DataTable();
+		$('#pagination').DataTable();
 	})
 </script>
+
+
+
+
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
 	<h1>Student List</h1>
-	<table id="example" class="display">
+	<table id="pagination" class="display">
 
 		<thead>
 			<tr>

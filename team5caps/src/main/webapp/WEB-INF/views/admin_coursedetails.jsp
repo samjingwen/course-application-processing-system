@@ -11,12 +11,25 @@
 <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
 	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+	<!-- 
+	pagination script here -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#pagination').DataTable();
+	})
+</script>
 </head>
 <body>
 
 	<h1>Course details</h1>
 	<div class="container">
-		<table class="table table-striped">
+		<table id="pagination" class="table table-striped">
 			<caption>Students currently enrolled</caption>
 			<thead>
 				<tr>
