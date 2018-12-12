@@ -174,7 +174,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public Module findModulebyID(String mid) {
-		Module mod = moduleRepository.findModuleById(mid);
+		Module mod = moduleRepository.findByModuleID(mid);
 
 		return mod;
 	}
