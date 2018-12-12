@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sg.iss.team5.model.Lecturer;
-
 import sg.iss.team5.service.AdminLecturer;
 
 @Controller
@@ -38,10 +37,10 @@ public class AdminManageLecController {
 	}
 
 	//create lecturer
-	@RequestMapping(value = "/lynn/lectnew", method = RequestMethod.GET)
-	public ModelAndView createLecturer() {
-		
-	}
+//	@RequestMapping(value = "/lynn/lectnew", method = RequestMethod.GET)
+//	public ModelAndView createLecturer() {
+//		
+//	}
 	
 	
 	

@@ -3,21 +3,39 @@ package sg.iss.team5.service;
 
 import java.util.ArrayList;
 
-
-import sg.iss.team5.model.Course;
+import sg.iss.team5.model.Coursedetail;
+import sg.iss.team5.model.Lecturer;
+import sg.iss.team5.model.Student;
 public interface AdminService {
 
-		ArrayList<Course> findAllStudents();
+		ArrayList<Student> findAllStudents();
+		
+		Student findStudentById(String sid);
+		
+		Student createStudent(Student student);
 
-		Course findStudent(String nric);
+		Student updateStudent(Student student);
+		
+		ArrayList<Lecturer> findAllLecturers();
+		
+		Lecturer findLecturerById(String lid);
+		
+		Lecturer createLecturer(Lecturer lecturer);
+		
+		Lecturer updateLecturer(Lecturer lecturer);
+		
+		ArrayList<Coursedetail> findAllCoursedetails();
 
-		Course createStudent(Course s);
+		Coursedetail findCoursedetailById(String cid);
+		
+		Coursedetail createCoursedetail(Coursedetail cd);
+		
+		Coursedetail updateCoursedetail(Coursedetail cd);
 
-		Course updateStudent(Course s);
+		
+		
+		
 
-		void removeStudent(Course s);
-
-		ArrayList<Course> findStudentsByCriteria(Course student);
 
 
 }
