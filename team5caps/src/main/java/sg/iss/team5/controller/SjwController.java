@@ -36,4 +36,12 @@ public class SjwController {
 		mv.addObject("cdList", cdList);
 		return mv;
 	}
+	
+	
+	
+	@RequestMapping(value = {"/sjw/admin"}, method = RequestMethod.GET)
+	public ModelAndView showAdmin() {
+		
+	}
+	
 }
