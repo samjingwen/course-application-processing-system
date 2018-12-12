@@ -15,6 +15,12 @@ public class StudentcoursePK implements Serializable {
 	@Column(insertable=false, updatable=false)
 	private String moduleID;
 
+	public StudentcoursePK(String moduleID, String studentID) {
+		super();
+		this.moduleID = moduleID;
+		this.studentID = studentID;
+	}
+
 	@Column(insertable=false, updatable=false)
 	private String studentID;
 
