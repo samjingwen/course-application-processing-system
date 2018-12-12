@@ -54,4 +54,6 @@ public interface AdminService {
 	Studentcourse findByModuleIDCourseID(String mid,String sid);
 	
 	void removeStudentCourse(Studentcourse sc);
+	
+	User createUser(User u);
 }

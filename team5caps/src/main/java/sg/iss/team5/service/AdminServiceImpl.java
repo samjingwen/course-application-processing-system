@@ -26,15 +26,15 @@ import sg.iss.team5.repository.UserRepository;
 @Service
 public class AdminServiceImpl implements AdminService {
 
-	@Resource
+	@Autowired
 	LecturerRepository lecturerRepository;
-	@Resource
+	@Autowired
 	StudentRepository studentRepository;
-	@Resource
+	@Autowired
 	UserRepository userRepository;
-	@Resource
+	@Autowired
 	CoursedetailRepository cdRepository;
-	@Resource
+	@Autowired
 	StudentcourseRepository studentcourseRepository;
 	@Autowired
 	ModuleRepository moduleRepository;
@@ -157,4 +157,8 @@ public class AdminServiceImpl implements AdminService {
 	studentcourseRepository.delete(sc);	
 	}
 	
+		@Override
+	public User createUser(User u) {
+		return userRepository.save(u);
+	}
 }

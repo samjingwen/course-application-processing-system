@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import sg.iss.team5.model.Coursedetail;
@@ -14,6 +15,7 @@ import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.model.StudentcoursePK;
 import sg.iss.team5.repository.CoursedetailRepository;
 import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.repository.StudentcourseRepository;
@@ -33,7 +35,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public int saveStudentCourse(Studentcourse sc) {
-		studentcourseRepository.save(sc);
+		studentcourseRepository.saveAndFlush(sc);
 		return 1;
 	}
 
@@ -144,7 +146,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public int getYear(Module mods) {
-		return mods.getAcademicYear().getYear() +1900;
+		return mods.getAcademicYear().getYear() + 1900;
 	}
 
 	public ArrayList<FormattedModule> getFormat(ArrayList<Module> mods) {
@@ -163,10 +165,17 @@ public class StudentServiceImpl implements StudentService {
 	public ArrayList<Studentcourse> enrollCourse(ArrayList<Module> mod, Student stu) {
 
 		ArrayList<Studentcourse> cdlist = new ArrayList<Studentcourse>();
-		for (Module current: mod) {
-			cdlist.add(new Studentcourse("Enrolled", Calendar.getInstance().getTime(), current, stu));
+		for (Module current : mod) {
+			cdlist.add(new Studentcourse( "Enrolled",
+					Calendar.getInstance().getTime(),stu,current));
 		}
-		
+
 		return cdlist;
+	}
+
+	public Module findModulebyID(String mid) {
+		Module mod = moduleRepository.findByModuleID(mid);
+
+		return mod;
 	}
 }
