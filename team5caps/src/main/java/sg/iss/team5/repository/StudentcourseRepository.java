@@ -1,6 +1,7 @@
 package sg.iss.team5.repository;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,4 +34,6 @@ Double findLecturerRatingByModuleId(@Param("mid") String mid);
 	@Query(value = "select * from studentcourse", nativeQuery = true)
 	ArrayList<Studentcourse> findAllStudentcourse();
 
+    @Query(value="insert into Studentcourse (enrollStatus, enrollTime, ModuleID, StudentID) values (:es, :et, :mid, :sid)", nativeQuery = true)
+	void saveStudentCourse(@Param("es") String es, @Param("et") Date et, @Param("mid") String mid, @Param("sid") String sid);
 }

@@ -15,7 +15,7 @@
 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script>
 	$(document).ready(function() {
-		$('#AvailMods').DataTable();
+		$('#CurrMods').DataTable();
 	})
 </script>
 
@@ -27,7 +27,7 @@
 	<form:form method="POST" modelAttribute="enroll"
 		action="${pageContext.request.contextPath}/studentenroll/enrollin">
 		<div name="availm">
-			<table id="AvailMods" class="display">
+			<table id="CurrMods" class="display">
 				<caption>List of available modules:</caption>
 				<br>
 				<thead>
@@ -39,7 +39,8 @@
 						<td><b>Day of Week</b></td>
 						<td><b>Time Slot</b></td>
 						<td><b>Venue</b></td>
-						<td><b>Enroll</b></td>
+						<td><b>Grade</b></td>
+						<td><b>Lecturer Rating</b></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -57,6 +58,8 @@
 							<td>${formattedmodules.venue}</td>
 							<td align="center"><input type="checkbox" name="modid"
 								value="${formattedmodules.moduleID}"></td>
+								<td></td>
+								<td></td>
 						</tr>
 					</c:forEach>
 				</tbody>

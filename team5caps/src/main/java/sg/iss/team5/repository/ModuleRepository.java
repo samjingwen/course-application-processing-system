@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import sg.iss.team5.model.Module;
-
+import sg.iss.team5.model.Student;
 
 public interface ModuleRepository extends JpaRepository<Module, String> {
 
@@ -33,4 +33,6 @@ public interface ModuleRepository extends JpaRepository<Module, String> {
 	@Query(value="select * from modules m where m.academicYear< year(curdate()) and m.lecturerid = :lid", nativeQuery = true)
 	ArrayList<Module> findPastModuleByLectId(@Param("lid") String lid);
 	
+	@Query(value="select * from modules m where m.moduleid = :mid", nativeQuery = true)
+	Module findModuleById(@Param("mid") String mid);
 }

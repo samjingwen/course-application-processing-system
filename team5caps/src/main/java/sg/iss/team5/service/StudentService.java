@@ -15,7 +15,7 @@ import sg.iss.team5.model.Studentcourse;
 public interface StudentService {
 	ArrayList<Studentcourse> findCourseByStudentId(String sid);
 	
-	int saveStudentCourse(Studentcourse sc);
+	int saveStudentCourse(String es, Date et, String mid, String sid);
 	
 	ArrayList<Module> findAllModule();
 	
@@ -39,5 +39,8 @@ public interface StudentService {
 	
 	ArrayList<FormattedModule> getFormat(ArrayList<Module> mods);
 
+	ArrayList<Studentcourse> enrollCourse(ArrayList<Module> mod, Student stu);
+	
+	Module findModulebyID(String mid);
 
 }

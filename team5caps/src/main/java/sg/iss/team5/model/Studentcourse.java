@@ -106,12 +106,14 @@ public class Studentcourse implements Serializable {
 		this.student = student;
 	}
 
-	public Studentcourse(String enrollStatus, Date enrollTime, Module module, Student student) {
+	public Studentcourse(String enrollStatus, Date enrollTime, Student stu, Module module) {
 		super();
+		this.student = stu;
+		this.module = module;
+		//this.id = new StudentcoursePK(stu.getStudentID(),module.getModuleID());
 		this.enrollStatus = enrollStatus;
 		this.enrollTime = enrollTime;
-		this.module = module;
-		this.student = student;
+
 	}
 
 
