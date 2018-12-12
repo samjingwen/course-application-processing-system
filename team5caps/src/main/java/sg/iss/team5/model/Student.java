@@ -1,9 +1,20 @@
 package sg.iss.team5.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 /**
@@ -30,7 +41,7 @@ public class Student implements Serializable {
 
 	//bi-directional one-to-one association to User
 	@OneToOne
-	@JoinColumn(name="StudentID")
+	@JoinColumn(name="StudentID", insertable = false, updatable = false)
 	private User user;
 
 	public Student() {
