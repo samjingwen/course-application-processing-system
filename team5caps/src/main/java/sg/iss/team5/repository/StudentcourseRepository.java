@@ -11,12 +11,17 @@ import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.model.StudentcoursePK;
 
 public interface StudentcourseRepository extends JpaRepository<Studentcourse, StudentcoursePK> {
+<<<<<<< HEAD
 	@Query(value = "select s from studentcourse s where s.studentid = :sid", nativeQuery = true)
+=======
+	@Query(value="select * from studentcourse s where s.studentid = :sid", nativeQuery = true)
+>>>>>>> branch 'master' of https://github.com/jwjwjw123/team5javaca.git
 	ArrayList<Studentcourse> findCourseByStudentId(@Param("sid") String sid);
 	
 	@Query(value = "select * from studentcourse s where s.moduleid = :mid", nativeQuery = true)
 	ArrayList<Studentcourse> findCourseByModuleId(@Param("mid") String mid);
 
+<<<<<<< HEAD
 	@Query(value = "select ROUND(avg(lecturerrating),2) FROM studentcourse ,modules m where m.moduleid in (select distinct moduleid from modules \r\n" + 
 			"where moduleid =:mid and academicyear < year(curdate()))", nativeQuery = true)
 	Double findLecturerRatingByModuleId(@Param("mid") String mid);
@@ -25,4 +30,8 @@ public interface StudentcourseRepository extends JpaRepository<Studentcourse, St
 			+ "where moduleid =:mid and academicyear < year(curdate()))", nativeQuery = true)
 	String findAttendanceByModuleId(@Param("mid") String mid);
 	
+=======
+	@Query(value="select * from studentcourse sc where sc.moduleid like %:cid", nativeQuery = true)
+	ArrayList<Studentcourse> findCourseByCourseId(@Param("cid") String cid);
+>>>>>>> branch 'master' of https://github.com/jwjwjw123/team5javaca.git
 }

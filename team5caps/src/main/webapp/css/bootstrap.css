@@ -9528,7 +9528,7 @@ to {
 	border-color: #e7ffff !important
 }
 
-.grid-container {
+div .grid-container{
   display: grid;
   grid-template-areas:
     'header header header header header header'
@@ -9536,12 +9536,15 @@ to {
     'footer footer footer footer footer footer';
 }
 
-.grid-container > div {
+div .grid-container {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
 }
 
-.headergrid { grid-area: header; }
+div .headergrid { grid-area: header; }
 /*.menugrid { grid-area: menu; }*/
-.maingrid { grid-area: main; }
+div .maingrid { grid-area: main; }
 .footergrid { grid-area: footer; }
+
+
+

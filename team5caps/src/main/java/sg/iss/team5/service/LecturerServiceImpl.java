@@ -3,6 +3,7 @@ package sg.iss.team5.service;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
