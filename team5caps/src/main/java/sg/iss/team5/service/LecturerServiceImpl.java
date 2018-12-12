@@ -94,4 +94,9 @@ public class LecturerServiceImpl implements LecturerService {
 		return (ArrayList<Module>) moduleRepository.findPastModuleByLectId(lid);
 	}
 
+	@Override
+	public Module updateModule(Module module) {
+		return moduleRepository.save(module);
+	}
+
 }

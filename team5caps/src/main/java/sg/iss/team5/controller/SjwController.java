@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -16,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Request;
+import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.model.StudentcoursePK;
 import sg.iss.team5.service.AdminService;
 import sg.iss.team5.service.LecturerService;
 import sg.iss.team5.service.StudentService;
@@ -28,7 +31,7 @@ public class SjwController {
 	@Autowired
 	private StudentService studentService;
 	@Autowired
-	private AdminService AdminService;
+	private AdminService adminService;
 	@Autowired
 	private LecturerService lecturerService;
 	
@@ -84,13 +87,22 @@ public class SjwController {
 		return mav;
 	}
 	
-	@RequestMapping(value = {"/sjw/confirm"}, method = RequestMethod.POST)
-	public String showConfirmRequest(@ModelAttribute("module") Module module, HttpSession session) {
+	@RequestMapping(value = {"/sjw/confirm/{mid}"}, method = RequestMethod.POST)
+	public String showConfirmRequest(@ModelAttribute("module") Module module, HttpSession session, @PathVariable String mid) {
+		
 		Studentcourse sc = new Studentcourse();
-		sc.setStudent(((UserSession) session.getAttribute("USERSESSION")).getUser().getStudent());
+		StudentcoursePK scPK = new StudentcoursePK();
+		module = lecturerService.findModuleByModuleID(mid);
+		scPK.setModuleID(module.getModuleID());
+		Student student = ((UserSession) session.getAttribute("USERSESSION")).getUser().getStudent();
+		sc.setStudent(student);
+		scPK.setStudentID(student.getStudentID());
+		sc.setId(scPK);
 		sc.setModule(module);
 		sc.setEnrollStatus("Pending");
 		sc.setEnrollTime(Calendar.getInstance().getTime());
+		module.getStudentcourses().add(sc);
+		//lecturerService.updateModule(module);
 		lecturerService.createStudentcourse(sc);
 		return "requestSuccess";
 	}

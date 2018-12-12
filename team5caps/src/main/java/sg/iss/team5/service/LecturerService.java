@@ -29,4 +29,6 @@ public interface LecturerService {
 	Module findModuleByModuleID(String mid);
 	
 	Studentcourse createStudentcourse(Studentcourse studentcourse);
+	
+	Module updateModule(Module module);
 }

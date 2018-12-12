@@ -49,7 +49,7 @@ public class Module implements Serializable {
 	private Lecturer lecturer;
 
 	//bi-directional many-to-one association to Studentcourse
-	@OneToMany(mappedBy="module")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="module")
 	private List<Studentcourse> studentcourses;
 
 	public Module() {
