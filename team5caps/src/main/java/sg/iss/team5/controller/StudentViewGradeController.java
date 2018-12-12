@@ -22,6 +22,8 @@ public class StudentViewGradeController {
 		ArrayList<Studentcourse> cl = studentService.findCourseByStudentId("S00006");
 		ModelAndView mav = new ModelAndView("studentViewGrade");
 		mav.addObject("courseList", cl);
+		double gpa = studentService.getGpa(cl);
+		mav.addObject("gpa", gpa);
 		return mav;
 	}
 	

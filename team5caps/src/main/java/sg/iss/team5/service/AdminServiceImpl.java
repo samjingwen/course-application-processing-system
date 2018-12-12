@@ -32,7 +32,9 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<Student> findAllStudents() {
 		return studentRepository.findAllStudents();
 	}
-
+	public ArrayList<Student> findNotEnrolled() {
+		return studentRepository.findNotEnrolled();
+	}
 	@Override
 	public Student findStudentById(String sid) {
 		Student student = studentRepository.findStudentById(sid);
@@ -101,5 +103,16 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+public ArrayList<Coursedetail> getCourseDetailList() {
+		return coursedetailRepository.findAllCoursedetail();
+	}
 
+	public Integer getEnrolledCapacity(String courseId) {
+		return coursedetailRepository.getCurrentEnrolledCapacity(courseId);
+	}
+	
+	public ArrayList<Studentcourse> findCourseByCourseId(String cid) {
+		System.out.println(cid);
+		return studentcourseRepository.findCourseByCourseId(cid);
+	}
 }

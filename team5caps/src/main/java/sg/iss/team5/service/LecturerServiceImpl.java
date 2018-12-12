@@ -22,24 +22,20 @@ public class LecturerServiceImpl implements LecturerService {
 	private ModuleRepository moduleRepository;
 	
 	public ArrayList<Module> findModuleByLecturerId(String lid) {
-		// TODO Auto-generated method stub
 		return moduleRepository.findModuleByLecturerId(lid);
 	}
 	
 	public int gradeCourse(Studentcourse sc) {
-		// TODO Auto-generated method stub
 		studentcourseRepository.save(sc);
 		return 1;
 	}
 		
 	public ArrayList<Module> findModuleByAcademicYear(Date year) {
-		// TODO Auto-generated method stub
 		return moduleRepository.findModuleByAcademicYear(year);
 	}
 
 	@Override
 	public ArrayList<Module> findAllModule() {
-		// TODO Auto-generated method stub
 		return (ArrayList<Module>)moduleRepository.findAll();
 	}
 	

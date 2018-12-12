@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Lecturer;
 import sg.iss.team5.model.Student;
+import sg.iss.team5.model.Studentcourse;
 public interface AdminService {
 
-		ArrayList<Student> findAllStudents();
+	ArrayList<Student> findNotEnrolled();
+	ArrayList<Student> findAllStudents();
 		
 		Student findStudentById(String sid);
 		
@@ -31,11 +33,12 @@ public interface AdminService {
 		Coursedetail createCoursedetail(Coursedetail cd);
 		
 		Coursedetail updateCoursedetail(Coursedetail cd);
+	Student findStudent(String nric);
 
-		
-		
-		
-
+		void removeStudent(Student s);
+		ArrayList<Coursedetail> getCourseDetailList();
+		Integer getEnrolledCapacity(String courseId);
+ArrayList<Studentcourse> findCourseByCourseId(String cid);
 
 
 }

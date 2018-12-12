@@ -1,13 +1,14 @@
 package sg.iss.team5.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import sg.iss.team5.model.Coursedetail;
+import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.repository.CoursedetailRepository;
@@ -36,11 +37,12 @@ public class StudentServiceImpl implements StudentService {
 	public ArrayList<Module> findAllModule() {
 		ArrayList<Module> mlist = (ArrayList<Module>) moduleRepository.findAll();
 		return mlist;
+
 	}
 
 	public ArrayList<Module> findModuleByStudentId(String sid) {
-		ArrayList<Module> mlist = (ArrayList<Module>) moduleRepository.findModuleByStudentId(sid);
-		return mlist;
+		ArrayList<Module> slist = (ArrayList<Module>) moduleRepository.findModuleByStudentId(sid);
+		return slist;
 
 	}
 
@@ -56,10 +58,95 @@ public class StudentServiceImpl implements StudentService {
 
 	}
 
+	public ArrayList<Module> findModuleNotEnrolled(String sid, Date year) {
+		year = Calendar.getInstance().getTime();
+		ArrayList<Module> mlist = (ArrayList<Module>) moduleRepository.findModuleNotEnrolled(sid, year);
+		return mlist;
+	}
+
 	@Override
 	public ArrayList<Coursedetail> findAllCoursedetail() {
-		// TODO Auto-generated method stub
-		return null;
+		return coursedetailRepository.findAllCoursedetail();
 	}
+
+	public String getDay(Module mods) {
+		String day = "Monday";
+		switch (mods.getDayofWeek()) {
+		case 1:
+			day = "Monday";
+			break;
+		case 2:
+			day = "Tuesday";
+			break;
+		case 3:
+			day = "Wednesday";
+			break;
+		case 4:
+			day = "Thursday";
+			break;
+		case 5:
+			day = "Friday";
+			break;
+		default:
+			break;
+		}
+
+		return day;
+	}
+
+	public String getTime(Module mods) {
+		String Time = "Morning";
+		switch (mods.getTimeslot()) {
+		case 1:
+			Time = "Morning";
+			break;
+		case 2:
+			Time = "Afternoon";
+			break;
+		case 3:
+			Time = "Evening";
+			break;
+		default:
+			break;
+		}
+
+		return Time;
+	}
+
+	public double getGpa(ArrayList<Studentcourse> courses) {
+		double gpa = 0;
+		for (Studentcourse course : courses) {
+			switch (course.getGrade()) {
+			case "A":
+				gpa += 5.0;
+				break;
+			case "B":
+				gpa += 4.0;
+				break;
+			case "C":
+				gpa += 3.0;
+				break;
+			case "D":
+				gpa += 2.0;
+				break;
+			case "E":
+				gpa += 1.0;
+				break;
+			default:
+				break;
+			}
+		}
+		gpa /= courses.size();
+		return gpa;
+	}
+
+	public ArrayList<FormattedModule> getFormat(ArrayList<Module> mods) {
+		ArrayList<FormattedModule> fmlist = new ArrayList<FormattedModule>();
+		for (Module current : mods) {
+			fmlist.add(new FormattedModule( current,getDay(current), getTime(current)));
+		}
+		return fmlist;
+	}
+
 
 }
