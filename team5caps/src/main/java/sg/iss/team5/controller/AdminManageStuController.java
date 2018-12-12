@@ -1,11 +1,14 @@
 package sg.iss.team5.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,20 +42,35 @@ public class AdminManageStuController {
 
 	// Create Student
 	@RequestMapping(value = "/lynn/newstudent", method = RequestMethod.GET)
-	public ModelAndView newStudentPage() {
-		ModelAndView mav = new ModelAndView("newStudent", "newStudent", new Student());
-		return mav;
+	public String newStudentPage(Model model) {
+		model.addAttribute("newUser", new User());
+		return "newStudent";
 	}
-
+	
+	@Transactional
 	@RequestMapping(value = "/lynn/newstudent", method = RequestMethod.POST)
-	public ModelAndView createNewStudent(@ModelAttribute("student") @Valid Student student, @ModelAttribute @Valid User user, BindingResult result,
-			final RedirectAttributes redirectAttributes) {
-		if (result.hasErrors())
-			return new ModelAndView("newStudent");
+	public ModelAndView createNewStudent(@ModelAttribute User user, final RedirectAttributes redirectAttributes) {
+//		if (result.hasErrors())
+//			return new ModelAndView("newStudent");
 		ModelAndView mav = new ModelAndView();
-		adminService.createStudent(student, user);
-		//String message = "New student " + student.getNric() + " was successfully created.";
-		mav.setViewName("redirect:/lynn/home");
+		user.setPassword("Password");
+		user.setAccessLevel("Student");
+		//user.setStudent(new Student());
+		//user.getStudent().setStudentID(user.getUserID());
+		//user.getStudent().setEnrollmentDate(Calendar.getInstance().getTime());
+		//user.getStudent().setStatus("Enrolled");
+		//adminService.createStudent(user.getStudent());
+		
+		adminService.createUser(user);
+		Student student = new Student();
+		student.setStudentID(user.getUserID());
+		student.setEnrollmentDate(Calendar.getInstance().getTime());
+		student.setStatus("Enrolled");
+		adminService.createStudent(student);
+		// adminService.createStudent(student, user);
+		// String message = "New student " + student.getNric() + " was successfully
+		// created.";
+		mav.setViewName("redirect:/sjw/home");
 		return mav;
 	}
 //

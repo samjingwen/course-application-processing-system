@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.iss.team5.model.Coursedetail;
@@ -24,15 +24,15 @@ import sg.iss.team5.repository.UserRepository;
 @Service
 public class AdminServiceImpl implements AdminService {
 
-	@Resource
+	@Autowired
 	LecturerRepository lecturerRepository;
-	@Resource
+	@Autowired
 	StudentRepository studentRepository;
-	@Resource
+	@Autowired
 	UserRepository userRepository;
-	@Resource
+	@Autowired
 	CoursedetailRepository cdRepository;
-	@Resource
+	@Autowired
 	StudentcourseRepository scRepository;
 
 	// Student
@@ -53,14 +53,11 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	@Transactional
-	public Student createStudent(Student student, User user) {
-		userRepository.saveAndFlush(user);
-		return studentRepository.saveAndFlush(student);
+	public Student createStudent(Student student) {
+		return studentRepository.save(student);
 	}
 
 	@Override
-	@Transactional
 	public Student updateStudent(Student student) {
 		studentRepository.save(student);
 		return student;
@@ -138,5 +135,10 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 
 	}
-	
+
+	@Override
+	public User createUser(User u) {
+		return userRepository.save(u);
+	}
+
 }
