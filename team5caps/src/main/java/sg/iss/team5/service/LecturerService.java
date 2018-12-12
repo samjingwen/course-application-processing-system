@@ -27,4 +27,6 @@ public interface LecturerService {
 	ArrayList<Module> findModuleIdbyLectid(String lid);
 	
 	ArrayList<Module> findPastModuleByLectId(String lid);
+	
+	ArrayList<Studentcourse> findAllStudentcourse();
 }

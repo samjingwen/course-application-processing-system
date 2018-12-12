@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -153,9 +155,7 @@ public class StudentServiceImpl implements StudentService {
 		return fmlist;
 	}
 
-	public void enrollStudent(Module mod, Student stu) {
-		
-		
+	public Coursedetail enrollStudent(Coursedetail cd) {
+		return coursedetailRepository.saveAndFlush(cd);
 	}
-
 }

@@ -42,7 +42,8 @@ public class SjwController {
 	@RequestMapping(value = {"/sjw/admin"}, method = RequestMethod.GET)
 	public ModelAndView showAdmin() {
 		return null;
-		
+
+
 	}
 	
 }

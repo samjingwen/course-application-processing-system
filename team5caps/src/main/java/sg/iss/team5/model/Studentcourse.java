@@ -106,4 +106,14 @@ public class Studentcourse implements Serializable {
 		this.student = student;
 	}
 
+	public Studentcourse(String enrollStatus, Date enrollTime, Module module, Student student) {
+		super();
+		this.enrollStatus = enrollStatus;
+		this.enrollTime = enrollTime;
+		this.module = module;
+		this.student = student;
+	}
+
+
+
 }
