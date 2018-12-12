@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.iss.team5.model.Coursedetail;
+import sg.iss.team5.model.Lecturer;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.repository.CoursedetailRepository;
+import sg.iss.team5.repository.LecturerRepository;
 import sg.iss.team5.repository.StudentRepository;
 import sg.iss.team5.repository.StudentcourseRepository;
 import sg.iss.team5.repository.UserRepository;
@@ -31,8 +33,16 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	CoursedetailRepository coursedetailRepository;
 	@Autowired
+	LecturerRepository lecturerRepository;
+	@Autowired
 	StudentcourseRepository studentcourseRepository;
 
+	// Student
+	@Override
+	public ArrayList<Student> findAllStudents() {
+		return studentRepository.findAllStudents();
+	}
+	
 	public ArrayList<Student> findNotEnrolled() {
 		return studentRepository.findNotEnrolled();
 	}

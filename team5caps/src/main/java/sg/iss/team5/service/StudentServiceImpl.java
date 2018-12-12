@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sg.iss.team5.model.Coursedetail;
+import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.Module;
+import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.repository.CoursedetailRepository;
 import sg.iss.team5.repository.ModuleRepository;
@@ -36,6 +38,7 @@ public class StudentServiceImpl implements StudentService {
 	public ArrayList<Module> findAllModule() {
 		ArrayList<Module> mlist = (ArrayList<Module>) moduleRepository.findAll();
 		return mlist;
+
 	}
 
 	public ArrayList<Module> findModuleByStudentId(String sid) {
@@ -67,33 +70,48 @@ public class StudentServiceImpl implements StudentService {
 		return coursedetailRepository.findAllCoursedetail();
 	}
 
-	public ArrayList<String> getDay(ArrayList<Module> mods) {
-		ArrayList<String> daylist = new ArrayList<String>();
+	public String getDay(Module mods) {
 		String day = "Monday";
-		for (Module current : mods) {
-			switch (current.getDayofWeek()) {
-			case 1:
-				day = "Monday";
-				break;
-			case 2:
-				day = "Tuesday";
-				break;
-			case 3:
-				day = "Wednesday";
-				break;
-			case 4:
-				day = "Thursday";
-				break;
-			case 5:
-				day = "Friday";
-				break;
-			default:
-				break;
-			}
-			daylist.add(day);
+		switch (mods.getDayofWeek()) {
+		case 1:
+			day = "Monday";
+			break;
+		case 2:
+			day = "Tuesday";
+			break;
+		case 3:
+			day = "Wednesday";
+			break;
+		case 4:
+			day = "Thursday";
+			break;
+		case 5:
+			day = "Friday";
+			break;
+		default:
+			break;
 		}
 
-		return daylist;
+		return day;
+	}
+
+	public String getTime(Module mods) {
+		String Time = "Morning";
+		switch (mods.getTimeslot()) {
+		case 1:
+			Time = "Morning";
+			break;
+		case 2:
+			Time = "Afternoon";
+			break;
+		case 3:
+			Time = "Evening";
+			break;
+		default:
+			break;
+		}
+
+		return Time;
 	}
 
 	public double getGpa(ArrayList<Studentcourse> courses) {
@@ -121,6 +139,23 @@ public class StudentServiceImpl implements StudentService {
 		}
 		gpa /= courses.size();
 		return gpa;
+	}
+
+	public int getYear(Module mods) {
+		return mods.getAcademicYear().getYear() +1900;
+	}
+
+	public ArrayList<FormattedModule> getFormat(ArrayList<Module> mods) {
+		ArrayList<FormattedModule> fmlist = new ArrayList<FormattedModule>();
+		for (Module current : mods) {
+			fmlist.add(new FormattedModule(current, getDay(current), getTime(current), getYear(current)));
+		}
+		return fmlist;
+	}
+
+	public void enrollStudent(Module mod, Student stu) {
+		
+		
 	}
 
 }
