@@ -6,6 +6,7 @@
 </head>
 
 <body>
+
 	<table id="ModuleTaught" class="table table-stripeds">
 		<tr>
 			<td>No</td>
@@ -16,8 +17,8 @@
 		</tr>
 		<c:forEach items="${modules}" var="module" varStatus="index">
 			<tr>
-				<td>${index.index+1}</td>
-				<td>${module.moduleID}</td>>
+				<td>${index.count}</td>
+				<td>${module.moduleID}</td>
 				<td>${module.coursedetail.courseName}</td>
 				<td>${ratings}</td>
 				<td>${attendance}</td>

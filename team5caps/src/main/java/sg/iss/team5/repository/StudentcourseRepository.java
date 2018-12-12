@@ -11,9 +11,7 @@ import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.model.StudentcoursePK;
 
 public interface StudentcourseRepository extends JpaRepository<Studentcourse, StudentcoursePK> {
-
-	@Query(value="select * from studentcourse s where s.studentid = :sid", nativeQuery = true)
-
+	@Query(value = "select s from studentcourse s where s.studentid = :sid", nativeQuery = true)
 	ArrayList<Studentcourse> findCourseByStudentId(@Param("sid") String sid);
 	
 	@Query(value = "select * from studentcourse s where s.moduleid = :mid", nativeQuery = true)
@@ -27,8 +25,4 @@ public interface StudentcourseRepository extends JpaRepository<Studentcourse, St
 			+ "where moduleid =:mid and academicyear < year(curdate()))", nativeQuery = true)
 	String findAttendanceByModuleId(@Param("mid") String mid);
 	
-
-	@Query(value="select * from studentcourse sc where sc.moduleid like %:cid", nativeQuery = true)
-	ArrayList<Studentcourse> findCourseByCourseId(@Param("cid") String cid);
-
 }

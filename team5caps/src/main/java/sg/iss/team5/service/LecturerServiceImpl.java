@@ -3,7 +3,6 @@ package sg.iss.team5.service;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +68,12 @@ public class LecturerServiceImpl implements LecturerService {
 	public ArrayList<Module> findModuleIdbyLectid(String lid) {
 		// TODO Auto-generated method stub
 		return (ArrayList<Module>) moduleRepository.findModuleByLecturerId(lid);
+	}
+
+	@Override
+	public ArrayList<Module> findPastModuleByLectId(String lid) {
+		// TODO Auto-generated method stub
+		return (ArrayList<Module>) moduleRepository.findPastModuleByLectId(lid);
 	}
 
 }

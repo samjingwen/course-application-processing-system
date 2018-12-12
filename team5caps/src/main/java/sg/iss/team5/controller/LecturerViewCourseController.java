@@ -1,5 +1,6 @@
 package sg.iss.team5.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,52 +14,66 @@ import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.service.LecturerService;
-
+import sg.iss.team5.service.StudentService;
 
 //View courses taught & show rating
 @Controller
-@RequestMapping(value="/lecturer")
+@RequestMapping(value = "/lecturer")
 public class LecturerViewCourseController {
 
 	@Autowired
 	LecturerService lectservice;
-		
-	@RequestMapping(value ="/courselist/{lid}", method=RequestMethod.GET)
+	
+	@Autowired
+	StudentService studentservice;
+
+	@RequestMapping(value = "/courselist/{lid}", method = RequestMethod.GET)
 	public ModelAndView listAllbyLectId(@PathVariable String lid) {
-		ArrayList<Module> mlist = lectservice.findModuleByLecturerId(lid);
+		ArrayList<Module> mlist = lectservice.findPastModuleByLectId(lid);
 		ModelAndView mav = new ModelAndView("ViewModules");
-		mav.addObject("modules",mlist);
+		mav.addObject("modules", mlist);
+		
 		ArrayList<Double> ratingList = new ArrayList<>();
 		Double ratingAverage = lectservice.findLecturerRatingByModuleId(mlist.get(1).getModuleID());
 		ratingList.add(ratingAverage);
-		//mav.addObject("ratings",ratingList);
+		mav.addObject("ratings", ratingList);
+
 		ArrayList<String> attList = new ArrayList<>();
 		String attAverage = lectservice.findAttendanceByModuleId(mlist.get(1).getModuleID());
 		attList.add(attAverage);
-		//mav.addObject("attendance",attList);		
+		mav.addObject("attendance", attList);
+		
 		return mav;
 	}
-		
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listAll() {
 		ArrayList<Module> mlist = lectservice.findModuleByLecturerId("L00002");
 		ModelAndView mav = new ModelAndView("ViewModules");
-		//ArrayList<Module> mlist = (ArrayList<Module>)lectservice.findAll();
-		mav.addObject("modules",mlist);;
+		// ArrayList<Module> mlist = (ArrayList<Module>)lectservice.findAll();
+		mav.addObject("modules", mlist);
+		
 		return mav;
 	}
-	
-	@RequestMapping(value ="/enrollist/{mid}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/enrollist/{mid}", method = RequestMethod.GET)
 	public ModelAndView findCourseByModuleId(@PathVariable String mid) {
 		ArrayList<Studentcourse> mlist = lectservice.findCourseByModuleId(mid);
 		ModelAndView mav = new ModelAndView("ViewEnrolment");
-		mav.addObject("modules",mlist);
+		mav.addObject("modules", mlist);
 		return mav;
 	}
-		
-	@RequestMapping(value= "/test", method= RequestMethod.GET)
+	
+	@RequestMapping(value = "/enrollrequest", method = RequestMethod.GET)
+	public ModelAndView editStudentPage() {
+		ModelAndView mav = new ModelAndView("RequestEnolment");
+		mav.addObject("student",studentservice);
+		return mav;
+	}
+
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String home() {
 		return "index";
 	}
-	
+
 }
