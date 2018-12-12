@@ -148,6 +148,33 @@ public class Module implements Serializable {
 		return studentcours;
 	}
 
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + dayofWeek;
+		result = prime * result + timeslot;
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Module other = (Module) obj;
+		if (dayofWeek != other.dayofWeek)
+			return false;
+		if (timeslot != other.timeslot)
+			return false;
+		return true;
+	}
+
 	
 	
 }

@@ -22,7 +22,7 @@ public interface ModuleRepository extends JpaRepository<Module, String> {
 	ArrayList<Module> findModuleByAcademicYear(@Param("year") Date year);
 	
 	@Query(value = "select * from modules m where m.courseid not in (select distinct courseid from modules m "
-			+ "where m.moduleid in (select distinct moduleid from studentcourse where studentid = :sid and grade != 'F')) "
+			+ "where m.moduleid in (select distinct moduleid from studentcourse where studentid = :sid and (grade != 'F' or grade is null))) "
 			+ "and m.academicyear = :year", nativeQuery = true)
 	ArrayList<Module> findModuleNotEnrolled(@Param("sid") String sid, @Param("year") Date year);
 	
