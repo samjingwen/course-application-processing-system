@@ -62,7 +62,7 @@ public class LecturerServiceImpl implements LecturerService {
 	@Override
 	public ArrayList<Studentcourse> findCourseByModuleId(String mid) {
 		// TODO Auto-generated method stub
-		return (ArrayList<Studentcourse>) studentcourseRepository.findCourseByModuleId(mid);
+		return (ArrayList<Studentcourse>) studentcourseRepository.findByModule_ModuleIDContaining(mid);
 	}
 
 	@Override
