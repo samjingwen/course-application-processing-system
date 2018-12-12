@@ -12,11 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Lecturer;
+import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.model.User;
 import sg.iss.team5.repository.CoursedetailRepository;
 import sg.iss.team5.repository.LecturerRepository;
+import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.repository.StudentRepository;
 import sg.iss.team5.repository.StudentcourseRepository;
 import sg.iss.team5.repository.UserRepository;
@@ -33,7 +35,9 @@ public class AdminServiceImpl implements AdminService {
 	@Resource
 	CoursedetailRepository cdRepository;
 	@Resource
-	StudentcourseRepository scRepository;
+	StudentcourseRepository studentcourseRepository;
+	@Autowired
+	ModuleRepository moduleRepository;
 
 	// Student
 	@Override
@@ -47,8 +51,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Student findStudentById(String sid) {
-		Student student = studentRepository.findStudentById(sid);
-		System.out.println(student.toString());
+		Student student = studentRepository.findByStudentID(sid);
 		return student;
 	}
 
@@ -124,7 +127,7 @@ public class AdminServiceImpl implements AdminService {
 
 	public ArrayList<Studentcourse> findCourseByCourseId(String cid) {
 		System.out.println(cid);
-		return scRepository.findCourseByCourseId(cid);
+		return studentcourseRepository.findCourseByCourseId(cid);
 	}
 
 	@Override
@@ -135,8 +138,23 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public void removeStudent(Student s) {
-		// TODO Auto-generated method stub
-
+		studentRepository.delete(s);
+	}
+	
+	public Module findByModuleID(String mid) {
+		return moduleRepository.findByModuleID(mid);
+	}
+	
+	public void removeModule(Module m) {
+		moduleRepository.delete(m);
+	}
+	
+	public Studentcourse findByModuleIDCourseID(String mid,String sid) {
+		return studentcourseRepository.findFirstByModule_ModuleIDAndStudent_StudentID(mid, sid);
+	}
+	
+	public void removeStudentCourse(Studentcourse sc){
+	studentcourseRepository.delete(sc);	
 	}
 	
 }

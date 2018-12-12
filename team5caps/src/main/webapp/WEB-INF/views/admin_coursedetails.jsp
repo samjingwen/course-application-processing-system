@@ -53,8 +53,7 @@
 							${current.student.user.firstName}</td>
 						<td>${current.attendance*100}%</td>
 						<td>${current.enrollTime}</td>
-						<td><form:form Name="student" action="dropStudent"
-								method="post">
+						<td><form:form method="GET" modelAttribute="drop" action="${pageContext.request.contextPath}/admin/manage/courses/${current.module.moduleID}/${current.student.studentID}">
 								<input type="submit" name="delete" class="button"
 									value="Drop Student" />
 							</form:form>
