@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import sg.iss.team5.model.FormattedModule;
+import sg.iss.team5.model.Student;
+import sg.iss.team5.model.User;
+import sg.iss.team5.service.AdminService;
 import sg.iss.team5.service.StudentService;
 
 @RestController
@@ -26,11 +29,13 @@ public class StudentEnrollCourseController {
 
 	@Autowired
 	StudentService stuservice;
+	@Autowired
+	private AdminService adService;
 
-	@RequestMapping(value = "/modules/{sid}", method = RequestMethod.GET)
-	public ModelAndView listAllNotTaken(@PathVariable String sid, HttpSession session, BindingResult result)
+	@RequestMapping(value = "/modules", method = RequestMethod.GET)
+	public ModelAndView listAllNotTaken(HttpSession session)
 			throws ParseException {
-		String sid2 = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
+		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		Date date = Calendar.getInstance().getTime();
 		ArrayList<FormattedModule> mlist = (ArrayList<FormattedModule>) stuservice
 				.getFormat(stuservice.findModuleNotEnrolled(sid, date));
@@ -44,8 +49,11 @@ public class StudentEnrollCourseController {
 	@RequestMapping(value = "/enrollin", method = RequestMethod.POST)
 	public ModelAndView enrollStudent(@RequestParam("modid") String[] modid, HttpServletRequest request,
 			HttpSession session) {
+		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
+		Student s = adService.findStudentById(sid);
 		for (String s : modid)
-			System.out.println(s);
+			
+		
 		ModelAndView mav = new ModelAndView("testing");
 		mav.addObject("modid", modid);
 //		String[] modids = request.getParameterValues("modid");

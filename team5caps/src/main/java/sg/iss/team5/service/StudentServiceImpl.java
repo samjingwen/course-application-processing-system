@@ -158,4 +158,15 @@ public class StudentServiceImpl implements StudentService {
 	public Coursedetail enrollStudent(Coursedetail cd) {
 		return coursedetailRepository.saveAndFlush(cd);
 	}
+
+	@Override
+	public ArrayList<Studentcourse> enrollCourse(ArrayList<Module> mod, Student stu) {
+
+		ArrayList<Studentcourse> cdlist = new ArrayList<Studentcourse>();
+		for (Module current: mod) {
+			cdlist.add(new Studentcourse("Enrolled", Calendar.getInstance().getTime(), current, stu));
+		}
+		
+		return cdlist;
+	}
 }
