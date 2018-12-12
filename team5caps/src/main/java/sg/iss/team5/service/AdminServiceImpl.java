@@ -4,15 +4,21 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Lecturer;
 import sg.iss.team5.model.Student;
+import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.model.User;
 import sg.iss.team5.repository.CoursedetailRepository;
 import sg.iss.team5.repository.LecturerRepository;
 import sg.iss.team5.repository.StudentRepository;
+import sg.iss.team5.repository.StudentcourseRepository;
 import sg.iss.team5.repository.UserRepository;
 
 @Service
@@ -26,15 +32,19 @@ public class AdminServiceImpl implements AdminService {
 	UserRepository userRepository;
 	@Resource
 	CoursedetailRepository cdRepository;
+	@Resource
+	StudentcourseRepository scRepository;
 
 	// Student
 	@Override
 	public ArrayList<Student> findAllStudents() {
 		return studentRepository.findAllStudents();
 	}
+
 	public ArrayList<Student> findNotEnrolled() {
 		return studentRepository.findNotEnrolled();
 	}
+
 	@Override
 	public Student findStudentById(String sid) {
 		Student student = studentRepository.findStudentById(sid);
@@ -44,16 +54,16 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public Student createStudent(Student s) {
-		// TODO Auto-generated method stub
-		return null;
+	public Student createStudent(Student student, User user) {
+		userRepository.saveAndFlush(user);
+		return studentRepository.saveAndFlush(student);
 	}
 
 	@Override
 	@Transactional
-	public Student updateStudent(Student s) {
-		// TODO Auto-generated method stub
-		return null;
+	public Student updateStudent(Student student) {
+		studentRepository.save(student);
+		return student;
 	}
 
 	@Override
@@ -103,16 +113,34 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-public ArrayList<Coursedetail> getCourseDetailList() {
-		return coursedetailRepository.findAllCoursedetail();
+
+	public ArrayList<Coursedetail> getCourseDetailList() {
+		return cdRepository.findAllCoursedetail();
 	}
 
 	public Integer getEnrolledCapacity(String courseId) {
-		return coursedetailRepository.getCurrentEnrolledCapacity(courseId);
+		return cdRepository.getCurrentEnrolledCapacity(courseId);
+	}
+
+	public ArrayList<Studentcourse> findCourseByCourseId(String cid) {
+		System.out.println(cid);
+		return scRepository.findCourseByCourseId(cid);
+	}
+
+	@Override
+	public Student findStudent(String nric) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeStudent(Student s) {
+		// TODO Auto-generated method stub
+
 	}
 	
 	public ArrayList<Studentcourse> findCourseByCourseId(String cid) {
 		System.out.println(cid);
-		return studentcourseRepository.findCourseByCourseId(cid);
+		return studentcourseRepository.findByModule_ModuleIDContaining(cid);
 	}
 }

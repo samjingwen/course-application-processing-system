@@ -40,10 +40,10 @@ public class SjwController {
 	
 	
 	@RequestMapping(value = {"/sjw/admin"}, method = RequestMethod.GET)
-	public ModelAndView showEdit() {
-		ModelAndView mav = new ModelAndView();
-		
-		return mav;
+	public ModelAndView showAdmin() {
+		return null;
+
+
 	}
 	
 }

@@ -22,6 +22,10 @@ public interface StudentRepository extends JpaRepository<Student, String> {
 	@Query(value="select * from students s where s.studentid =: sid", nativeQuery = true)
 	Student findStudentById(@Param("sid") String sid);
 	
+	
+	
+	
+	
 //
 //	if custom methods are needed, add the interface method down below and 
 	//use another implementation with the following convention

@@ -2,27 +2,32 @@ package sg.iss.team5.controller;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sg.iss.team5.model.Student;
+import sg.iss.team5.model.User;
 import sg.iss.team5.service.AdminService;
-
 
 @Controller
 public class AdminManageStuController {
-	
+
 	@Autowired
 	private AdminService adminService;
-	
-	@RequestMapping(value = {"/lynn/home"}, method = RequestMethod.GET)
+
+	@RequestMapping(value = { "/lynn/home" }, method = RequestMethod.GET)
 	public ModelAndView showTesting() {
 		ArrayList<Student> myStudentList = new ArrayList<Student>();
 		myStudentList = adminService.findAllStudents();
-		for (Student aStudent: myStudentList) {
+		for (Student aStudent : myStudentList) {
 			System.out.println(aStudent);
 		}
 		System.out.println("HAHAHAHAHAHAH");
@@ -31,27 +36,25 @@ public class AdminManageStuController {
 		mv.addObject("sList", myStudentList);
 		return mv;
 	}
-	
-	
-	//Create Student
-//	@RequestMapping(value = "/lynn/newstudent", method = RequestMethod.GET)
-//	public ModelAndView newStudentPage() {
-//		ModelAndView mav = new ModelAndView("FormStudent", "student", new Course());
-//		return mav;
-//	}
-//
-//	@RequestMapping(value = "/create", method = RequestMethod.POST)
-//	public ModelAndView createNewStudent(@ModelAttribute @Valid Course student, BindingResult result,
-//			final RedirectAttributes redirectAttributes) {
-//		if (result.hasErrors())
-//			return new ModelAndView("FormStudent");
-//		ModelAndView mav = new ModelAndView();
-//
-//		adminService.createStudent(student);
-//		//String message = "New student " + student.getNric() + " was successfully created.";
-//		mav.setViewName("redirect:/lynn/home");
-//		return mav;
-//	}
+
+	// Create Student
+	@RequestMapping(value = "/lynn/newstudent", method = RequestMethod.GET)
+	public ModelAndView newStudentPage() {
+		ModelAndView mav = new ModelAndView("newStudent", "newStudent", new Student());
+		return mav;
+	}
+
+	@RequestMapping(value = "/lynn/newstudent", method = RequestMethod.POST)
+	public ModelAndView createNewStudent(@ModelAttribute("student") @Valid Student student, @ModelAttribute @Valid User user, BindingResult result,
+			final RedirectAttributes redirectAttributes) {
+		if (result.hasErrors())
+			return new ModelAndView("newStudent");
+		ModelAndView mav = new ModelAndView();
+		adminService.createStudent(student, user);
+		//String message = "New student " + student.getNric() + " was successfully created.";
+		mav.setViewName("redirect:/lynn/home");
+		return mav;
+	}
 //
 //	//edit
 //	@RequestMapping(value = "/edit/{sid}", method = RequestMethod.GET)
@@ -74,15 +77,6 @@ public class AdminManageStuController {
 //		return mav;
 //	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
 //	@RequestMapping(value = "/student")
 //	@Controller
 //	public class StudentController {

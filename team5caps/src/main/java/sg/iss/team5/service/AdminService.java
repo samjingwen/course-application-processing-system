@@ -7,6 +7,7 @@ import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Lecturer;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.model.User;
 public interface AdminService {
 
 	ArrayList<Student> findNotEnrolled();
@@ -14,7 +15,7 @@ public interface AdminService {
 		
 		Student findStudentById(String sid);
 		
-		Student createStudent(Student student);
+		Student createStudent(Student student, User user);
 
 		Student updateStudent(Student student);
 		
