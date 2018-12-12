@@ -34,6 +34,5 @@ public interface StudentcourseRepository extends JpaRepository<Studentcourse, St
 	@Query(value = "select * from studentcourse", nativeQuery = true)
 	ArrayList<Studentcourse> findAllStudentcourse();
 
-//    @Query(value="insert into Studentcourse (enrollStatus, enrollTime, ModuleID, StudentID) values (:es, :et, :mid, :sid)", nativeQuery = true)
-//	void saveStudentCourse(@Param("es") String es, @Param("et") Date et, @Param("mid") String mid, @Param("sid") String sid);
+
 }
