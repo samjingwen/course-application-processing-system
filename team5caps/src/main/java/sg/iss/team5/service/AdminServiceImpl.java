@@ -36,12 +36,6 @@ public class AdminServiceImpl implements AdminService {
 	LecturerRepository lecturerRepository;
 	@Autowired
 	StudentcourseRepository studentcourseRepository;
-
-	// Student
-	@Override
-	public ArrayList<Student> findAllStudents() {
-		return studentRepository.findAllStudents();
-	}
 	
 	public ArrayList<Student> findNotEnrolled() {
 		return studentRepository.findNotEnrolled();
@@ -85,6 +79,5 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<Studentcourse> findCourseByCourseId(String cid) {
 		System.out.println(cid);
 		return studentcourseRepository.findByModule_ModuleIDContaining(cid);
-//		return studentcourseRepository.findCourseByCourseId(cid);
 	}
 }
