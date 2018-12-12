@@ -155,9 +155,7 @@ public class StudentServiceImpl implements StudentService {
 		return fmlist;
 	}
 
-	public void enrollStudent(Module mod, Student stu) {
-		
-		
+	public Coursedetail enrollStudent(Coursedetail cd) {
+		return coursedetailRepository.saveAndFlush(cd);
 	}
-
 }
