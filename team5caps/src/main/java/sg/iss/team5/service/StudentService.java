@@ -39,6 +39,6 @@ public interface StudentService {
 	
 	ArrayList<FormattedModule> getFormat(ArrayList<Module> mods);
 
-	void enrollStudent(Module mod, Student stu);
+	ArrayList<Studentcourse> enrollCourse(ArrayList<Module> mod, Student stu);
 
 }

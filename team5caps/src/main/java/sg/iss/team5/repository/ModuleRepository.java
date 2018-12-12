@@ -9,13 +9,12 @@ import org.springframework.data.repository.query.Param;
 
 import sg.iss.team5.model.Module;
 
-
 public interface ModuleRepository extends JpaRepository<Module, String> {
 
-	@Query(value = "select * from modules m where m.moduleid in (select moduleid from studentcourse s where s.studentid = ':sid')", nativeQuery = true)
+	@Query(value = "select * from modules m where m.moduleid in (select moduleid from studentcourse s where s.studentid = :sid)", nativeQuery = true)
 	ArrayList<Module> findModuleByStudentId(@Param("sid") String sid);
 	
-	@Query(value = "select * from modules m where m.lecturerid = ':lid'", nativeQuery = true)
+	@Query(value = "select * from modules m where m.lecturerid = :lid", nativeQuery = true)
 	ArrayList<Module> findModuleByLecturerId(@Param("lid") String lid);
 	
 	@Query(value="select * from modules m where m.academicYear = :year", nativeQuery = true)

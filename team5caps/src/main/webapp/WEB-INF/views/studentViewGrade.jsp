@@ -6,13 +6,16 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<c:url value="/css/style.css" var="ss2"/>
+<link rel="STYLESHEET" type="text/css"
+	href="${ss2}" />
 </head>
 <body>
-<table border = "3">
+<table>
 <tr>
-<td>#</td>
-<td>Course Name</td>
-<td>Grade</td>
+<th>#</th>
+<th>Course Name</th>
+<th>Grade</th>
 </tr>
 <c:forEach items = "${courseList}" var = "course" varStatus = "index">
 <tr>
@@ -21,7 +24,7 @@
 <td>${course.grade}</td>
 </tr>
 </c:forEach>
+<tr ><td colspan="3" >GPA: ${gpa}</td></tr>
 </table>
-<h3>GPA: ${gpa}</h3>
 </body>
 </html>

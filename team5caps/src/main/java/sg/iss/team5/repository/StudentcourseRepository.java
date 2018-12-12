@@ -26,6 +26,9 @@ public interface StudentcourseRepository extends JpaRepository<Studentcourse, St
 	String findAttendanceByModuleId(@Param("mid") String mid);
 	
 	ArrayList<Studentcourse> findByModule_ModuleIDContaining(String cid);
+	
+	@Query(value="select * from studentcourse", nativeQuery=true)
+	ArrayList<Studentcourse> findAllStudentcourse();
 
 	
 }
