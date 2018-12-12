@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import sg.iss.team5.model.Coursedetail;
+import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Studentcourse;
 
@@ -27,6 +28,10 @@ public interface StudentService {
 
 	double getGpa(ArrayList<Studentcourse> courses);
 	
-	ArrayList<String> getDay(ArrayList<Module> mods);
+	String getDay(Module mods);
+	
+	String getTime(Module mods);
+	
+	ArrayList<FormattedModule> getFormat(ArrayList<Module> mods);
 
 }

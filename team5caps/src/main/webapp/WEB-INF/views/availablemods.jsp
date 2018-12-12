@@ -24,16 +24,17 @@
 			</tr>
 			</thread>
 			<tbody>
-				<c:forEach items="${modules}" var="modules" varStatus="index">
+				<c:forEach items="${formattedmodules}" var="formattedmodules" varStatus="index">
+				
 					<tr>
-						<td>${modules.academicYear}</td>
-						<td>${modules.moduleID}</td>
-						<td>${modules.coursedetail.courseName}</td>
-						<td>${modules.lecturer.user.firstName}
-							${modules.lecturer.user.lastName}</td>
-						<td>${dlist}</td>
-						<td>${modules.timeslot}</td>
-						<td>${modules.venue}</td>
+						<td>${formattedmodules.academicYear}</td>
+						<td>${formattedmodules.moduleID}</td>
+						<td>${formattedmodules.coursedetail.courseName}</td>
+						<td>${formattedmodules.lecturer.user.firstName}
+							${formattedmodules.lecturer.user.lastName}</td>
+						<td>${formattedmodules.getDay()}</td>
+						<td>${formattedmodules.getTime()}</td>
+						<td>${formattedmodules.venue}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

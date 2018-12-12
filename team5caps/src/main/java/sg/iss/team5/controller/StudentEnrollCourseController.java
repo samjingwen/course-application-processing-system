@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.service.StudentService;
@@ -26,18 +27,14 @@ public class StudentEnrollCourseController {
 
 	@RequestMapping(value = "/modules/{sid}", method = RequestMethod.GET)
 	public ModelAndView listAllNotTaken(@PathVariable String sid) throws ParseException {
-		// ArrayList<Module> mlist =
-		// stuservice.findModuleByAcademicYear(Calendar.getInstance().getTime());
-		// ArrayList<Module> mlist = (ArrayList<Module>) stuservice.findAllModule();
-		// ArrayList<Module> mlist =
-		// (ArrayList<Module>)stuservice.findModuleByStudentId(sid);
+
 		Date date = Calendar.getInstance().getTime();
-		ArrayList<Module> mlist = (ArrayList<Module>) stuservice.findModuleNotEnrolled(sid, date);
+		ArrayList<FormattedModule> mlist = (ArrayList<FormattedModule>) stuservice
+				.getFormat(stuservice.findModuleNotEnrolled(sid, date));
+
 		ModelAndView mav = new ModelAndView("availablemods");
-		mav.addObject("modules", mlist);
-		ArrayList<String> dlist = new ArrayList<String>();
-		dlist = stuservice.getDay(mlist);
-		mav.addObject("dlist",dlist);
+
+		mav.addObject("formattedmodules", mlist);
 		return mav;
 	}
 
