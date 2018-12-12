@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.Module;
+import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.repository.CoursedetailRepository;
 import sg.iss.team5.repository.ModuleRepository;
@@ -140,13 +141,21 @@ public class StudentServiceImpl implements StudentService {
 		return gpa;
 	}
 
+	public int getYear(Module mods) {
+		return mods.getAcademicYear().getYear() +1900;
+	}
+
 	public ArrayList<FormattedModule> getFormat(ArrayList<Module> mods) {
 		ArrayList<FormattedModule> fmlist = new ArrayList<FormattedModule>();
 		for (Module current : mods) {
-			fmlist.add(new FormattedModule( current,getDay(current), getTime(current)));
+			fmlist.add(new FormattedModule(current, getDay(current), getTime(current), getYear(current)));
 		}
 		return fmlist;
 	}
 
+	public void enrollStudent(Module mod, Student stu) {
+		
+		
+	}
 
 }

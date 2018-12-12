@@ -3,27 +3,20 @@ package sg.iss.team5.model;
 import java.util.Date;
 import java.util.List;
 
-
 public class FormattedModule {
 	String Day;
 	String Time;
+	int Year;
 	String moduleID;
-
 	Date academicYear;
-
 	int dayofWeek;
-
 	int timeslot;
-
 	String venue;
-
 	Coursedetail coursedetail;
-
 	Lecturer lecturer;
-
 	List<Studentcourse> studentcourses;
 
-	public FormattedModule(Module mod, String day, String time) {
+	public FormattedModule(Module mod, String day, String time, int year) {
 
 		this.moduleID = mod.getModuleID();
 		this.academicYear = mod.getAcademicYear();
@@ -34,6 +27,7 @@ public class FormattedModule {
 		this.lecturer = mod.getLecturer();
 		Day = day;
 		Time = time;
+		Year = year;
 	}
 
 	public String getDay() {
@@ -114,6 +108,14 @@ public class FormattedModule {
 
 	public void setStudentcourses(List<Studentcourse> studentcourses) {
 		this.studentcourses = studentcourses;
+	}
+
+	public int getYear() {
+		return Year;
+	}
+
+	public void setYear(int year) {
+		Year = year;
 	}
 
 }
