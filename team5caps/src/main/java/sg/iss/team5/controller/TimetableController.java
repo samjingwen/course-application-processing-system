@@ -42,6 +42,7 @@ public class TimetableController {
 				 {
 					 sm=sService.findModuleByStudentId(id);
 				 }
+				 System.out.println(sm);
 				 if(firstLetter=="L")
 				 {
 					 sm=lService.findModuleByLecturerId(id);
