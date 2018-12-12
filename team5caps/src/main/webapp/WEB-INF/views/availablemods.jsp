@@ -8,27 +8,36 @@
 <title>Available Modules</title>
 </head>
 <body>
-	<table>
-		<tr>
-			<td>Academic Year</td>
-			<td>Module ID</td>
-			<td>Module Name</td>
-			<td>Lecturer</td>
-			<td>Day of Week</td>
-			<td>Time Slot</td>
-			<td>Venue</td>
-		</tr>
-		<c:forEach items="${modules}" var="modules" varStatus="index">
+	<div name="availm">
+		<table id="AvailMods" class="table table-stripeds">
+			<caption>List of available modules:</caption>
+			<br>
+			<thread>
 			<tr>
-				<td>${modules.academicYear}</td>
-				<td>${modules.moduleID}</td>
-				<td>${modules.coursedetail.courseName}</td>
-				<td>${modules.lecturer.user.firstName} ${modules.lecturer.user.lastName}</td>
-				<td>${modules.dayofWeek}</td>
-				<td>${modules.timeslot}</td>
-				<td>${modules.venue}</td>
+				<td><b>Academic Year</b></td>
+				<td><b>Module ID</b></td>
+				<td><b>Module Name</b></td>
+				<td><b>Lecturer</b></td>
+				<td><b>Day of Week</b></td>
+				<td><b>Time Slot</b></td>
+				<td><b>Venue</b></td>
 			</tr>
-		</c:forEach>
-	</table>
+			</thread>
+			<tbody>
+				<c:forEach items="${modules}" var="modules" varStatus="index">
+					<tr>
+						<td>${modules.academicYear}</td>
+						<td>${modules.moduleID}</td>
+						<td>${modules.coursedetail.courseName}</td>
+						<td>${modules.lecturer.user.firstName}
+							${modules.lecturer.user.lastName}</td>
+						<td>${dlist}</td>
+						<td>${modules.timeslot}</td>
+						<td>${modules.venue}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

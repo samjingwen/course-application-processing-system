@@ -25,5 +25,8 @@ public interface StudentService {
 
 	ArrayList<Module> findModuleByLecturerId(String lid);
 
+	double getGpa(ArrayList<Studentcourse> courses);
+	
+	ArrayList<String> getDay(ArrayList<Module> mods);
 
 }

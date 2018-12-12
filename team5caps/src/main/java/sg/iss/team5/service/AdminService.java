@@ -2,7 +2,9 @@ package sg.iss.team5.service;
 
 import java.util.ArrayList;
 
+import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Student;
+import sg.iss.team5.model.Studentcourse;
 
 import java.util.ArrayList;
 
@@ -10,7 +12,7 @@ import sg.iss.team5.model.Student;
 
 public interface AdminService {
 
-	public ArrayList<Student> findNotEnrolled();
+	ArrayList<Student> findNotEnrolled();
 
 	ArrayList<Student> findAllStudents();
 
@@ -21,7 +23,10 @@ public interface AdminService {
 	Student updateStudent(Student s);
 
 	void removeStudent(Student s);
-
-	ArrayList<Student> findStudentsByCriteria(Student student);
-
+	
+	ArrayList<Coursedetail> getCourseDetailList();
+	
+	Integer getEnrolledCapacity(String courseId);
+	
+	ArrayList<Studentcourse> findCourseByCourseId(String cid);
 }
