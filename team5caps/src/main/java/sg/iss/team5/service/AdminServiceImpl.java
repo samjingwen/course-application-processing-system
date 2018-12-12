@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,9 +61,9 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public Student updateStudent(Student s) {
-		// TODO Auto-generated method stub
-		return null;
+	public Student updateStudent(Student student) {
+		studentRepository.save(student);
+		return student;
 	}
 
 	@Override
@@ -134,5 +137,10 @@ public class AdminServiceImpl implements AdminService {
 	public void removeStudent(Student s) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public ArrayList<Studentcourse> findCourseByCourseId(String cid) {
+		System.out.println(cid);
+		return studentcourseRepository.findByModule_ModuleIDContaining(cid);
 	}
 }

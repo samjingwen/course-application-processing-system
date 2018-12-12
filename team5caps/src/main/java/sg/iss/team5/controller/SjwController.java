@@ -42,6 +42,10 @@ public class SjwController {
 	@RequestMapping(value = {"/sjw/admin"}, method = RequestMethod.GET)
 	public ModelAndView showAdmin() {
 		return null;
+<<<<<<< HEAD
+=======
+		
+>>>>>>> branch 'master' of https://github.com/jwjwjw123/team5javaca.git
 	}
 	
 }
