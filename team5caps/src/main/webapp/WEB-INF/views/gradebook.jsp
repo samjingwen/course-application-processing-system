@@ -9,18 +9,15 @@
 </head>
 <body>
 
-
 <table>
 		<tr colspan="6">
-			<form name="courselist" method="get" action="#">
+		<form name="mm" method="get" action="#">
 				<select name="clr">
-					<option>A</option>
-					<option>B</option>
-					<option>C</option>
-					<option>D</option>
+				<c:forEach var="cl" items="${courselist}">
+					<option>${cl}</option>
+				</c:forEach>	
 				</select>
-			</form>
-		
+			</form>	
 		<tr>
 		<tr colspan="6">
 			<td><input type="submit" name="submit"
@@ -42,7 +39,7 @@
 				<td>${sc.student.user.lastName}</td>
 				<td>${sc.getAttendance()}</td>
 				<td>
-					<form name="f1" method="get" action="#" width=40>
+					<form name="f1" method="get" action="#" >
 						<select name="clr">
 							<option>A</option>
 							<option>B</option>
