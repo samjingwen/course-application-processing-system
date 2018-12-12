@@ -15,13 +15,13 @@
 			<td>Lecturer Rating</td>
 			<td>Attendance</td>
 		</tr>
-		<c:forEach items="${modules}" var="module" varStatus="index">
+		<c:forEach items="${modules}" var="module" varStatus="status">
 			<tr>
-				<td>${index.count}</td>
+				<td>${status.index+1}</td>
 				<td>${module.moduleID}</td>
 				<td>${module.coursedetail.courseName}</td>
-				<td>${ratings}</td>
-				<td>${attendance}</td>
+				<td>${ratings[status.index]}</td>
+				<td>${attendance[status.index]}</td>
 			</tr>
 		</c:forEach>
 	</table>

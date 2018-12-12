@@ -1,6 +1,5 @@
 package sg.iss.team5.controller;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Studentcourse;
-import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.service.LecturerService;
 import sg.iss.team5.service.StudentService;
 
@@ -34,15 +32,18 @@ public class LecturerViewCourseController {
 		mav.addObject("modules", mlist);
 		
 		ArrayList<Double> ratingList = new ArrayList<>();
-		Double ratingAverage = lectservice.findLecturerRatingByModuleId(mlist.get(1).getModuleID());
-		ratingList.add(ratingAverage);
+		for (int i=0; i < mlist.size(); i++) {
+			Double ratingAverage = lectservice.findLecturerRatingByModuleId(mlist.get(i).getModuleID());
+			ratingList.add(ratingAverage);
+		}
 		mav.addObject("ratings", ratingList);
 
 		ArrayList<String> attList = new ArrayList<>();
-		String attAverage = lectservice.findAttendanceByModuleId(mlist.get(1).getModuleID());
+		for (int i=0; i < mlist.size(); i++) {
+		String attAverage = lectservice.findAttendanceByModuleId(mlist.get(i).getModuleID());
 		attList.add(attAverage);
-		mav.addObject("attendance", attList);
-		
+		}
+		mav.addObject("attendance", attList);		
 		return mav;
 	}
 
