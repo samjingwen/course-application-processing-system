@@ -3,6 +3,9 @@ package sg.iss.team5.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sg.iss.team5.model.Coursedetail;
@@ -66,10 +70,26 @@ public class AdminHomePageController {
 	@RequestMapping(value = "/manage/courses/{cid}")
 	public ModelAndView listStudentsInCourse(@PathVariable String cid) {
 		ArrayList<Studentcourse> sclist = adminService.findCourseByCourseId(cid);
-		System.out.println(sclist);
 		ModelAndView mav = new ModelAndView("admin_coursedetails");
 		mav.addObject("studentcourse",sclist);
 		return mav;
+	}
+	
+	@RequestMapping(value = "/manage/courses/{mid}/{sid}", method = RequestMethod.GET)
+	public ModelAndView dropStudent(@PathVariable String mid, @PathVariable String sid) {
+		Student student = adminService.findStudentById(sid);
+		Module module = adminService.findByModuleID(mid);
+		ModelAndView mav = new ModelAndView("admin_dropstudent");
+		mav.addObject("student",student);
+		mav.addObject("module",module);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/manage/courses/{mid}/{sid}", method = RequestMethod.POST)
+	public String dropStudentConfirm(@PathVariable String mid, @PathVariable String sid) {
+		Studentcourse sc = adminService.findByModuleIDCourseID(mid, sid);
+		adminService.removeStudentCourse(sc);
+		return "admin_successful";
 	}
 
 //	To manage approval

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.iss.team5.model.Lecturer;
+import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.repository.LecturerRepository;
 import sg.iss.team5.repository.UserRepository;
 

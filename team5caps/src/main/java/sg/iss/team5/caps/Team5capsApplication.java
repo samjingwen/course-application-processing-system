@@ -33,6 +33,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
+//@SpringBootApplication
 @ComponentScan(basePackages="sg.iss.team5")
 @PropertySource({ "classpath:application.properties",
 		"classpath:/i18n/messages.properties" })
