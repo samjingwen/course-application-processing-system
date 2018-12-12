@@ -3,20 +3,21 @@ package sg.iss.team5.service;
 
 import java.util.ArrayList;
 
-import sg.iss.team5.model.Student;
+
+import sg.iss.team5.model.Course;
 public interface AdminService {
 
-		ArrayList<Student> findAllStudents();
+		ArrayList<Course> findAllStudents();
 
-		Student findStudent(String nric);
+		Course findStudent(String nric);
 
-		Student createStudent(Student s);
+		Course createStudent(Course s);
 
-		Student updateStudent(Student s);
+		Course updateStudent(Course s);
 
-		void removeStudent(Student s);
+		void removeStudent(Course s);
 
-		ArrayList<Student> findStudentsByCriteria(Student student);
+		ArrayList<Course> findStudentsByCriteria(Course student);
 
-	
+
 }

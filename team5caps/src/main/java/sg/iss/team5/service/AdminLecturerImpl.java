@@ -7,54 +7,53 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import sg.iss.team5.model.Course;
-import sg.iss.team5.repository.StudentRepository;
+import sg.iss.team5.model.Lecturer;
+import sg.iss.team5.repository.LecturerRepository;
 import sg.iss.team5.repository.UserRepository;
 
 
 @Service
-public class AdminServiceImpl implements AdminService {
+public class AdminLecturerImpl implements AdminLecturer {
 
 	@Resource
-	StudentRepository studentRepository;
+	LecturerRepository LecturerRepository;
 	@Resource
 	UserRepository userRepository;
 
 	@Override
-	public ArrayList<Course> findAllStudents() {
-		return studentRepository.findAllStudents();
+	public ArrayList<Lecturer> findAllLecturers() {
+		return LecturerRepository.findAllLecturers();
 	}
 
 	@Override
 	@Transactional
-	public Course findStudent(String sid) {
-		Course student = studentRepository.findStudentById(sid);
+	public Lecturer findLecturer(String lid) {
+		Lecturer student = LecturerRepository.findLecturerById(lid);
 		System.out.println(student.toString());
 		return student;
 	}
 
 	@Override
-	public Course createStudent(Course s) {
+	public Lecturer createLecturer(Lecturer l) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Course updateStudent(Course s) {
+	public Lecturer updateLecturer(Lecturer l) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void removeStudent(Course s) {
+	public void removeLecturer(Lecturer l) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public ArrayList<Course> findStudentsByCriteria(Course student) {
+	public ArrayList<Lecturer> findLecturersByCriteria(Lecturer lecturer) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
