@@ -29,7 +29,7 @@ public class StudentEnrollCourseController {
 
 	@RequestMapping(value = "/modules/{sid}", method = RequestMethod.GET)
 	public ModelAndView listAllNotTaken(@PathVariable String sid, HttpSession session, BindingResult result) throws ParseException {
-		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
+		String sid2 = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 
 		ArrayList<FormattedModule> mlist = (ArrayList<FormattedModule>) stuservice
 				.getFormat(stuservice.findModuleNotEnrolled(sid, date));
