@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Lecturer;
 import sg.iss.team5.model.Student;
+import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.repository.CoursedetailRepository;
 import sg.iss.team5.repository.LecturerRepository;
 import sg.iss.team5.repository.StudentRepository;
@@ -32,9 +33,11 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<Student> findAllStudents() {
 		return studentRepository.findAllStudents();
 	}
+
 	public ArrayList<Student> findNotEnrolled() {
 		return studentRepository.findNotEnrolled();
 	}
+
 	@Override
 	public Student findStudentById(String sid) {
 		Student student = studentRepository.findStudentById(sid);
@@ -103,16 +106,31 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-public ArrayList<Coursedetail> getCourseDetailList() {
-		return coursedetailRepository.findAllCoursedetail();
+
+	public ArrayList<Coursedetail> getCourseDetailList() {
+		return cdRepository.findAllCoursedetail();
 	}
 
 	public Integer getEnrolledCapacity(String courseId) {
-		return coursedetailRepository.getCurrentEnrolledCapacity(courseId);
+		return cdRepository.getCurrentEnrolledCapacity(courseId);
 	}
-	
+
+
+	@Override
+	public Student findStudent(String nric) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeStudent(Student s) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public ArrayList<Studentcourse> findCourseByCourseId(String cid) {
-		System.out.println(cid);
-		return studentcourseRepository.findCourseByCourseId(cid);
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
