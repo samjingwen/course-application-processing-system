@@ -31,12 +31,12 @@ public class Studentcourse implements Serializable {
 
 	//bi-directional many-to-one association to Module
 	@ManyToOne
-	@JoinColumn(name="ModuleID")
+	@JoinColumn(name="ModuleID", insertable=false, updatable=false)
 	private Module module;
 
 	//bi-directional many-to-one association to Student
 	@ManyToOne
-	@JoinColumn(name="StudentID")
+	@JoinColumn(name="StudentID", insertable=false, updatable=false)
 	private Student student;
 
 	public Studentcourse() {
@@ -106,12 +106,14 @@ public class Studentcourse implements Serializable {
 		this.student = student;
 	}
 
-	public Studentcourse(String enrollStatus, Date enrollTime, Module module, Student student) {
+	public Studentcourse(String enrollStatus, Date enrollTime, Student stu, Module module) {
 		super();
+		this.student = stu;
+		this.module = module;
+		//this.id = new StudentcoursePK(stu.getStudentID(),module.getModuleID());
 		this.enrollStatus = enrollStatus;
 		this.enrollTime = enrollTime;
-		this.module = module;
-		this.student = student;
+
 	}
 
 

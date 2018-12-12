@@ -88,4 +88,10 @@ public class LecturerServiceImpl implements LecturerService {
 	
 	
 	
+	@Override
+	public ArrayList<Module> findPastModuleByLectId(String lid) {
+		// TODO Auto-generated method stub
+		return (ArrayList<Module>) moduleRepository.findPastModuleByLectId(lid);
+	}
+
 }

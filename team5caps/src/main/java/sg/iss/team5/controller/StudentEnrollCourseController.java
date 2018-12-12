@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.FormattedModule;
+import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
+import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.model.StudentcoursePK;
 import sg.iss.team5.model.User;
 import sg.iss.team5.service.AdminService;
 import sg.iss.team5.service.StudentService;
@@ -51,11 +55,18 @@ public class StudentEnrollCourseController {
 			HttpSession session) {
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		Student s = adService.findStudentById(sid);
-		for (String s : modid)
-			
+		ArrayList<Module> mlist = new ArrayList<Module>();
+		for (String current : modid)
+			mlist.add(stuservice.findModulebyID(current));
 		
-		ModelAndView mav = new ModelAndView("testing");
-		mav.addObject("modid", modid);
+		ArrayList<Studentcourse> clist = stuservice.enrollCourse(mlist, s);
+		for(Studentcourse sc : clist) {
+			sc.setId(new StudentcoursePK(sc.getModule().getModuleID(), sc.getStudent().getStudentID()));
+			stuservice.saveStudentCourse(sc);
+		}
+		
+		ModelAndView mav = new ModelAndView("studentenrollment");
+		mav.addObject("clist", clist);
 //		String[] modids = request.getParameterValues("modid");
 //		
 //		/*ArrayList<Studentcourse> sc = new ArrayList<Studentcourse>();

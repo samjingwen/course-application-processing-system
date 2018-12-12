@@ -11,10 +11,10 @@
 
 <table>
 		<tr colspan="6">
-		<form name="mm" method="get" action="#">
+		<form name="selectone" method="get" action="#">
 				<select name="clr">
 				<c:forEach var="cl" items="${courselist}">
-					<option>${cl}</option>
+					<option>${cl.key}</option>
 				</c:forEach>	
 				</select>
 			</form>	

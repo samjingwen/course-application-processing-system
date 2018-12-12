@@ -37,7 +37,8 @@ public class TimetableController {
 				TreeMap<Integer, String> evecourse=new TreeMap<>();
 				 ArrayList<sg.iss.team5.model.Module> sm=new ArrayList<>();
 				 String firstLetter = String.valueOf(id.charAt(0));
-				 //judge id is student id or lecturer id
+				 
+				 //judge id is student id or lecturer id 
 				 if(firstLetter.equalsIgnoreCase("S"))
 				 {
 					 sm=sService.findModuleByStudentId(id);
@@ -47,7 +48,9 @@ public class TimetableController {
 				 {
 					 sm=lService.findModuleByLecturerId(id);
 				 }
+				 
 				 //divide all the courses into 3 parts
+				 
 				 for (sg.iss.team5.model.Module module : sm) {
 					if (module.getTimeslot()==1)
 					{
@@ -62,6 +65,7 @@ public class TimetableController {
 						evecourse.put(module.getDayofWeek(), module.getCoursedetail().getCourseName()+"("+module.getVenue()+")");
 					}
 				}
+				 
 				 //find no morning class day
 				 ArrayList<Integer> listm = new ArrayList<Integer>(morcourse.keySet());
 				 boolean resultm1 = listm.contains(1); 
@@ -79,6 +83,7 @@ public class TimetableController {
 				 {morcourse.put(4, " ");}
 				 if(resultm5==false)
 				 {morcourse.put(5, " ");}
+				 
 				 //find no afternoon class day
 				 ArrayList<Integer> lista = new ArrayList<Integer>(aftcourse.keySet());
 				 boolean resulta1 = lista.contains(1); 
@@ -96,6 +101,7 @@ public class TimetableController {
 				 {aftcourse.put(4, " ");}
 				 if(resulta5==false)
 				 {aftcourse.put(5, " ");}
+				 
 				 //find no evening course day
 				 ArrayList<Integer> liste = new ArrayList<Integer>(evecourse.keySet());
 				 boolean resulte1 = liste.contains(1); 
@@ -113,6 +119,7 @@ public class TimetableController {
 				 {evecourse.put(4, " ");}
 				 if(resulte5==false)
 				 {evecourse.put(5, " ");}
+				 
 				 //add to m and v
 				   mav.addObject("morcoursetime",morcourse);
 				   mav.addObject("aftcoursetime",aftcourse);
