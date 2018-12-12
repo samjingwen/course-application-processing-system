@@ -39,12 +39,12 @@
 			</tbody>
 		</table>
 		<form:form method="POST" modelAttribute="enroll"
-			action="${pageContext.request.contextPath}/manage/courses/${module.moduleID}/${student.studentID}">
+			action="${pageContext.request.contextPath}/admin/manage/courses/${module.moduleID}/${student.studentID}">
 			<input type="submit" name="delete" value="Confirm" class="button" />
 		</form:form>
 		
 		<form:form method="GET" modelAttribute="cancel"
-			action="${pageContext.request.contextPath}/manage/courses/${module.moduleID}">
+			action="${pageContext.request.contextPath}/admin/manage/courses/${module.moduleID}">
 			<input type="submit" name="back" value="Cancel" class="button" />
 		</form:form>
 		
