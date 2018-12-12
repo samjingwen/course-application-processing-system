@@ -28,9 +28,10 @@ public class StudentEnrollCourseController {
 	StudentService stuservice;
 
 	@RequestMapping(value = "/modules/{sid}", method = RequestMethod.GET)
-	public ModelAndView listAllNotTaken(@PathVariable String sid, HttpSession session, BindingResult result) throws ParseException {
+	public ModelAndView listAllNotTaken(@PathVariable String sid, HttpSession session, BindingResult result)
+			throws ParseException {
 		String sid2 = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
-
+		Date date = Calendar.getInstance().getTime();
 		ArrayList<FormattedModule> mlist = (ArrayList<FormattedModule>) stuservice
 				.getFormat(stuservice.findModuleNotEnrolled(sid, date));
 
@@ -40,11 +41,10 @@ public class StudentEnrollCourseController {
 		return mav;
 	}
 
-	
 	@RequestMapping(value = "/enrollin", method = RequestMethod.POST)
-	public ModelAndView enrollStudent(@RequestParam("modid") String[] modid, HttpServletRequest request, HttpSession session)
-	{
-		for (String s:modid)
+	public ModelAndView enrollStudent(@RequestParam("modid") String[] modid, HttpServletRequest request,
+			HttpSession session) {
+		for (String s : modid)
 			System.out.println(s);
 		ModelAndView mav = new ModelAndView("testing");
 		mav.addObject("modid", modid);
@@ -59,16 +59,15 @@ public class StudentEnrollCourseController {
 //		
 		return mav;
 	}
-	
-/*	@RequestMapping(value = "/modules/{sid}", method = RequestMethod.POST)
-	public ModelAndView addAllNotTaken(@PathVariable String sid) throws ParseException {
 
-		String[] modid = request.getParameterValues("modid")
-		ModelAndView mav = new ModelAndView("availablemods");
-
-		mav.addObject("formattedmodules", mlist);
-		return mav;
-	}*/
-
+	/*
+	 * @RequestMapping(value = "/modules/{sid}", method = RequestMethod.POST) public
+	 * ModelAndView addAllNotTaken(@PathVariable String sid) throws ParseException {
+	 * 
+	 * String[] modid = request.getParameterValues("modid") ModelAndView mav = new
+	 * ModelAndView("availablemods");
+	 * 
+	 * mav.addObject("formattedmodules", mlist); return mav; }
+	 */
 
 }
