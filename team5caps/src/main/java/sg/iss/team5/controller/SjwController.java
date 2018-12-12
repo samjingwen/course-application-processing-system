@@ -1,14 +1,24 @@
 package sg.iss.team5.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import sg.iss.team5.model.Coursedetail;
+import sg.iss.team5.model.Module;
+import sg.iss.team5.model.Request;
+import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.service.AdminService;
+import sg.iss.team5.service.LecturerService;
 import sg.iss.team5.service.StudentService;
 
 
@@ -17,11 +27,21 @@ public class SjwController {
 	
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	private AdminService AdminService;
+	@Autowired
+	private LecturerService lecturerService;
 	
 	@RequestMapping("/sjw")
 	public String showHome() {
 		return "index";
 	}
+	
+	@ModelAttribute("modulesList")
+	public ArrayList<Module> getAllModules(){
+		return studentService.findAllModule();
+	}
+	
 	
 	@RequestMapping(value = {"/sjw/home"}, method = RequestMethod.GET)
 	public ModelAndView showTesting() {
@@ -39,11 +59,40 @@ public class SjwController {
 	
 	
 	
-	@RequestMapping(value = {"/sjw/admin"}, method = RequestMethod.GET)
-	public ModelAndView showAdmin() {
-		return null;
-
-
+	@RequestMapping(value = {"/sjw/request"}, method = RequestMethod.GET)
+	public ModelAndView showRequest(Model model) {
+		model.addAttribute("module", new Module());
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("requestEnrollment");
+		return mav;
+	}
+	
+	@RequestMapping(value = {"/sjw/request"}, method = RequestMethod.POST)
+	public ModelAndView showRequest(@ModelAttribute("module") Module module) {
+		ModelAndView mav = new ModelAndView();
+		Request newReq = new Request();
+		module = lecturerService.findModuleByModuleID(module.getModuleID());
+		System.out.println(module.getCoursedetail().getCourseName());
+		System.out.println("HAHAHAHAHA");
+		newReq.setCourseName(module.getCoursedetail().getCourseName());
+		newReq.setLecturerName(module.getLecturer().getUser().getFirstName() + " " + module.getLecturer().getUser().getLastName());
+		newReq.setModuleID(module.getModuleID());
+		newReq.setVenue(module.getVenue());
+		System.out.println(newReq);
+		mav.addObject("newRequest", newReq);
+		mav.setViewName("confirmRequest");
+		return mav;
+	}
+	
+	@RequestMapping(value = {"/sjw/confirm"}, method = RequestMethod.POST)
+	public String showConfirmRequest(@ModelAttribute("module") Module module, HttpSession session) {
+		Studentcourse sc = new Studentcourse();
+		sc.setStudent(((UserSession) session.getAttribute("USERSESSION")).getUser().getStudent());
+		sc.setModule(module);
+		sc.setEnrollStatus("Pending");
+		sc.setEnrollTime(Calendar.getInstance().getTime());
+		lecturerService.createStudentcourse(sc);
+		return "requestSuccess";
 	}
 	
 }

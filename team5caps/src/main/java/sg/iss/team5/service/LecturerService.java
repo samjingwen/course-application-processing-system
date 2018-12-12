@@ -3,8 +3,6 @@ package sg.iss.team5.service;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.springframework.data.repository.query.Param;
-
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Studentcourse;
 
@@ -28,4 +26,7 @@ public interface LecturerService {
 	
 	ArrayList<Studentcourse> findAllStudentcourse();
 
+	Module findModuleByModuleID(String mid);
+	
+	Studentcourse createStudentcourse(Studentcourse studentcourse);
 }
