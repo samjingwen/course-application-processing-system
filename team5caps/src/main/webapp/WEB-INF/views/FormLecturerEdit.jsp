@@ -20,7 +20,7 @@
 				</tr>
 				<tr>
 				   <td><s:message code="LecturerID" /> *</td>
-				   <td><form:input path="lecturerID" readonly="true"/></td>
+				   <td><form:input path="lecturerID" readonly="true" disabled="true"/></td>
 				 </tr>
 				<tr>
 				   <td><s:message code="FirstName" /></td>
