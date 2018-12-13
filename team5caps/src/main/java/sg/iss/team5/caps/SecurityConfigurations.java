@@ -9,7 +9,7 @@ public class SecurityConfigurations {
 	public static Boolean CheckAdminAuth(HttpSession session) {
 		if (session.getAttribute("USERSESSION") == null)
 			return false;
-		if (((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID().startsWith("A")) {
+		if (((UserSession) session.getAttribute("USERSESSION")).getUser().getAccessLevel().equals("Administrator")) {
 			return true;
 		}
 		return false;
@@ -17,7 +17,7 @@ public class SecurityConfigurations {
 	public static Boolean CheckLectAuth(HttpSession session) {
 		if (session.getAttribute("USERSESSION") == null)
 			return false;
-		if (((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID().startsWith("L")) {
+		if (((UserSession) session.getAttribute("USERSESSION")).getUser().getAccessLevel().equals("Lecturer")) {
 			return true;
 		}
 		return false;
@@ -25,7 +25,7 @@ public class SecurityConfigurations {
 	public static Boolean CheckStudAuth(HttpSession session) {
 		if (session.getAttribute("USERSESSION") == null)
 			return false;
-		if (((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID().startsWith("S")) {
+		if (((UserSession) session.getAttribute("USERSESSION")).getUser().getAccessLevel().equals("Student")) {
 			return true;
 		}
 		return false;
