@@ -72,6 +72,7 @@ public class AdminManageCourseController {
 		System.out.println("course"+course.toString());
 		if (result.hasErrors())
 			return new ModelAndView("FormCourseEdit");
+		course.setCredits(adminCourse.findCoursedetailById(course.getCourseID()).getCredits());
 		adminCourse.updateCoursedetail(course);
 		ModelAndView mav = new ModelAndView("redirect:/course/courselist");
 		String message = "Course" + course.getCourseID() + " was successfully updated.";

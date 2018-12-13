@@ -3,6 +3,7 @@ package sg.iss.team5.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import sg.iss.team5.model.User;
 import sg.iss.team5.service.AdminLecturer;
 
 @Controller
+@Transactional
 @RequestMapping(value="/lecturer")
 public class AdminManageLecController {
 
@@ -60,16 +62,16 @@ public class AdminManageLecController {
 	}
 	
 	
-	@RequestMapping(value = "/edit/{LecturerID}", method = RequestMethod.GET)
-	public ModelAndView editStudentPage(@PathVariable String LecturerID) {
+	@RequestMapping(value = "/edit/{lecturerID}", method = RequestMethod.GET)
+	public ModelAndView editStudentPage(@PathVariable String lecturerID) {
 		ModelAndView mav = new ModelAndView("FormLecturerEdit");
-		mav.addObject("lecturer", adminlecturer.findLecturer(LecturerID));
+		mav.addObject("lecturer", adminlecturer.findLecturer(lecturerID));
 		return mav;
 	}
 
-	@RequestMapping(value = "/edit/{LecturerID}", method = RequestMethod.POST)
-	public ModelAndView editLecturer(@ModelAttribute @Valid Lecturer lecturer, @PathVariable String LecturerID,
-			BindingResult result, final RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "/edit/{lecturerID}", method = RequestMethod.POST)
+	public ModelAndView editLecturer(@ModelAttribute @Valid Lecturer lecturer, BindingResult result,  @PathVariable String lecturerID, 
+			final RedirectAttributes redirectAttributes) {
 		System.out.println("lecturer"+lecturer.toString());
 		if (result.hasErrors())
 			return new ModelAndView("FormLecturerEdit");

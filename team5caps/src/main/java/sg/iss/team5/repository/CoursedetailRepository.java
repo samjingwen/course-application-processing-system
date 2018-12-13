@@ -18,6 +18,6 @@ public interface CoursedetailRepository extends JpaRepository<Coursedetail, Stri
 	@Query(value= "select count(*) from studentcourse sc where sc.moduleid like '%:courseid' and year (sc.enrolltime) = YEAR(CURDATE())",nativeQuery=true)
 	Integer getCurrentEnrolledCapacity(@Param("courseid") String courseId);
 	
-	@Query(value="select * from coursedetail where coursedetailid = :cid", nativeQuery = true)
+	@Query(value="select * from coursedetails where courseid = :cid", nativeQuery = true)
 	Coursedetail findCoursesById(@Param("cid") String cid);
 }
