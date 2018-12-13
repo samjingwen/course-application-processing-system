@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
 
+import javax.mail.Session;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class LecturerGradeCourseController {
 			Module eachmodule = module;
 			cList.put(eachcourse, eachmodule);
 		}
+		//to
 		mav.addObject("courselist", cList);
 
 		return mav;
@@ -54,12 +56,13 @@ public class LecturerGradeCourseController {
 	@RequestMapping(value = "/gradebook", method = RequestMethod.POST)
 	public ModelAndView listAllStudent(@RequestParam("selectone") String moduleID) {
 		// Get list of students from module(dropdownlist selected)
-		ModelAndView mav = new ModelAndView("gradebook");
+		   ModelAndView mav = new ModelAndView("gradebook");
 		    Module selectone=sService.findModulebyID(moduleID);
 		    System.out.println(selectone);
 			List<Studentcourse> scList = new ArrayList<>();
 			ArrayList<Student> stuList = new ArrayList<>();
 			scList = selectone.getStudentcourses();
+			//get the  student list of exact course
 			for (Studentcourse studentcourse : scList) {
 				Student student = studentcourse.getStudent();
 				stuList.add(student);
