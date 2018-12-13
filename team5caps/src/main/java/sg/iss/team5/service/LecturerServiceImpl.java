@@ -3,11 +3,11 @@ package sg.iss.team5.service;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,26 +33,22 @@ public class LecturerServiceImpl implements LecturerService {
 
 	@Override
 	public ArrayList<Module> findModuleByLecturerId(String lid) {
-		// TODO Auto-generated method stub
 		return moduleRepository.findModuleByLecturerId(lid);
 	}
 
 	@Override
 	public int gradeCourse(Studentcourse sc) {
-		// TODO Auto-generated method stub
 		studentcourseRepository.saveAndFlush(sc);
 		return 1;
 	}
 
 	@Override
 	public ArrayList<Module> findModuleByAcademicYear(Date year) {
-		// TODO Auto-generated method stub
 		return moduleRepository.findModuleByAcademicYear(year);
 	}
 
 	@Override
 	public ArrayList<Module> findAllModule() {
-		// TODO Auto-generated method stub
 		return (ArrayList<Module>) moduleRepository.findAll();
 	}
 
@@ -94,7 +90,6 @@ public class LecturerServiceImpl implements LecturerService {
 	
 	@Override
 	public ArrayList<Module> findPastModuleByLectId(String lid) {
-		// TODO Auto-generated method stub
 		return (ArrayList<Module>) moduleRepository.findPastModuleByLectId(lid);
 	}
 
@@ -102,7 +97,7 @@ public class LecturerServiceImpl implements LecturerService {
 	public Module updateModule(Module module) {
 		return moduleRepository.save(module);
 	}
-
+	
 	@Override
 	public ArrayList<String> getAllModuleID() {
 		return moduleRepository.getAllModuleID();
@@ -114,19 +109,27 @@ public class LecturerServiceImpl implements LecturerService {
 	}
 
 	@Override
-	public Studentcourse findStudentcourseByPK(String sid, String mid) {
-		return studentcourseRepository.findFirstByModule_ModuleIDAndStudent_StudentID(mid, sid);
-	}
-	@Override
 	public ArrayList<Studentcourse> findModulesByLecturerId(String lid) {
 		return (ArrayList<Studentcourse>) studentcourseRepository.findModulesByLecturerId(lid);
 	}
 
 	@Override
 	public ArrayList<Module> findCurentModuleByLectId(String lid) {
+		// TODO Auto-generated method stub
 		return (ArrayList<Module>) moduleRepository.findCurentModuleByLectId(lid);
 	}
 
+	@Override
+	public Studentcourse updateStudentcourse(Studentcourse sc) {
+		return studentcourseRepository.saveAndFlush(sc);
+		
+	}
+	
+	@Override
+	public Studentcourse findStudentcourseByPK(String sid, String mid) {
+		return studentcourseRepository.findFirstByModule_ModuleIDAndStudent_StudentID(mid, sid);
+	}
+	
 	@Override
 	public ArrayList<String> getAllModuleIDForCurrentYear() {
 		ArrayList<String> mList = new ArrayList<String>();
@@ -143,5 +146,5 @@ public class LecturerServiceImpl implements LecturerService {
 		return newList;
 	}
 	
-
+	
 }
