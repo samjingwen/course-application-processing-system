@@ -8,9 +8,11 @@
 <link rel="STYLESHEET" type="text/css" href="${ss2}" />
 </head>
 <body>
-	<form:form modelAttribute="scList" method="POST" action="${pageContext.request.contextPath}/grade/gradebook/gradeconfirm">
+	<form:form modelAttribute="module" method="POST"
+		action="${pageContext.request.contextPath}/grade/gradebook/gradeconfirm">
 		<form:button type="submit" name="submit" value="s">SUBMIT</form:button>
-		<form:input type="text" readonly="readonly" value="${moduleID}" path="moduleID"/>
+		<form:input type="text" readonly="readonly" value="${moduleID}"
+			path="moduleID" />
 		<table>
 			<thead>
 				<tr>
@@ -30,16 +32,15 @@
 						<td>${sc.student.user.firstName}</td>
 						<td>${sc.student.user.lastName}</td>
 						<td>${sc.getAttendance()}</td>
-						<td>
-							<select name="${sc.getStudent().getStudentID()}">
+						<td><select name="${sc.getStudent().getStudentID()}">
 								<option value=" ">--</option>
 								<option value="A">A</option>
 								<option value="B">B</option>
 								<option value="C">C</option>
 								<option value="D">D</option>
-								<option value="E">D</option>
-								<option value="F">D</option>
-							</select></td>
+								<option value="E">E</option>
+								<option value="F">F</option>
+						</select></td>
 
 					</tr>
 				</c:forEach>
