@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.FormattedModule;
+import sg.iss.team5.model.FormattedSC;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
@@ -42,5 +43,7 @@ public interface StudentService {
 	ArrayList<Studentcourse> enrollCourse(ArrayList<Module> mod, Student stu);
 	
 	Module findModulebyID(String mid);
+	
+	ArrayList<FormattedSC> getFormatSC(ArrayList<Studentcourse> sc);
 
 }
