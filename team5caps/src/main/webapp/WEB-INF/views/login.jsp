@@ -14,25 +14,25 @@
 <div>
 <form:form modelAttribute="user" method="POST" cssClass="maingrid"
 	action="${pageContext.request.contextPath}/home/authenticate">
-	<div>
+	<div align="center">
 	<table>
+		<tr></tr>
 		<tr>
-			<td><spring:message code="fieldLabel.username" /></td>
-			<td><form:input path="userID" size="40" /></td>
+			<td><spring:message code="fieldLabel.username" />&nbsp</td>
+			<td colspan="2"><form:input path="userID" size="40" /></td>
 		</tr>
+		
 		<tr>
-			<td><spring:message code="fieldLabel.password" /></td>
-			<td><form:password path="password" size="40" /></td>
+			<td><spring:message code="fieldLabel.password" />&nbsp</td>
+			<td colspan="2"><form:password path="password" size="40" /></td>
 		</tr>
+	
 		<tr>
 			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td><form:button name="submit" type="submit" value="s">
+			<td><form:button name="submit" type="submit" value="s" class="button1">
 						Submit
 					</form:button></td>
-			<td><form:button name="clear" type="reset" value="r">
+			<td><form:button name="clear" type="reset" value="r" class="button1">
 						Clear
 					</form:button></td>
 		</tr>

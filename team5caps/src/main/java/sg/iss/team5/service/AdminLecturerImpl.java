@@ -4,21 +4,24 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sg.iss.team5.model.Lecturer;
-import sg.iss.team5.model.Studentcourse;
+
+import sg.iss.team5.model.User;
 import sg.iss.team5.repository.LecturerRepository;
 import sg.iss.team5.repository.UserRepository;
+
 
 
 @Service
 public class AdminLecturerImpl implements AdminLecturer {
 
-	@Resource
+	@Autowired
 	LecturerRepository LecturerRepository;
-	@Resource
+	@Autowired
 	UserRepository userRepository;
 
 	@Override
@@ -29,21 +32,21 @@ public class AdminLecturerImpl implements AdminLecturer {
 	@Override
 	@Transactional
 	public Lecturer findLecturer(String lid) {
-		Lecturer student = LecturerRepository.findLecturerById(lid);
-		System.out.println(student.toString());
-		return student;
+		Lecturer lecturer = LecturerRepository.findLecturerById(lid);
+		//System.out.println(student.toString());
+		return lecturer;
 	}
 
-	@Override
-	public Lecturer createLecturer(Lecturer l) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public Lecturer createLecturer(Lecturer lecturer, User user) {
+		userRepository.saveAndFlush(user);
+		return LecturerRepository.saveAndFlush(lecturer);
 	}
-
 	@Override
 	public Lecturer updateLecturer(Lecturer l) {
 		// TODO Auto-generated method stub
-		return null;
+	
+		return LecturerRepository.save(l);
 	}
 
 	@Override
@@ -54,6 +57,12 @@ public class AdminLecturerImpl implements AdminLecturer {
 
 	@Override
 	public ArrayList<Lecturer> findLecturersByCriteria(Lecturer lecturer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Lecturer createLecturer(Lecturer l) {
 		// TODO Auto-generated method stub
 		return null;
 	}

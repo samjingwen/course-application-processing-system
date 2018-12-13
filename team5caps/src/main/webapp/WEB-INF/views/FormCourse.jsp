@@ -8,9 +8,9 @@
 	type="text/css" />
 </head>
 <body>
-
-<form:form method="POST" modelAttribute="lynn"
-	action="${pageContext.request.contextPath}/lynn/create.html">
+<h1><center><u>ADD NEW COURSE</u></center></h1>
+<form:form method="POST" modelAttribute="course"
+	action="${pageContext.request.contextPath}/course/create.html">
 		<center>
 			<table cellpadding=4 cellspacing=2 border=0>
 				<tr>
@@ -19,34 +19,37 @@
 				</tr>
 				
 				<tr>
-				   <td><s:message code="label.course.StudentID" /> *</td>
-				   <td><form:input path="sid"/>
-				   <form:errors path="sid" cssStyle="color: red;" /></td>
+				   <td><s:message code="CourseID" /> *</td>
+				   <td><form:input path="courseID" />
+				   <form:errors path="courseID" cssStyle="color: red;" /></td>
 				 </tr>
 				<tr>
-				   <td><s:message code="label.student.Firstname" /> *</td>
-				   <td><form:input path="fname"/>
-				   <form:errors path="fname" cssStyle="color: red;" /></td>
+				   <td><s:message code="CourseName" /> *</td>
+				   <td><form:input path="courseName"/>
+				   <form:errors path="courseName" cssStyle="color: red;" /></td>
 				 </tr>
 				<tr>
-				   <td><s:message code="label.student.LastName" /></td>
-				   <td><form:input path="lname"/>
-				   <form:errors path="lname" cssStyle="color: red;" /></td>
+				   <td><s:message code="Description" /></td>
+				   <td><form:input path="description"/>
+				   <form:errors path="description" cssStyle="color: red;" /></td>
 				 </tr>
 				
 				<tr>
-				   <td><s:message code="label.student.EmailAddress" /></td>
-				   <td><form:input path="email"/>
-				   <form:errors path="email" cssStyle="color: red;" /></td>
+				   <td><s:message code="MinVacancy" /></td>
+				   <td><form:input path="minVacancy"/>
+				   <form:errors path="minVacancy" cssStyle="color: red;" /></td>
 				 </tr>
 				<tr>
-				   <td><s:message code="label.student.EnrollmentDate" /></td>
-				   <td><form:input path="edate"/>
-				   <form:errors path="edate" cssStyle="color: red;" /></td>
+				   <td><s:message code="MaxVacancy" /></td>
+				   <td><form:input path="maxVacancy"/>
+				   <form:errors path="maxVacancy" cssStyle="color: red;" /></td>
 				 </tr>
-				
-				
-
+				 <tr>
+				   <td><s:message code="Credit" /></td>
+				   <td><form:input path="credits"/>
+				   <form:errors path="credits" cssStyle="color: red;" /></td>
+				 </tr>
+			
 				 <tr>
 				 <td><input type="submit" value="Submit"> </td>
 				 <td><input type="reset" value="Reset"></td>

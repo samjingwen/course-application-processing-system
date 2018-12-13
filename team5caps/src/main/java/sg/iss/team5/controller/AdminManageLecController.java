@@ -1,7 +1,9 @@
 package sg.iss.team5.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +15,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import sg.iss.team5.model.Lecturer;
+import sg.iss.team5.model.Student;
+import sg.iss.team5.model.User;
 import sg.iss.team5.service.AdminLecturer;
 
 @Controller
+@Transactional
+@RequestMapping(value="/lecturer")
 public class AdminManageLecController {
 
 	@Autowired
 	private AdminLecturer adminlecturer;
 
-	@RequestMapping(value = { "/lynn/lechome" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/lecturelist" }, method = RequestMethod.GET)
 	public ModelAndView showTesting() {
 		ArrayList<Lecturer> lecturerList = new ArrayList<Lecturer>();
 		lecturerList = adminlecturer.findAllLecturers();
@@ -31,10 +36,57 @@ public class AdminManageLecController {
 			System.out.println(s);
 		}
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("Lecturerlist");
+		mv.setViewName("ListLecture");
 		mv.addObject("lList", lecturerList);
 		return mv;
 	}
+	
+	@RequestMapping(value = { "/create"}, method = RequestMethod.GET)
+	public ModelAndView newCoursepage() {
+		ModelAndView mav = new ModelAndView("FormLecturer", "lecturer", new Lecturer());
+		return mav;
+	}
+	@RequestMapping(value = { "/create"}, method = RequestMethod.POST)
+	public ModelAndView createNewLecturer(@ModelAttribute @Valid Lecturer lecturer, BindingResult result,
+			final RedirectAttributes redirectAttributes) {
+		if (result.hasErrors())
+			return new ModelAndView("FormLecturer");
+		
+		
+		lecturer.getUser().setUserID(lecturer.getLecturerID());
+		lecturer.getUser().setPassword("Password");
+		lecturer.getUser().setAccessLevel("Lecturer");
+		adminlecturer.createLecturer(lecturer, lecturer.getUser());
+		ModelAndView mav = new ModelAndView("redirect:/lecturer/lecturelist");
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/edit/{lecturerID}", method = RequestMethod.GET)
+	public ModelAndView editStudentPage(@PathVariable String lecturerID) {
+		ModelAndView mav = new ModelAndView("FormLecturerEdit");
+		mav.addObject("lecturer", adminlecturer.findLecturer(lecturerID));
+		return mav;
+	}
+
+	@RequestMapping(value = "/edit/{lecturerID}", method = RequestMethod.POST)
+	public ModelAndView editLecturer(@ModelAttribute @Valid Lecturer lecturer, BindingResult result,  @PathVariable String lecturerID, 
+			final RedirectAttributes redirectAttributes) {
+		System.out.println("lecturer"+lecturer.toString());
+		if (result.hasErrors())
+			return new ModelAndView("FormLecturerEdit");
+		User user = lecturer.getUser();
+		user.setUserID(lecturer.getLecturerID());
+		user.setAccessLevel(adminlecturer.findLecturer(lecturer.getLecturerID()).getUser().getAccessLevel());
+		user.setPassword(adminlecturer.findLecturer(lecturer.getLecturerID()).getUser().getPassword());		
+		adminlecturer.createLecturer(lecturer, user);
+		ModelAndView mav = new ModelAndView("redirect:/lecturer/lecturelist");
+		String message = "Lecturer" + lecturer.getLecturerID() + " was successfully updated.";
+		redirectAttributes.addFlashAttribute("message", message);
+		return mav;
+	}
+}
+
 
 	//create lecturer
 //	@RequestMapping(value = "/lynn/lectnew", method = RequestMethod.GET)
@@ -44,7 +96,7 @@ public class AdminManageLecController {
 	
 	
 	
-	@RequestMapping(value = "/leccreate", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/leccreate", method = RequestMethod.POST)
 	public ModelAndView createNewStudent(@ModelAttribute @Valid Lecturer lecturer, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
 		if (result.hasErrors())
@@ -77,7 +129,7 @@ public class AdminManageLecController {
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
 	}
-
+*/
 //	@RequestMapping(value = "/student")
 //	@Controller
 //	public class StudentController {
@@ -145,4 +197,3 @@ public class AdminManageLecController {
 //
 //	}
 
-}

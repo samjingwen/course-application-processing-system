@@ -17,7 +17,7 @@ public class HtmlEmailController {
     public JavaMailSender emailSender;
  
     @ResponseBody
-    @RequestMapping("/admin/sendHtmlEmail")
+    @RequestMapping("/admin/sendHtmlEmailReminder")
     public String sendHtmlEmail() throws MessagingException {
  
         MimeMessage message = emailSender.createMimeMessage();

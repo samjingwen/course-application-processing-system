@@ -40,12 +40,12 @@ public class Module implements Serializable {
 
 	//bi-directional many-to-one association to Coursedetail
 	@ManyToOne
-	@JoinColumn(name="CourseID")
+	@JoinColumn(name="CourseID", insertable=false, updatable=false)
 	private Coursedetail coursedetail;
 
 	//bi-directional many-to-one association to Lecturer
 	@ManyToOne
-	@JoinColumn(name="LecturerID")
+	@JoinColumn(name="LecturerID", insertable=false, updatable=false)
 	private Lecturer lecturer;
 
 	//bi-directional many-to-one association to Studentcourse

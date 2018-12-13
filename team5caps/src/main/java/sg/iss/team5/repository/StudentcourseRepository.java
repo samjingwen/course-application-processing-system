@@ -31,16 +31,20 @@ public interface StudentcourseRepository extends JpaRepository<Studentcourse, St
 
 	ArrayList<Studentcourse> findByModule_ModuleIDContaining(String cid);
 
-	@Query(value = "select * from studentcourse", nativeQuery = true)
-	ArrayList<Studentcourse> findAllStudentcourse();
+	//@Query(value = "select * from studentcourse", nativeQuery = true)
+	//ArrayList<Studentcourse> findAllStudentcourse();
 
 	@Query(value = "select * from studentcourse sc where sc.moduleid in(select moduleid from modules where lecturerid= :lid", nativeQuery = true)
 	ArrayList<Studentcourse> findModulesByLecturerId(@Param("lid") String lid);
 
 	Studentcourse findFirstByModule_ModuleIDAndStudent_StudentID(String mid, String sid);
 
+	ArrayList<Studentcourse> findByEnrollStatus(String status);
+
 	@Query(value = "select * from studentcourse sc where sc.moduleid = :mid and sc.studentid = :sid", nativeQuery = true)
 	Studentcourse findStudentcourseByPK(@Param("mid") String mid, @Param("sid") String sid);
+	
+	ArrayList<Studentcourse> findByModule_Lecturer_LecturerID(String lid);
 	
 	// ArrayList<Studentcourse> findByModule_ModuleIDContaining(String cid);
 

@@ -2,6 +2,7 @@ package sg.iss.team5.service;
 
 import java.util.ArrayList;
 
+import sg.iss.team5.model.ChartData;
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Lecturer;
 import sg.iss.team5.model.Module;
@@ -56,4 +57,12 @@ public interface AdminService {
 	void removeStudentCourse(Studentcourse sc);
 	
 	User createUser(User u);
+	
+	int countByCourseID(String cid);
+	
+	ArrayList<Studentcourse> findAllStudentcourse();
+	
+	ArrayList<Studentcourse> findByEnrollStatus(String status);
+	
+	void save(Studentcourse sc);
 }

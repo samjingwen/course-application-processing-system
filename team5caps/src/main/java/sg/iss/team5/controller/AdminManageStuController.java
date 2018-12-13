@@ -3,14 +3,13 @@ package sg.iss.team5.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,12 +20,13 @@ import sg.iss.team5.model.User;
 import sg.iss.team5.service.AdminService;
 
 @Controller
+@RequestMapping(value = "/student")
 public class AdminManageStuController {
 
 	@Autowired
 	private AdminService adminService;
 
-	@RequestMapping(value = { "/lynn/home" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/studentlist" }, method = RequestMethod.GET)
 	public ModelAndView showTesting() {
 		ArrayList<Student> myStudentList = new ArrayList<Student>();
 		myStudentList = adminService.findAllStudents();
@@ -35,44 +35,58 @@ public class AdminManageStuController {
 		}
 		System.out.println("HAHAHAHAHAHAH");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("studList");
+		mv.setViewName("ListStudent");
 		mv.addObject("sList", myStudentList);
 		return mv;
 	}
 
-	// Create Student
-	@RequestMapping(value = "/lynn/newstudent", method = RequestMethod.GET)
-	public String newStudentPage(Model model) {
-		model.addAttribute("newUser", new User());
-		return "newStudent";
-	}
-	
-	@Transactional
-	@RequestMapping(value = "/lynn/newstudent", method = RequestMethod.POST)
-	public ModelAndView createNewStudent(@ModelAttribute User user, final RedirectAttributes redirectAttributes) {
-//		if (result.hasErrors())
-//			return new ModelAndView("newStudent");
-		ModelAndView mav = new ModelAndView();
-		user.setPassword("Password");
-		user.setAccessLevel("Student");
-		//user.setStudent(new Student());
-		//user.getStudent().setStudentID(user.getUserID());
-		//user.getStudent().setEnrollmentDate(Calendar.getInstance().getTime());
-		//user.getStudent().setStatus("Enrolled");
-		//adminService.createStudent(user.getStudent());
-		
-		adminService.createUser(user);
-		Student student = new Student();
-		student.setStudentID(user.getUserID());
-		student.setEnrollmentDate(Calendar.getInstance().getTime());
-		student.setStatus("Enrolled");
-		adminService.createStudent(student);
-		// adminService.createStudent(student, user);
-		// String message = "New student " + student.getNric() + " was successfully
-		// created.";
-		mav.setViewName("redirect:/sjw/home");
+	@RequestMapping(value = { "/create" }, method = RequestMethod.GET)
+	public ModelAndView newCoursepage() {
+		ModelAndView mav = new ModelAndView("FormStudent", "student", new Student());
 		return mav;
 	}
+
+	@RequestMapping(value = { "/create" }, method = RequestMethod.POST)
+	public ModelAndView createNewLecturer(@ModelAttribute Student student, BindingResult result) {
+		if (result.hasErrors())
+			return new ModelAndView("FormStudent");
+
+		student.setEnrollmentDate(Calendar.getInstance().getTime());
+		student.getUser().setUserID(student.getStudentID());
+		student.getUser().setPassword("Password");
+		student.getUser().setAccessLevel("Student");
+		adminService.createStudent(student, student.getUser());
+
+		ModelAndView mav = new ModelAndView("redirect:/student/studentlist");
+		return mav;
+	}
+
+	@RequestMapping(value = "/edit/{studentID}", method = RequestMethod.GET)
+	public ModelAndView editStudentPage(@PathVariable String studentID) {
+		ModelAndView mav = new ModelAndView("FormStudentEdit");
+		mav.addObject("student", adminService.findStudent(studentID));
+		return mav;
+	}
+
+	@RequestMapping(value = "/edit/{studentID}", method = RequestMethod.POST)
+	public ModelAndView editStudent(@ModelAttribute @Valid Student student,BindingResult result, @PathVariable String studentID,
+			 final RedirectAttributes redirectAttributes) {
+		System.out.println("student" + student.toString());
+		if (result.hasErrors())
+			return new ModelAndView("FormStudentEdit");
+		User user = student.getUser();
+		user.setUserID(student.getStudentID());
+		user.setAccessLevel(adminService.findStudentById(student.getStudentID()).getUser().getAccessLevel());
+		user.setPassword(adminService.findStudentById(student.getStudentID()).getUser().getPassword());
+		student.setEnrollmentDate(adminService.findStudentById(student.getStudentID()).getEnrollmentDate());
+		//System.out.println(student.get);
+		adminService.createStudent(student, user);
+		ModelAndView mav = new ModelAndView("redirect:/student/studentlist");
+		String message = "Student" + student.getStudentID() + " was successfully updated.";
+		redirectAttributes.addFlashAttribute("message", message);
+		return mav;
+	}
+}
 //
 //	//edit
 //	@RequestMapping(value = "/edit/{sid}", method = RequestMethod.GET)
@@ -161,5 +175,3 @@ public class AdminManageStuController {
 //		}
 //
 //	}
-
-}
