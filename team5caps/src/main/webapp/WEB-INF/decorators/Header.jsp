@@ -23,9 +23,9 @@
 						<c:choose>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Administrator' }">
-								<li><a href="#">Admin Btn1</a></li>
-								<li><a href="#">Admin Btn2</a></li>
-								<li><a href="#">Admin Btn3</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/homepage">Dash board</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/manage/courses">Manage Courses</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/manage/approval">Manage Request Approval</a></li>
 							</c:when>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Lecturer' }">

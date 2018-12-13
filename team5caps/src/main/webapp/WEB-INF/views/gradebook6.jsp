@@ -7,9 +7,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
+<title>Students Grading</title>
 </head>
 <body>
+	<div class="container">
 	<form:form name="selectoneww" method="POST" modelAttribute="module"
 		action="${pageContext.request.contextPath}/grade/gradebook/exact">
 		<form:select name="selectone" path="moduleID">
@@ -20,5 +24,6 @@
 		<input type='submit' name=submit value='Search' />
 
 	</form:form>
+	</div>
 </body>
 </html>

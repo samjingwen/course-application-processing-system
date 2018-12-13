@@ -6,6 +6,9 @@
 
 <html>
 <head>
+<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 <c:url value="/css/bootstrap.css" var="ss" />
 <link rel="STYLESHEET" type="text/css" href="${ss}" />
 
