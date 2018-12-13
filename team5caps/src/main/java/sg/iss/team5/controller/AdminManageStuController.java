@@ -3,6 +3,7 @@ package sg.iss.team5.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import antlr.StringUtils;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.User;
 import sg.iss.team5.service.AdminService;
@@ -42,7 +45,11 @@ public class AdminManageStuController {
 
 	@RequestMapping(value = { "/create" }, method = RequestMethod.GET)
 	public ModelAndView newCoursepage() {
+		String sid = adminService.findAllStudents().get(adminService.findAllStudents().size()-1).getStudentID();
+		int num = Integer.parseInt(sid.substring(1, 6));
+		String id = "S"+String.format("%05d", num+1);
 		ModelAndView mav = new ModelAndView("FormStudent", "student", new Student());
+		mav.addObject("SID", id);
 		return mav;
 	}
 
@@ -50,7 +57,7 @@ public class AdminManageStuController {
 	public ModelAndView createNewLecturer(@ModelAttribute Student student, BindingResult result) {
 		if (result.hasErrors())
 			return new ModelAndView("FormStudent");
-
+		//System.out.println(student.getStudentID());
 		student.setEnrollmentDate(Calendar.getInstance().getTime());
 		student.getUser().setUserID(student.getStudentID());
 		student.getUser().setPassword("Password");
