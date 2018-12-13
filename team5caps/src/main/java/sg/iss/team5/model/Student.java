@@ -37,7 +37,7 @@ public class Student implements Serializable {
 	private String status;
 
 	//bi-directional many-to-one association to Studentcourse
-	@OneToMany(mappedBy="student")
+	@OneToMany(mappedBy="student", fetch = FetchType.EAGER)
 	private List<Studentcourse> studentcourses;
 
 	//bi-directional one-to-one association to User
