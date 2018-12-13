@@ -2,11 +2,7 @@ package sg.iss.team5.service;
 
 import java.util.ArrayList;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,14 +54,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	@Transactional
 	public Student createStudent(Student student, User user) {
+		userRepository.saveAndFlush(user);
 		return studentRepository.saveAndFlush(student);
 	}
 
 	@Override
 	@Transactional
 	public Student updateStudent(Student student) {
-		studentRepository.save(student);
-		return student;
+		/*studentRepository.saveAndFlush(student);
+		return student;*/
+		return studentRepository.save(student);
 	}
 
 	@Override
@@ -132,7 +130,8 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Student findStudent(String nric) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return studentRepository.findByStudentID(nric);
 	}
 
 	@Override
@@ -160,4 +159,7 @@ public class AdminServiceImpl implements AdminService {
 	public User createUser(User u) {
 		return userRepository.save(u);
 	}
+	
+	
+	
 }

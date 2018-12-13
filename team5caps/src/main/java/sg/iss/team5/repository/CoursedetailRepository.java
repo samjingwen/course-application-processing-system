@@ -16,4 +16,7 @@ public interface CoursedetailRepository extends JpaRepository<Coursedetail, Stri
 	//select sc.moduleid,count (sc.studentid) from studentcourse sc group by sc.moduleid where sc.moduleid like '%A0006' and year(sc.enrolltime)=YEAR(CURDATE())
 	@Query(value= "select count(*) from studentcourse sc where sc.moduleid like '%:courseid' and year (sc.enrolltime) = YEAR(CURDATE())",nativeQuery=true)
 	Integer getCurrentEnrolledCapacity(@Param("courseid") String courseId);
+	
+	@Query(value="select * from coursedetail where coursedetailid = :cid")
+	Coursedetail findCoursesById(@Param("cid") String cid);
 }
