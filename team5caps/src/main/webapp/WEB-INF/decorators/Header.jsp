@@ -36,6 +36,7 @@
 							</c:when>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Student' }">
+								<li><a href="${pageContext.request.contextPath}/Timetable">Timetable</a></li>
 								<li><a href="${pageContext.request.contextPath}/studentenroll/modules">View Available Modules</a></li>
 								<li><a href="${pageContext.request.contextPath}/studentenroll/currenroll">Current Enrollment</a></li>
 								<li><a href="${pageContext.request.contextPath}/studentGrade/">View GPA</a></li>
