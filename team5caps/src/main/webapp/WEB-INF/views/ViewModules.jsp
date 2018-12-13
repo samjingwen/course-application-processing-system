@@ -28,7 +28,7 @@
 			<td align="center">No</td>
 			<td align="center">Module ID</td>
 			<td align="center">Course Name</td>
-			<td align="center">Lecturer Rating</td>
+			<td align="center">Lecturer Rating [0-5]</td>
 			<td align="center">Attendance</td>
 		</tr>
 		</thead>
