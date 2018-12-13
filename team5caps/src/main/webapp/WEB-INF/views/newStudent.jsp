@@ -9,7 +9,7 @@
 </head>
 <body>
 <h1>THIS IS NEW STUDENT PAGE</h1>
-<form:form method="POST" modelAttribute="student"
+<form:form method="POST" modelAttribute="newUser"
 	action="${pageContext.request.contextPath}/lynn/newstudent">
 		<center>
 			<table cellpadding=4 cellspacing=2 border=0>
@@ -19,11 +19,10 @@
 				</tr>
 				
 				<tr>
-				
-				   <%-- <td><s:message code="fieldLabel.studentID" /> *</td>--%>
-				   <td><form:input path="studentID"/>
+				   <td><s:message code="fieldLabel.studentID" /> *</td>
+				   <td><form:input path="userID"/>
 				 </tr>
-				<!-- <tr>
+				<tr>
 				   <td><s:message code="fieldLabel.firstName" /> *</td>
 				   <td><form:input path="firstName"/>
 				 </tr>
@@ -37,17 +36,7 @@
 				   <td><s:message code="fieldLabel.emailAddress" /></td>
 				   <td><form:input path="emailAddress"/>
 				   <form:errors path="emailAddress" cssStyle="color: red;" /></td>
-				 </tr> -->
-				<tr>
-				   <td><s:message code="fieldLabel.enrollmentDate" /></td>
-				   <td><form:input path="enrollmentDate"/>
-				   <form:errors path="enrollmentDate" cssStyle="color: red;" /></td>
-				 </tr>
-				<tr>
-				   <td><s:message code="fieldLabel.status" /></td>
-				   <td><form:input path="status"/>
-				   <form:errors path="status" cssStyle="color: red;" /></td>
-				 </tr>
+				 </tr> 
 				
 
 				 <tr>

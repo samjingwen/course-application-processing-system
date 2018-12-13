@@ -76,4 +76,26 @@ public class LecturerServiceImpl implements LecturerService {
 		return studentcourseRepository.findAllStudentcourse();
 	}
 
+	@Override
+	public Module findModuleByModuleID(String mid) {
+		return moduleRepository.findByModuleID(mid);
+	}
+
+	@Override
+	public Studentcourse createStudentcourse(Studentcourse studentcourse) {
+		return studentcourseRepository.save(studentcourse);
+	}
+	
+	
+	@Override
+	public ArrayList<Module> findPastModuleByLectId(String lid) {
+		// TODO Auto-generated method stub
+		return (ArrayList<Module>) moduleRepository.findPastModuleByLectId(lid);
+	}
+
+	@Override
+	public Module updateModule(Module module) {
+		return moduleRepository.save(module);
+	}
+
 }

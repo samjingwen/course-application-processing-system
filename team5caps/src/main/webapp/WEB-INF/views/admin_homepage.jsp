@@ -11,18 +11,30 @@
 <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
 	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#pagination').DataTable();
+	})
+</script>
 </head>
 <body>
-	
+
 	<h1>Not enrolled</h1>
 	<div class="container">
-		<table class="table table-striped">
-			<caption>List of students with not currently enrolled:</caption>
+		<table id="pagination" class="table table-striped">
+			<caption>List of students yet enrolled to a course:</caption>
 			<thead>
 				<tr>
 					<td>#</td>
 					<td>Student ID</td>
 					<td>Student Name</td>
+					<td></td>
 				</tr>
 			</thead>
 			<tbody>

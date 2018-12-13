@@ -22,6 +22,7 @@ import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.model.StudentcoursePK;
 import sg.iss.team5.model.User;
 import sg.iss.team5.service.AdminService;
 import sg.iss.team5.service.StudentService;
@@ -36,8 +37,7 @@ public class StudentEnrollCourseController {
 	private AdminService adService;
 
 	@RequestMapping(value = "/modules", method = RequestMethod.GET)
-	public ModelAndView listAllNotTaken(HttpSession session)
-			throws ParseException {
+	public ModelAndView listAllNotTaken(HttpSession session) throws ParseException {
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		Date date = Calendar.getInstance().getTime();
 		ArrayList<FormattedModule> mlist = (ArrayList<FormattedModule>) stuservice
@@ -54,37 +54,26 @@ public class StudentEnrollCourseController {
 			HttpSession session) {
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		Student s = adService.findStudentById(sid);
+		ArrayList<Studentcourse> clist = new ArrayList<Studentcourse>();
 		ArrayList<Module> mlist = new ArrayList<Module>();
-		for (String current : modid)
+		for (String current : modid) {
 			mlist.add(stuservice.findModulebyID(current));
-		
-		ArrayList<Studentcourse> clist = stuservice.enrollCourse(mlist, s);
-		for(Studentcourse sc : clist) {
-			stuservice.saveStudentCourse("Test",Calendar.getInstance().getTime(),"0117A0006","S00008");
+			if (mlist.contains(stuservice.findModulebyID(current))) {
+				ModelAndView mav = new ModelAndView("testing");
+				return mav;
+			} else {
+				mlist.add(stuservice.findModulebyID(current));
+			}
+			clist = stuservice.enrollCourse(mlist, s);
 		}
-		
+		for (Studentcourse sc : clist) {
+			sc.setId(new StudentcoursePK(sc.getModule().getModuleID(), sc.getStudent().getStudentID()));
+			stuservice.saveStudentCourse(sc);
+		}
 		ModelAndView mav = new ModelAndView("studentenrollment");
-		mav.addObject("clist", clist);
-//		String[] modids = request.getParameterValues("modid");
-//		
-//		/*ArrayList<Studentcourse> sc = new ArrayList<Studentcourse>();
-//		for(String current: modids)
-//		{
-//			sc.add(new Studentcourse("Enrolled",Calendar.getInstance().getTime(),))
-//		}*/
-//		ModelAndView mav = new ModelAndView("redirect:/modules/S00006");
-//		
+		mav.addObject("mlist", mlist);
 		return mav;
-	}
 
-	/*
-	 * @RequestMapping(value = "/modules/{sid}", method = RequestMethod.POST) public
-	 * ModelAndView addAllNotTaken(@PathVariable String sid) throws ParseException {
-	 * 
-	 * String[] modid = request.getParameterValues("modid") ModelAndView mav = new
-	 * ModelAndView("availablemods");
-	 * 
-	 * mav.addObject("formattedmodules", mlist); return mav; }
-	 */
+	}
 
 }
