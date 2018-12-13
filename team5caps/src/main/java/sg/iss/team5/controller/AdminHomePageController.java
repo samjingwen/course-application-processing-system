@@ -45,23 +45,22 @@ public class AdminHomePageController {
 	public ModelAndView listStudentsNotEnrolled() {
 		
 		//get top 7 courses
-		ArrayList<ChartData> chartDataList=adminService.findChartData();
-		int sum=0;
-		for (ChartData chartData : chartDataList) {
-			sum+=chartData.getY();
-		}
+//		ArrayList<ChartData> chartDataList=adminService.findChartData();
+//		int sum=0;
+//		for (ChartData chartData : chartDataList) {
+//			sum+=chartData.getY();
+//		}
 		
-		//get the average and put into string and int list
-		String name =chartDataList.get(1).getLabel();
-		for (int i=0;i<chartDataList.size();i++) {
-			chartDataList.get(i).setY((int)(chartDataList.get(i).getY()/sum*100));
-		}
+//		//get the average and put into string and int list
+//		String name =chartDataList.get(1).getLabel();
+//		for (int i=0;i<chartDataList.size();i++) {
+//			chartDataList.get(i).setY((int)(chartDataList.get(i).getY()/sum*100));
+//		}
 		
 		ArrayList<Student> studentNotEnrolledList = adminService.findNotEnrolled();
 		ModelAndView mav = new ModelAndView("admin_homepage");
 		mav.addObject("listNotEnrolled", studentNotEnrolledList);
-		mav.addObject("dataPoints", chartDataList);
-		mav.addObject("name",name);
+//		mav.addObject("dataPoints", chartDataList);
 		return mav;
 	}
 

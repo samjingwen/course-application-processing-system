@@ -180,7 +180,4 @@ public class AdminServiceImpl implements AdminService {
 		studentcourseRepository.save(sc);
 	}
 	
-	public ArrayList<ChartData> findChartData(){
-		return coursedetailRepository.findChartData();
-	}
 }

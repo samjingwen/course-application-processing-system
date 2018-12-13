@@ -65,6 +65,4 @@ public interface AdminService {
 	ArrayList<Studentcourse> findByEnrollStatus(String status);
 	
 	void save(Studentcourse sc);
-	
-	ArrayList<ChartData> findChartData();
 }

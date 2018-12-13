@@ -18,14 +18,6 @@ public interface CoursedetailRepository extends JpaRepository<Coursedetail, Stri
 	@Query(value= "select count(*) from studentcourse sc where sc.moduleid like '%:courseid' and year (sc.enrolltime) = YEAR(CURDATE())",nativeQuery=true)
 	Integer getCurrentEnrolledCapacity(@Param("courseid") String courseId);
 	
-	@Query(value="select cs.coursename, count(*) from coursedetails cs\r\n" + 
-			"inner join modules m on cs.courseid=m.courseid\r\n" + 
-			"inner join studentcourse sc on m.moduleid=sc.moduleid\r\n" + 
-			"group by cs.coursename\r\n" + 
-			"order by count(*) desc\r\n" + 
-			"")
-	ArrayList<ChartData> findChartData();
-	
-		@Query(value="select * from coursedetail where coursedetailid = :cid", nativeQuery = true)
+	@Query(value="select * from coursedetail where coursedetailid = :cid", nativeQuery = true)
 	Coursedetail findCoursesById(@Param("cid") String cid);
 }
