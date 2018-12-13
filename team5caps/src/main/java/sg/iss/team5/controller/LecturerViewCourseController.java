@@ -71,7 +71,7 @@ public class LecturerViewCourseController {
 	public ModelAndView findCourseByModuleId(@PathVariable String mid) {
 		ArrayList<Studentcourse> mlist = lectservice.findCourseByModuleId(mid);
 		ModelAndView mav = new ModelAndView("ViewEnrolment");
-		mav.addObject("modules", mlist);
+		mav.addObject("modules", mlist);				
 		return mav;
 	}
 	

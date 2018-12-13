@@ -8,19 +8,8 @@
 	href="${ss2}" />
 </head>
 <body>
-		<form name="selectoneww" method="POST" action="${pageContext.request.contextPath}/grade/gradebook">
 <table>
-		<tr colspan="6">
-
-				<select name="selectone">
-				<c:forEach var="cl" items="${courselist}">
-					<option value="${cl.value.getModuleID()}">${cl.key}</option>
-				</c:forEach>	
-				</select>
-				<input type='submit' name=submit value='Search'/>
-				
-		<tr>
-		<tr colspan="6">
+  <tr colspan="6">
 			<td><input type="submit" name="submit"
 				value="SUBMIT" /></td>
 		</tr>
@@ -56,7 +45,6 @@
 		
 		
 </table>
-
-</form>	
+	
 </body>
 </html>
