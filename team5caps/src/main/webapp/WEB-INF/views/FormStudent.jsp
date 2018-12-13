@@ -19,7 +19,7 @@
 				
 				<tr>
 				<td><s:message code="studentID" /> *</td>
-				   <td><form:input path="studentID"/>
+				   <td><form:input path="studentID" name="SID" value="${SID}" readonly="true"/></td>
 				 </tr>
 			<tr>
 				   <td><s:message code="FirstName" /> *</td>
