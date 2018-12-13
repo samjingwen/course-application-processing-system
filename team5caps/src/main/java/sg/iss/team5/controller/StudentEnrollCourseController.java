@@ -65,15 +65,20 @@ public class StudentEnrollCourseController {
 		}
 
 		for (String current : modid) {
-			if (mlist.size() < 1) {
+			if (enmlist.contains(stuservice.findModulebyID(current))) {
+				check = 0;
+				JOptionPane.showMessageDialog(null, "You have added modules with conflicting times!", "Conflicts",
+						JOptionPane.WARNING_MESSAGE);
+			}
+
+			else if (mlist.size() < 1) {
 				check++;
 				mlist.add(stuservice.findModulebyID(current));
 			}
 
-			// check for time conflicts 
-			//STILL NOT DONE YET
-			else if (mlist.contains(stuservice.findModulebyID(current))
-					|| enmlist.contains(stuservice.findModulebyID(current))) {
+			// check for time conflicts
+
+			else if (mlist.contains(stuservice.findModulebyID(current))) {
 				check = 0;
 				JOptionPane.showMessageDialog(null, "You have added modules with conflicting times!", "Conflicts",
 						JOptionPane.WARNING_MESSAGE);
@@ -86,13 +91,13 @@ public class StudentEnrollCourseController {
 			}
 		}
 
-		//check if amount of modules added for the year exceeds 5
+		// check if amount of modules added for the year exceeds 5
 		if ((mlist.size() > 5) || (mlist.size() > (5 - curcount))) {
 			check = 0;
 			JOptionPane.showMessageDialog(null, "You may only add up to 5 modules per year.", "Too many modules!",
 					JOptionPane.WARNING_MESSAGE);
 		}
-		//enroll student in module
+		// enroll student in module
 		if (check > 0) {
 			clist = stuservice.enrollCourse(mlist, s);
 
@@ -107,8 +112,8 @@ public class StudentEnrollCourseController {
 			ModelAndView mav = new ModelAndView("studentenrollment");
 			mav.addObject("sclist", sclist);
 			return mav;
-			
-		// if any of the above fails, return to module selection page	
+
+			// if any of the above fails, return to module selection page
 		} else {
 			Date date = Calendar.getInstance().getTime();
 			ArrayList<FormattedModule> m2list = (ArrayList<FormattedModule>) stuservice
