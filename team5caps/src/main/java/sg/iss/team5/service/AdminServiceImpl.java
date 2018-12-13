@@ -58,7 +58,6 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	@Transactional
 	public Student createStudent(Student student, User user) {
-		userRepository.saveAndFlush(user);
 		return studentRepository.saveAndFlush(student);
 	}
 
@@ -107,8 +106,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Coursedetail createCoursedetail(Coursedetail cd) {
-		// TODO Auto-generated method stub
-		return null;
+		cdRepository.saveAndFlush(cd);
+		return cd;
 	}
 
 	@Override

@@ -58,12 +58,14 @@ public class StudentEnrollCourseController {
 		ArrayList<Module> mlist = new ArrayList<Module>();
 		int check = 0;
 		int curcount = stuservice.findSCbyStuandYear(sid).size();
-
+		
+		//create list of already enrolled modules for current year
 		ArrayList<Module> enmlist = new ArrayList<Module>();
 		for (Studentcourse sc : stuservice.findSCbyStuandYear(sid)) {
 			enmlist.add(stuservice.findModulebyID(sc.getModule().getModuleID()));
 		}
 
+		//check if selected modules have conflicting time with previously enrolled modules
 		for (String current : modid) {
 			if (enmlist.contains(stuservice.findModulebyID(current))) {
 				check = 0;
@@ -76,7 +78,7 @@ public class StudentEnrollCourseController {
 				mlist.add(stuservice.findModulebyID(current));
 			}
 
-			// check for time conflicts
+			// check for time conflicts in current selection of modules
 
 			else if (mlist.contains(stuservice.findModulebyID(current))) {
 				check = 0;

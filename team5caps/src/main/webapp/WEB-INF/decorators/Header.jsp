@@ -21,16 +21,24 @@
 					<li><a href="#">Link</a></li>
 					<li><a href="#">Link</a></li>
 					<c:if test="${not empty sessionScope.USERSESSION}">
-
 						<c:choose>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Administrator' }">
-
 								<li><a href="#">Admin Btn1</a></li>
 								<li><a href="#">Admin Btn2</a></li>
 								<li><a href="#">Admin Btn3</a></li>
-
-
+							</c:when>
+							<c:when
+								test="${sessionScope.USERSESSION.user.accessLevel eq 'Lecturer' }">
+								<li><a href="${pageContext.request.contextPath}/lecturer/request">Lect Btn1</a></li>
+								<li><a href="#">Lect Btn2</a></li>
+								<li><a href="#">Lect Btn3</a></li>
+							</c:when>
+							<c:when
+								test="${sessionScope.USERSESSION.user.accessLevel eq 'Student' }">
+								<li><a href="#">Stud Btn1</a></li>
+								<li><a href="#">Stud Btn2</a></li>
+								<li><a href="#">Stud Btn3</a></li>
 							</c:when>
 						</c:choose>
 					</c:if>
@@ -43,9 +51,7 @@
 
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Welcome
-							${sessionScope.USERSESSION.user.accessLevel}
-							${sessionScope.USERSESSION.user.firstName }</a></li>
+					<li><a href="#">Welcome	${sessionScope.USERSESSION.user.accessLevel} ${sessionScope.USERSESSION.user.firstName }</a></li>
 					<li><a href="#">Link</a></li>
 				</ul>
 			</div>
