@@ -2,6 +2,8 @@ package sg.iss.team5.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +27,9 @@ public class LecturerViewCourseController {
 	@Autowired
 	StudentService studentservice;
 
-	@RequestMapping(value = "/courselist/{lid}", method = RequestMethod.GET)
-	public ModelAndView listAllbyLectId(@PathVariable String lid) {
+	@RequestMapping(value = "/courselist", method = RequestMethod.GET)
+	public ModelAndView listAllbyLectId(HttpSession session) {
+		String lid = ((UserSession)session.getAttribute("USERSESSION")).getUser().getUserID();
 		ArrayList<Module> mlist = lectservice.findPastModuleByLectId(lid);
 		ModelAndView mav = new ModelAndView("ViewModules");
 		mav.addObject("modules", mlist);
@@ -47,31 +50,51 @@ public class LecturerViewCourseController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listAll() {
 		ArrayList<Module> mlist = lectservice.findModuleByLecturerId("L00002");
 		ModelAndView mav = new ModelAndView("ViewModules");
 		// ArrayList<Module> mlist = (ArrayList<Module>)lectservice.findAll();
 		mav.addObject("modules", mlist);
-		
 		return mav;
-	}
+	}*/
 
-	@RequestMapping(value = "/enrollist/{mid}", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/enrollist/{mid}", method = RequestMethod.GET)
 	public ModelAndView findCourseByModuleId(@PathVariable String mid) {
 		ArrayList<Studentcourse> mlist = lectservice.findCourseByModuleId(mid);
 		ModelAndView mav = new ModelAndView("ViewEnrolment");
 		mav.addObject("modules", mlist);
 		return mav;
 	}
+	*/
+/*	@RequestMapping(value = "/enrollist/{lid}", method = RequestMethod.GET)
+	public ModelAndView findModulesByLecturerId(@PathVariable String lid) {
+		ArrayList<Studentcourse> mlist = lectservice.findModulesByLecturerId(lid);
+		ModelAndView mav = new ModelAndView("ViewEnrolment");
+		mav.addObject("modules", mlist);
+	return mav;
+	}*/
 	
-	@RequestMapping(value = "/enrollrequest", method = RequestMethod.GET)
-	public ModelAndView editStudentPage() {
-		ModelAndView mav = new ModelAndView("RequestEnolment");
-		mav.addObject("student",studentservice);
+	@RequestMapping(value = "/enrollist", method = RequestMethod.GET)
+	public ModelAndView findModuleByLectId(HttpSession session) {
+		String lid = ((UserSession)session.getAttribute("USERSESSION")).getUser().getUserID();
+		ArrayList<Module> mlist = lectservice.findCurentModuleByLectId(lid);
+		ModelAndView mav = new ModelAndView("ViewEnrolment");
+		mav.addObject("modules", mlist);
+		
+		
+		ArrayList<Studentcourse> scourse = new ArrayList<>();
+		for (Module current: mlist) {
+		for(Studentcourse c1: lectservice.findCourseByModuleId(current.getModuleID())) {
+			scourse.add(c1);
+		}
+		
+		}
+		mav.addObject("courses", scourse);
+			
 		return mav;
 	}
-
+	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String home() {
 		return "index";
