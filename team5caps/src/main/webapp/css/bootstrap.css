@@ -4857,6 +4857,7 @@ border-radius
 .navbar-fixed-top {
 	top: 0;
 	border-width: 0 0 1px;
+	position:relative;
 }
 
 .navbar-fixed-bottom {
@@ -9603,4 +9604,8 @@ div .maingrid { grid-area: main;}
 .footercopyright {
 	padding-top: 20px;
 	border-top: 1px solid #ededed;
+}
+
+.logintable{
+	align:center;
 }

@@ -15,7 +15,8 @@
 <form:form modelAttribute="user" method="POST" cssClass="maingrid"
 	action="${pageContext.request.contextPath}/home/authenticate">
 	<div>
-	<table>
+	<table class="table text-centered">
+		<tr></tr>
 		<tr>
 			<td><spring:message code="fieldLabel.username" />&nbsp</td>
 			<td colspan="2"><form:input path="userID" size="40" /></td>
