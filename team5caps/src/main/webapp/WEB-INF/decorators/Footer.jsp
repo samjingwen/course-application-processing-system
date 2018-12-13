@@ -4,10 +4,11 @@
 	<!-- Footer Links -->
 
 
-	<hr>
 
 	<!-- Copyright -->
-	<div class="footer-copyright text-center py-3">© 2018 Copyright:
+	<div class="footercopyright text-center py-3">	
+	
+	© 2018 Copyright:
 		GDIP SA47 - Team 5</div>
 	<!-- Copyright -->
 
