@@ -34,7 +34,7 @@
 			<tbody>
 				<td>${module.coursedetail.courseName}</td>
 				<td>${module.moduleID}</td>
-				<td>${student.user.lastName}${student.user.firstName}</td>
+				<td>${student.user.lastName} ${student.user.firstName}</td>
 				<td>${student.status}</td>
 			</tbody>
 		</table>
@@ -44,7 +44,7 @@
 		</form:form>
 		
 		<form:form method="GET" modelAttribute="cancel"
-			action="${pageContext.request.contextPath}/admin/manage/courses/${module.moduleID}">
+			action="${pageContext.request.contextPath}admin/sendHtmlEmailReminder">
 			<input type="submit" name="back" value="Cancel" class="button" />
 		</form:form>
 		

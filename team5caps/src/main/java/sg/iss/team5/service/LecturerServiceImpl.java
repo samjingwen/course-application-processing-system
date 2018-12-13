@@ -73,7 +73,7 @@ public class LecturerServiceImpl implements LecturerService {
 	
 	@Override
 	public ArrayList<Studentcourse> findAllStudentcourse() {
-		return studentcourseRepository.findAllStudentcourse();
+		return (ArrayList<Studentcourse>) studentcourseRepository.findAll();
 	}
 
 	@Override

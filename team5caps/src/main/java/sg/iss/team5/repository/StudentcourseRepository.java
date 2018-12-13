@@ -15,26 +15,28 @@ public interface StudentcourseRepository extends JpaRepository<Studentcourse, St
 	@Query(value = "select * from studentcourse s where s.studentid = :sid", nativeQuery = true)
 	ArrayList<Studentcourse> findCourseByStudentId(@Param("sid") String sid);
 
-	@Query(value="select * from studentcourse sc where sc.moduleid like %:cid", nativeQuery = true)
+	@Query(value = "select * from studentcourse sc where sc.moduleid like %:cid", nativeQuery = true)
 	ArrayList<Studentcourse> findCourseByCourseId(@Param("cid") String cid);
-	
-	//updated the query for rating
+
+	// updated the query for rating
 	@Query(value = "select ROUND(avg(lecturerrating),2) from studentcourse join modules on studentcourse.moduleid = modules.moduleid where studentcourse.moduleid=:mid", nativeQuery = true)
-Double findLecturerRatingByModuleId(@Param("mid") String mid);
+	Double findLecturerRatingByModuleId(@Param("mid") String mid);
 
 	@Query(value = "select * from studentcourse s where s.moduleid = :mid", nativeQuery = true)
 	ArrayList<Studentcourse> findCourseByModuleId(@Param("mid") String mid);
 
-	//updated the query for attendance
+	// updated the query for attendance
 	@Query(value = "select concat(ROUND((avg(attendance)*100),2),' %') from studentcourse join modules on studentcourse.moduleid = modules.moduleid where studentcourse.moduleid=:mid", nativeQuery = true)
 	String findAttendanceByModuleId(@Param("mid") String mid);
-	
+
 	ArrayList<Studentcourse> findByModule_ModuleIDContaining(String cid);
-	
-	@Query(value="select * from studentcourse", nativeQuery=true)
-	ArrayList<Studentcourse> findAllStudentcourse();
+
+//	@Query(value="select * from studentcourse", nativeQuery=true)
+//	ArrayList<Studentcourse> findAllStudentcourse();
 
 	Studentcourse findFirstByModule_ModuleIDAndStudent_StudentID(String mid, String sid);
-	
-	//	ArrayList<Studentcourse> findByModule_ModuleIDContaining(String cid);
+
+	ArrayList<Studentcourse> findByEnrollStatus(String status);
+
+	// ArrayList<Studentcourse> findByModule_ModuleIDContaining(String cid);
 }

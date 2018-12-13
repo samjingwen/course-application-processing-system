@@ -1,6 +1,7 @@
 package sg.iss.team5.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -72,7 +73,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public ArrayList<Coursedetail> findAllCoursedetail() {
-		return coursedetailRepository.findAllCoursedetail();
+		return new ArrayList<Coursedetail>(coursedetailRepository.findAll());
 	}
 
 	public String getDay(Module mods) {

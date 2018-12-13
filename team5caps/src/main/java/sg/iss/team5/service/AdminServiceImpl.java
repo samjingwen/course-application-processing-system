@@ -10,6 +10,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
+import sg.iss.team5.model.ChartData;
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Lecturer;
 import sg.iss.team5.model.Module;
@@ -33,7 +36,7 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
-	CoursedetailRepository cdRepository;
+	CoursedetailRepository coursedetailRepository;
 	@Autowired
 	StudentcourseRepository studentcourseRepository;
 	@Autowired
@@ -118,11 +121,11 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	public ArrayList<Coursedetail> getCourseDetailList() {
-		return cdRepository.findAllCoursedetail();
+		return new ArrayList<Coursedetail>(coursedetailRepository.findAll());
 	}
 
 	public Integer getEnrolledCapacity(String courseId) {
-		return cdRepository.getCurrentEnrolledCapacity(courseId);
+		return coursedetailRepository.getCurrentEnrolledCapacity(courseId);
 	}
 
 	public ArrayList<Studentcourse> findCourseByCourseId(String cid) {
@@ -140,25 +143,45 @@ public class AdminServiceImpl implements AdminService {
 	public void removeStudent(Student s) {
 		studentRepository.delete(s);
 	}
-	
+
 	public Module findByModuleID(String mid) {
 		return moduleRepository.findByModuleID(mid);
 	}
-	
+
 	public void removeModule(Module m) {
 		moduleRepository.delete(m);
 	}
-	
-	public Studentcourse findByModuleIDCourseID(String mid,String sid) {
+
+	public Studentcourse findByModuleIDCourseID(String mid, String sid) {
 		return studentcourseRepository.findFirstByModule_ModuleIDAndStudent_StudentID(mid, sid);
 	}
-	
-	public void removeStudentCourse(Studentcourse sc){
-	studentcourseRepository.delete(sc);	
+
+	public void removeStudentCourse(Studentcourse sc) {
+		studentcourseRepository.delete(sc);
 	}
-	
-		@Override
+
+	@Override
 	public User createUser(User u) {
 		return userRepository.save(u);
+	}
+	
+	public int countByCourseID(String cid) {
+		return countByCourseID(cid);
+	}
+	
+	public ArrayList<Studentcourse> findAllStudentcourse() {
+		return (ArrayList<Studentcourse>) studentcourseRepository.findAll();
+	}
+	
+	public ArrayList<Studentcourse> findByEnrollStatus(String status){
+		return studentcourseRepository.findByEnrollStatus(status);
+	}
+	
+	public void save(Studentcourse sc) {
+		studentcourseRepository.save(sc);
+	}
+	
+	public ArrayList<ChartData> findChartData(){
+		return coursedetailRepository.findChartData();
 	}
 }
