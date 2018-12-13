@@ -4,52 +4,45 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="<c:url value='/css/style.css'/>" rel="stylesheet"
+
+<link href="<c:url value='/styles/style.css'/>" rel="stylesheet"
 	type="text/css" />
 </head>
 <body>
-<h1><center><u>ADD NEW LECTURER</u></center></h1>
+
 <form:form method="POST" modelAttribute="lecturer"
-	action="${pageContext.request.contextPath}/lecturer/create">
+	action="${pageContext.request.contextPath}/lecturer/edit/${lecturer.lecturerID}">
 		<center>
 			<table cellpadding=4 cellspacing=2 border=0>
 				<tr>
 					<th width="45%">Description</th>
 					<th width="55%">Detail</th>
 				</tr>
-				
 				<tr>
 				   <td><s:message code="LecturerID" /> *</td>
-				   <td><form:input path="lecturerID"/>
-				   <form:errors path="lecturerID" cssStyle="color: red;" /></td>
+				   <td><form:input path="lecturerID" readonly="true"/></td>
 				 </tr>
 				<tr>
-				   <td><s:message code="FirstName" /> *</td>
-				   <td><form:input path="user.firstName"/>
-				   <form:errors path="user.firstName" cssStyle="color: red;" /></td>
-				 </tr>
-				<tr>
-				   <td><s:message code="LastName" /></td>
-				   <td><form:input path="user.lastName"/>
-				   <form:errors path="user.lastName" cssStyle="color: red;" /></td>
+				   <td><s:message code="FirstName" /></td>
+				   <td><form:input path="user.firstName"/></td>
 				 </tr>
 				
 				<tr>
+				   <td><s:message code="LastName" /></td>
+				   <td><form:input path="user.LastName"/></td>
+				 </tr>
+				 
+				<tr>
 				   <td><s:message code="EmailAddress" /></td>
-				   <td><form:input path="user.emailAddress"/>
-				   <form:errors path="user.emailAddress" cssStyle="color: red;" /></td>
+				   <td><form:input path="user.emailAddress"/></td>
 				 </tr>
 				<tr>
 				   <td><s:message code="Position" /></td>
-				   <td><form:input path="position"/>
-				   <form:errors path="position" cssStyle="color: red;" /></td>
+				   <td><form:input path="position"/></td>
 				 </tr>
 				
-
 				 <tr>
-				
-				  <td><input type="submit" value="Submit"> </td> 
-				
+				 <td><input type="submit" value="Submit"> </td>
 				 <td><input type="reset" value="Reset"></td>
 				 </tr>
 		</table>

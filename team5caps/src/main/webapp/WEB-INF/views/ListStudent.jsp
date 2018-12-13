@@ -7,65 +7,56 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-
-
-
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script>
 	$(document).ready(function() {
-		$('#pagination').DataTable();
+		$('#example').DataTable();
 	})
 </script>
-
-
-
-
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
 	<h1>Student List</h1>
-	<table id="pagination" class="display">
+	<%-- <form:form modelAttribute="user" method="POST" cssClass="maingrid"
+	action="${pageContext.request.contextPath}/student/create"> --%>
+	<a href="${pageContext.request.contextPath}/student/create">Add Student</a>
+	<table id="example" class="display">
 
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>Course ID</th>
-				<th>Course Name</th>
-				<th>Description</th>
-				<th>MinVacancy</th>
-				<th>MaxVacancy</th>
-				<th>Credits</th>
+				<th>Student ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email Address</th>
+				<th>Enrollment Date</th>
+				<th>Status</th>
+				<th>Edit</th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="cd" varStatus="s" items="${cdList}">
+			<c:forEach var="stu" varStatus="s" items="${sList}">
 
 				<tr>
 					<td>${s.index+1}</td>
-					<td>${cd.getCourseID()}</td>
-					<td>${cd.getCourseName()}</td>
-					<td>${cd.getDescription()}</td>
-					<td>${cd.getMinVacancy()}</td>
-					<td>${cd.getMaxVacancy()}</td>
-					<td>${cd.getCredits()}</td>
+					<td>${stu.getStudentID()}</td>
+					<td>${stu.getUser().getFirstName()}</td>
+					<td>${stu.getUser().getLastName()}</td>
+					<td>${stu.getUser().getEmailAddress()}</td>
+					<td>${stu.getEnrollmentDate()}</td>
+					<td>${stu.getStatus()}</td>
+					<td align="center"><a
+					href="${pageContext.request.contextPath}/student/edit/${stu.getStudentID()}">
+					Edit
+				</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
-
-	<select name="mList">
-		<c:forEach items="${modules}" var="mid">
-			<option value="${mid}"><c:out value="${mid}" /></option>
-		</c:forEach>
-	</select>
-
+	<%-- </form:form> --%>
 </body>
 </html>

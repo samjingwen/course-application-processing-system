@@ -25,4 +25,7 @@ public interface CoursedetailRepository extends JpaRepository<Coursedetail, Stri
 			"order by count(*) desc\r\n" + 
 			"")
 	ArrayList<ChartData> findChartData();
+	
+		@Query(value="select * from coursedetail where coursedetailid = :cid", nativeQuery = true)
+	Coursedetail findCoursesById(@Param("cid") String cid);
 }

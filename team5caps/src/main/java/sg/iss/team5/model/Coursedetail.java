@@ -106,4 +106,15 @@ public class Coursedetail implements Serializable {
 		return module;
 	}
 
+	public Coursedetail(String courseID, String courseName, BigDecimal credits, String description, int maxVacancy,
+			int minVacancy) {
+		super();
+		this.courseID = courseID;
+		this.courseName = courseName;
+		this.credits = credits;
+		this.description = description;
+		this.maxVacancy = maxVacancy;
+		this.minVacancy = minVacancy;
+	}
+
 }

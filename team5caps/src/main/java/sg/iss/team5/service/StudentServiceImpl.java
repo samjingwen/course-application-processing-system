@@ -188,4 +188,10 @@ public class StudentServiceImpl implements StudentService {
 
 		return mod;
 	}
+
+	public ArrayList<Studentcourse> findSCbyStuandYear(String sid){
+		ArrayList<Studentcourse> sc = studentcourseRepository.findModbyStuandYear(sid);
+		return sc;
+	}
+
 }

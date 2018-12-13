@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import sg.iss.team5.model.Student;
 
-@Repository
 public interface StudentRepository extends JpaRepository<Student, String> {
+	
 	@Query(value = "SELECT * FROM students s\r\n" + 
 			"where s.studentId not in(select distinct StudentID from studentcourse sc where year(sc.enrolltime)=YEAR(CURDATE())) and s.status='enrolled'", nativeQuery = true)
 	ArrayList<Student> findNotEnrolled();
@@ -19,7 +19,8 @@ public interface StudentRepository extends JpaRepository<Student, String> {
 	@Query(value = "select * from students", nativeQuery = true)
 	ArrayList<Student> findAllStudents();
 	
-	Student findByStudentID(String sid);
+	@Query(value = "select * from students where s.studentid = :sid", nativeQuery = true)
+	Student findByStudentID(@Param("sid") String sid);
 	
 //
 //	if custom methods are needed, add the interface method down below and 

@@ -10,8 +10,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form modelAttribute="module" method="POST" action="${pageContext.request.contextPath}/sjw/confirm/${newRequest.getModuleID()}">
+	<form:form modelAttribute="request" method="POST" action="${pageContext.request.contextPath}/sjw/confirm/${newRequest.getModuleID()}">
 		<table>
+		<tr>
+				<td>Student ID :</td>
+				<td>${newRequest.getStudentID() }</td>
+			</tr>
+			<tr>
+				<td>Student Name :</td>
+				<td>${newRequest.getStudentName() }</td>
+			</tr>
 			<tr>
 				<td>Module ID :</td>
 				<td>${newRequest.getModuleID() }</td>
@@ -20,6 +28,7 @@
 				<td>Course Name :</td>
 				<td>${newRequest.getCourseName() }</td>
 			</tr>
+			
 			<tr>
 				<td>Lecturer Name :</td>
 				<td>${newRequest.getLecturerName() }</td>

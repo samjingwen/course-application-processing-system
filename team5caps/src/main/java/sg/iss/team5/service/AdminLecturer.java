@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.validation.Valid;
 
 import sg.iss.team5.model.Lecturer;
+import sg.iss.team5.model.Student;
+import sg.iss.team5.model.User;
 
 
 public interface AdminLecturer {
@@ -18,6 +20,8 @@ public interface AdminLecturer {
 	void removeLecturer(Lecturer l);
 
 	Lecturer createLecturer(Lecturer l);
+
+	Lecturer createLecturer(Lecturer student, User user);
 
 	
 }

@@ -45,5 +45,7 @@ public interface StudentService {
 	Module findModulebyID(String mid);
 	
 	ArrayList<FormattedSC> getFormatSC(ArrayList<Studentcourse> sc);
+	
+	ArrayList<Studentcourse> findSCbyStuandYear(String sid);
 
 }

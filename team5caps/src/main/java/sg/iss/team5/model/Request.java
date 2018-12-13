@@ -1,6 +1,8 @@
 package sg.iss.team5.model;
 
 public class Request {
+	private String studentID;
+	private String studentName;
 	private String moduleID;
 	private String courseName;
 	private String lecturerName;
@@ -9,6 +11,23 @@ public class Request {
 	public Request() {
 		super();
 	}
+	
+	public String getStudentID() {
+		return studentID;
+	}
+
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
+	}
+
+	public String getStudentName() {
+		return studentName;
+	}
+
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+
 	public String getModuleID() {
 		return moduleID;
 	}
@@ -33,11 +52,11 @@ public class Request {
 	public void setVenue(String venue) {
 		this.venue = venue;
 	}
+
 	@Override
 	public String toString() {
-		return "Request [moduleID=" + moduleID + ", courseName=" + courseName + ", lecturerName=" + lecturerName
-				+ ", venue=" + venue + "]";
+		return "Request [studentID=" + studentID + ", studentName=" + studentName + ", moduleID=" + moduleID
+				+ ", courseName=" + courseName + ", lecturerName=" + lecturerName + ", venue=" + venue + "]";
 	}
-	
 	
 }

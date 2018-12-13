@@ -12,9 +12,7 @@
 
 <div class="grid-container">
   <div class="headergrid"><%@include file="Header.jsp"%></div>
-  <br/>
-  <br/>
-  <br/>
+ 
   <div class="menugrid"><%--<%@ include file="Menu.jsp"%>--%></div>
   <div class="maingrid"><decorator:body /></div>  
   <div class="footergrid"><%@ include file="Footer.jsp"%></div>

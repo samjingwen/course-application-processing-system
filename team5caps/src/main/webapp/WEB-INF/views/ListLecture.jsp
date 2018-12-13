@@ -7,65 +7,53 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-
-
-
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script>
 	$(document).ready(function() {
-		$('#pagination').DataTable();
+		$('#example').DataTable();
 	})
 </script>
-
-
-
-
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Student List</h1>
-	<table id="pagination" class="display">
+	<h1>Lecturer List</h1>
+		<a href="${pageContext.request.contextPath}/lecturer/create">Add COURSE</a>
+	<table id="example" class="display">
+		
 
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>Course ID</th>
-				<th>Course Name</th>
-				<th>Description</th>
-				<th>MinVacancy</th>
-				<th>MaxVacancy</th>
-				<th>Credits</th>
+				<th>Lecturer ID</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email Address</th>
+				<th>Position</th>
+				<th>Edit</th>
+				
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="cd" varStatus="s" items="${cdList}">
+			<c:forEach var="lec" varStatus="s" items="${lList}">
 
 				<tr>
 					<td>${s.index+1}</td>
-					<td>${cd.getCourseID()}</td>
-					<td>${cd.getCourseName()}</td>
-					<td>${cd.getDescription()}</td>
-					<td>${cd.getMinVacancy()}</td>
-					<td>${cd.getMaxVacancy()}</td>
-					<td>${cd.getCredits()}</td>
+					<td>${lec.getLecturerID()}</td>
+					<td>${lec.getUser().getFirstName()}</td>
+					<td>${lec.getUser().getLastName()}</td>
+					<td>${lec.getUser().getEmailAddress()}</td>
+					<td>${lec.getPosition()}</td>
+					<td align="center"><a
+					href="${pageContext.request.contextPath}/lecturer/edit/${lec.getLecturerID()}">
+						Edit
+				</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
-
-
-	<select name="mList">
-		<c:forEach items="${modules}" var="mid">
-			<option value="${mid}"><c:out value="${mid}" /></option>
-		</c:forEach>
-	</select>
-
 </body>
 </html>

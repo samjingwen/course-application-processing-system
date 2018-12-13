@@ -10,7 +10,7 @@ import sg.iss.team5.model.Lecturer;
 
 public interface LecturerRepository extends JpaRepository<Lecturer, String>{
 
-	@Query(value = "select * from lecturers l where l.lecturerid =: 'lid'", nativeQuery = true)
+	@Query(value = "select * from lecturers l where l.lecturerid =:lid", nativeQuery = true)
 	Lecturer findLecturerById(String lid);
 	
 	@Query(value = "select * from lecturers", nativeQuery = true)

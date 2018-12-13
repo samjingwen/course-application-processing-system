@@ -110,8 +110,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Coursedetail createCoursedetail(Coursedetail cd) {
-		// TODO Auto-generated method stub
-		return null;
+		cdRepository.saveAndFlush(cd);
+		return cd;
 	}
 
 	@Override
@@ -135,8 +135,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Student findStudent(String nric) {
-		// TODO Auto-generated method stub
-		return null;
+		return studentRepository.findByStudentID(nric);
 	}
 
 	@Override

@@ -1,62 +1,52 @@
 <html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <head>
 <meta charset="ISO-8859-1">
 <title>Course Grade</title>
-<c:url value="/css/style.css" var="ss2"/>
-<link rel="STYLESHEET" type="text/css"
-	href="${ss2}" />
+<c:url value="/css/style.css" var="ss2" />
+<link rel="STYLESHEET" type="text/css" href="${ss2}" />
 </head>
 <body>
-		<form name="selectoneww" method="POST" action="${pageContext.request.contextPath}/grade/gradebook">
-<table>
-		<tr colspan="6">
+	<form:form modelAttribute="scList" method="POST" action="${pageContext.request.contextPath}/grade/gradebook/gradeconfirm">
+		<form:button type="submit" name="submit" value="s">SUBMIT</form:button>
+		<form:input type="text" readonly="readonly" value="${moduleID}" path="moduleID"/>
+		<table>
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Student ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Student Attendance</th>
+					<th>Grade</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${scList}" var="sc" varStatus="status">
+					<tr>
+						<td>${status.index+1}</td>
+						<td>${sc.getStudent().getStudentID()}</td>
+						<td>${sc.student.user.firstName}</td>
+						<td>${sc.student.user.lastName}</td>
+						<td>${sc.getAttendance()}</td>
+						<td>
+							<select name="${sc.getStudent().getStudentID()}">
+								<option value=" ">--</option>
+								<option value="A">A</option>
+								<option value="B">B</option>
+								<option value="C">C</option>
+								<option value="D">D</option>
+								<option value="E">D</option>
+								<option value="F">D</option>
+							</select></td>
 
-				<select name="selectone">
-				<c:forEach var="cl" items="${courselist}">
-					<option value="${cl.value.getModuleID()}">${cl.key}</option>
-				</c:forEach>	
-				</select>
-				<input type='submit' name=submit value='Search'/>
-				
-		<tr>
-		<tr colspan="6">
-			<td><input type="submit" name="submit"
-				value="SUBMIT" /></td>
-		</tr>
-		<tr>
-			<th>#</th>
-			<th>Student ID</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Student Attendance</th>
-			<th>Grade</th>
-		</tr>
-		<c:forEach items="${scList}" var="sc" varStatus="status">
-			<tr>
-				<td>${status.index+1}</td>
-				<td>${sc.getStudent().getStudentID()}</td>
-				<td>${sc.student.user.firstName}</td>
-				<td>${sc.student.user.lastName}</td>
-				<td>${sc.getAttendance()}</td>
-				<td>
+					</tr>
+				</c:forEach>
+			</tbody>
 
-						<select name="clr">
-							<option>A</option>
-							<option>B</option>
-							<option>C</option>
-							<option>D</option>
-						</select> 
 
-				</td>
-
-			</tr>
-		</c:forEach>
-		
-		
-		
-</table>
-
-</form>	
+		</table>
+	</form:form>
 </body>
 </html>

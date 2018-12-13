@@ -39,4 +39,8 @@ public interface StudentcourseRepository extends JpaRepository<Studentcourse, St
 	ArrayList<Studentcourse> findByEnrollStatus(String status);
 
 	// ArrayList<Studentcourse> findByModule_ModuleIDContaining(String cid);
+	
+	// EC 13 Dec
+	@Query(value = "select * from javateam5.studentcourse sc where sc.studentid = :sid and sc.moduleid in (select moduleid from modules where academicyear = year(curdate())) ", nativeQuery = true)
+	ArrayList<Studentcourse> findModbyStuandYear(@Param("sid") String sid);
 }

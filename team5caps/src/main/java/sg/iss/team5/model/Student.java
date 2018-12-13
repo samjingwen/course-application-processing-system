@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
@@ -40,7 +41,7 @@ public class Student implements Serializable {
 	private List<Studentcourse> studentcourses;
 
 	//bi-directional one-to-one association to User
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="StudentID", insertable = false, updatable = false)
 	private User user;
 
@@ -101,4 +102,12 @@ public class Student implements Serializable {
 		this.user = user;
 	}
 
+	@Override
+	public String toString() {
+		return "Student [studentID=" + studentID + ", enrollmentDate=" + enrollmentDate + ", status=" + status
+				+ ", studentcourses=" + studentcourses + ", user=" + user + "]";
+	}
+
+	
+	
 }
