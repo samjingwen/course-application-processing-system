@@ -20,7 +20,7 @@
 				
 				<tr>
 				   <td><s:message code="LecturerID"/> *</td>
-				   <td><form:input path="lecturerID"  readonly="false" />
+				   <td><form:input path="lecturerID"  />
 				   
 				   <form:errors path="lecturerID" cssStyle="color: red;" /></td>
 				 </tr>
