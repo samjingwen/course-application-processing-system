@@ -34,6 +34,9 @@ Double findLecturerRatingByModuleId(@Param("mid") String mid);
 	@Query(value="select * from studentcourse", nativeQuery=true)
 	ArrayList<Studentcourse> findAllStudentcourse();
 
+    @Query(value = "select * from studentcourse sc where sc.moduleid in(select moduleid from modules where lecturerid= :lid", nativeQuery = true)
+	ArrayList<Studentcourse> findModulesByLecturerId(@Param("lid") String lid);
+ 
 	Studentcourse findFirstByModule_ModuleIDAndStudent_StudentID(String mid, String sid);
 	
 	//	ArrayList<Studentcourse> findByModule_ModuleIDContaining(String cid);

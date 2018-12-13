@@ -39,4 +39,11 @@ public interface ModuleRepository extends JpaRepository<Module, String> {
 	
 	@Query(value = "select moduleid from modules", nativeQuery = true)
 	ArrayList<String> getAllModuleID();
+	
+	// added by Zan 13-Dec
+	@Query(value = "select * from modules m where m.academicYear= year(curdate()) and m.lecturerid = :lid", nativeQuery = true)
+	ArrayList<Module> findCurentModuleByLectId(@Param("lid") String lid);
+
+	@Query(value = "select * from modules m where m.moduleid = :mid", nativeQuery = true)
+	Module findModuleById(@Param("mid") String mid);
 }

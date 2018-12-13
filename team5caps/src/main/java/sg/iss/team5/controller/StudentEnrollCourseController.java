@@ -7,23 +7,21 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.FormattedModule;
+import sg.iss.team5.model.FormattedSC;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.model.StudentcoursePK;
-import sg.iss.team5.model.User;
 import sg.iss.team5.service.AdminService;
 import sg.iss.team5.service.StudentService;
 
@@ -56,22 +54,58 @@ public class StudentEnrollCourseController {
 		Student s = adService.findStudentById(sid);
 		ArrayList<Studentcourse> clist = new ArrayList<Studentcourse>();
 		ArrayList<Module> mlist = new ArrayList<Module>();
+		int check = 0;
 		for (String current : modid) {
-			mlist.add(stuservice.findModulebyID(current));
-			if (mlist.contains(stuservice.findModulebyID(current))) {
-				ModelAndView mav = new ModelAndView("testing");
-				return mav;
-			} else {
+			if (mlist.size() < 1) {
+				check = 1;
 				mlist.add(stuservice.findModulebyID(current));
 			}
+
+			else if (mlist.contains(stuservice.findModulebyID(current))) {
+				check = 0;
+				JOptionPane.showMessageDialog(null, "You have added modules with conflicting times!", "Conflicts",
+						JOptionPane.WARNING_MESSAGE);
+
+			} else {
+				mlist.add(stuservice.findModulebyID(current));
+				check = 10;
+			}
+		}
+		if (check > 0) {
 			clist = stuservice.enrollCourse(mlist, s);
+
+			for (Studentcourse sc : clist) {
+				sc.setId(new StudentcoursePK(sc.getModule().getModuleID(), sc.getStudent().getStudentID()));
+				stuservice.saveStudentCourse(sc);
+			}
+				JOptionPane.showMessageDialog(null, "Successfully enrolled in module(s)!", "Success!", JOptionPane.INFORMATION_MESSAGE);
+			ArrayList<FormattedSC> sclist = (ArrayList<FormattedSC>) stuservice
+					.getFormatSC(stuservice.findCourseByStudentId(sid));
+			ModelAndView mav = new ModelAndView("studentenrollment");
+			mav.addObject("sclist", sclist);
+			return mav;
 		}
-		for (Studentcourse sc : clist) {
-			sc.setId(new StudentcoursePK(sc.getModule().getModuleID(), sc.getStudent().getStudentID()));
-			stuservice.saveStudentCourse(sc);
+		else {
+			Date date = Calendar.getInstance().getTime();
+			ArrayList<FormattedModule> m2list = (ArrayList<FormattedModule>) stuservice
+					.getFormat(stuservice.findModuleNotEnrolled(sid, date));
+
+			ModelAndView mav = new ModelAndView("availablemods");
+
+			mav.addObject("formattedmodules", m2list);
+			return mav;
 		}
+
+	}
+
+	@RequestMapping(value = "/currenroll", method = RequestMethod.GET)
+	public ModelAndView listAllTaken(HttpSession session) throws ParseException {
+		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
+		ArrayList<FormattedSC> sclist = (ArrayList<FormattedSC>) stuservice
+				.getFormatSC(stuservice.findCourseByStudentId(sid));
+
 		ModelAndView mav = new ModelAndView("studentenrollment");
-		mav.addObject("mlist", mlist);
+		mav.addObject("sclist", sclist);
 		return mav;
 
 	}

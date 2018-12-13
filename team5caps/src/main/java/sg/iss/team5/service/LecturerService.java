@@ -40,4 +40,8 @@ public interface LecturerService {
 	Student findStudentByStudentID(String sid);
 	
 	Studentcourse findStudentcourseByPK(String sid, String mid);
+	
+	ArrayList<Studentcourse> findModulesByLecturerId(String lid);
+
+	ArrayList<Module> findCurentModuleByLectId(String lid);
 }

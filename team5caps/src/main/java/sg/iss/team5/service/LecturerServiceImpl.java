@@ -115,6 +115,16 @@ public class LecturerServiceImpl implements LecturerService {
 	public Studentcourse findStudentcourseByPK(String sid, String mid) {
 		return studentcourseRepository.findFirstByModule_ModuleIDAndStudent_StudentID(mid, sid);
 	}
-	
+	@Override
+	public ArrayList<Studentcourse> findModulesByLecturerId(String lid) {
+		// TODO Auto-generated method stub
+		return (ArrayList<Studentcourse>) studentcourseRepository.findModulesByLecturerId(lid);
+	}
+
+	@Override
+	public ArrayList<Module> findCurentModuleByLectId(String lid) {
+		// TODO Auto-generated method stub
+		return (ArrayList<Module>) moduleRepository.findCurentModuleByLectId(lid);
+	}
 
 }

@@ -19,54 +19,44 @@
 	})
 </script>
 
-<title>Available Modules</title>
+<title>Current Modules</title>
 </head>
-
 <body>
-
-	<form:form method="POST" modelAttribute="enroll"
-		action="${pageContext.request.contextPath}/studentenroll/enrollin">
-		<div name="availm">
-			<table id="CurrMods" class="display">
-				<caption>List of available modules:</caption>
-				<br>
-				<thead>
+	<form:form method="GET" modelAttribute="curr"
+		action="${pageContext.request.contextPath}/studentenroll/curr">
+	<div name="currm">
+		<table id="CurrMods" class="display">
+			<caption>Current Enrollment:</caption>
+			<thead>
+				<tr>
+					<td><b>Academic Year</b></td>
+					<td><b>Module ID</b></td>
+					<td><b>Module Name</b></td>
+					<td><b>Lecturer</b></td>
+					<td><b>Day of Week</b></td>
+					<td><b>Time Slot</b></td>
+					<td><b>Venue</b></td>
+					<td><b>Grade</b></td>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${sclist}" var="sclist" varStatus="index">
 					<tr>
-						<td><b>Academic Year</b></td>
-						<td><b>Module ID</b></td>
-						<td><b>Module Name</b></td>
-						<td><b>Lecturer</b></td>
-						<td><b>Day of Week</b></td>
-						<td><b>Time Slot</b></td>
-						<td><b>Venue</b></td>
-						<td><b>Grade</b></td>
-						<td><b>Lecturer Rating</b></td>
+						<td>${sclist.getYear()}</td>
+						<td>${sclist.moduleID}</td>
+						<td>${sclist.moduleName}</td>
+						<td>${sclist.module.lecturer.user.firstName}
+							${sclist.module.lecturer.user.lastName}</td>
+						<td>${sclist.getDay()}</td>
+						<td>${sclist.getTime()}</td>
+						<td>${sclist.venue}</td>
+						<td>${sclist.grade}</td>
+						<td></td>
 					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${formattedmodules}" var="formattedmodules"
-						varStatus="index">
-
-						<tr>
-							<td>${formattedmodules.getYear()}</td>
-							<td>${formattedmodules.moduleID}</td>
-							<td>${formattedmodules.coursedetail.courseName}</td>
-							<td>${formattedmodules.lecturer.user.firstName}
-								${formattedmodules.lecturer.user.lastName}</td>
-							<td>${formattedmodules.getDay()}</td>
-							<td>${formattedmodules.getTime()}</td>
-							<td>${formattedmodules.venue}</td>
-							<td align="center"><input type="checkbox" name="modid"
-								value="${formattedmodules.moduleID}"></td>
-								<td></td>
-								<td></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-
-		<input type="submit" name="enroll" value="Enroll" class="button" />
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 	</form:form>
 </body>
 
