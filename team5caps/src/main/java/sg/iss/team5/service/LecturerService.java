@@ -37,4 +37,6 @@ public interface LecturerService {
 	ArrayList<Studentcourse> findModulesByLecturerId(String lid);
 
 	ArrayList<Module> findCurentModuleByLectId(String lid);
+	
+	Studentcourse updateStudentcourse(Studentcourse sc);
 }

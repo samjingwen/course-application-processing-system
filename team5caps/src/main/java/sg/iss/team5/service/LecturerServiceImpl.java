@@ -109,4 +109,10 @@ public class LecturerServiceImpl implements LecturerService {
 		// TODO Auto-generated method stub
 		return (ArrayList<Module>) moduleRepository.findCurentModuleByLectId(lid);
 	}
+
+	@Override
+	public Studentcourse updateStudentcourse(Studentcourse sc) {
+		return studentcourseRepository.saveAndFlush(sc);
+		
+	}
 }
