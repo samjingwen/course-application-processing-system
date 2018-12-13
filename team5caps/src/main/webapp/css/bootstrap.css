@@ -9549,7 +9549,7 @@ div .maingrid { grid-area: main;}
 
 .containerhome{
 	width:100%;
-	margin:100px;
+	margin:50px;
 	position:relative;
 	float:left;
 }
@@ -9567,7 +9567,7 @@ div .maingrid { grid-area: main;}
 	border-radius: 8px;
 	background: #e5e5e5;
 	padding: 20px;
-	margin-left:15px;
+	margin-left:58px;
 	margin-top:55px;
 	height: 150px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -9577,14 +9577,14 @@ div .maingrid { grid-area: main;}
 	font-weight:bold;
 	font-size:25px;
 	color:#093f8e;
-	
+	font-style: italic;
 }
 
 .right h4{
 	text-decoration: underline;
 	text-align:right;
-	margin-top:20px;
-	font-size:14px;
+	margin-top:40px;
+	font-size:16px;
 	font-weight:bold;
 	color:#4C4C4C;
 }
@@ -9598,14 +9598,17 @@ div .maingrid { grid-area: main;}
 	position:relative;
 	float:left;
 	width:100%;
-	height:50px;
+	height: 89px;
+	bottom: 0;
+  	left: 0;
+  	margin-top: 50px;
 }
 
 .footercopyright {
-	padding-top: 20px;
+	padding-top: 25px;
 	border-top: 1px solid #ededed;
 }
 
 .logintable{
-	align:center;
+	margin: auto;
 }

@@ -5,7 +5,7 @@
 <head>
 
 </head>
-<div class="containerhome">
+<div class="containerhome" align="center">
 <!-- 	<h1>Home page</h1> -->
  	<section >
 	<div class="left">
@@ -15,7 +15,7 @@
 
 	<div  class="right">
 		<h2>Welcome to "Student application".</h2>
-		<h4><a href="/team5caps/home/login">Log in ></a> </h4><br />
+		<h4><a href="/team5caps/home/login">LOG IN ></a> </h4><br />
 	</div>
 	</section>
 </div>
