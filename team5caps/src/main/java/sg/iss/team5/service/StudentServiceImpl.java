@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.FormattedModule;
+import sg.iss.team5.model.FormattedSC;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
@@ -161,13 +162,21 @@ public class StudentServiceImpl implements StudentService {
 		return coursedetailRepository.saveAndFlush(cd);
 	}
 
+	public ArrayList<FormattedSC> getFormatSC(ArrayList<Studentcourse> sc) {
+		ArrayList<FormattedSC> sclist = new ArrayList<FormattedSC>();
+		for (Studentcourse current : sc) {
+			sclist.add(new FormattedSC(current, getTime(current.getModule()), getYear(current.getModule()),
+					getDay(current.getModule())));
+		}
+		return sclist;
+	}
+
 	@Override
 	public ArrayList<Studentcourse> enrollCourse(ArrayList<Module> mod, Student stu) {
 
 		ArrayList<Studentcourse> cdlist = new ArrayList<Studentcourse>();
 		for (Module current : mod) {
-			cdlist.add(new Studentcourse( "Enrolled",
-					Calendar.getInstance().getTime(),stu,current));
+			cdlist.add(new Studentcourse("Enrolled", Calendar.getInstance().getTime(), stu, current));
 		}
 
 		return cdlist;
@@ -178,4 +187,10 @@ public class StudentServiceImpl implements StudentService {
 
 		return mod;
 	}
+
+	public ArrayList<Studentcourse> findSCbyStuandYear(String sid){
+		ArrayList<Studentcourse> sc = studentcourseRepository.findModbyStuandYear(sid);
+		return sc;
+	}
+
 }
