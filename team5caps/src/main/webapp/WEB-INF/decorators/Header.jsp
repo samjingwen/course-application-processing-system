@@ -36,9 +36,9 @@
 							</c:when>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Student' }">
-								<li><a href="#">Stud Btn1</a></li>
-								<li><a href="#">Stud Btn2</a></li>
-								<li><a href="#">Stud Btn3</a></li>
+								<li><a href="${pageContext.request.contextPath}/studentenroll/modules">View Available Modules</a></li>
+								<li><a href="${pageContext.request.contextPath}/studentenroll/currenroll">Current Enrollment</a></li>
+								<li><a href="${pageContext.request.contextPath}/studentGrade/">View GPA</a></li>
 							</c:when>
 						</c:choose>
 					</c:if>
