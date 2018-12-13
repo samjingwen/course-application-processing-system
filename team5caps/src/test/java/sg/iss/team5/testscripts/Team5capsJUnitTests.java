@@ -66,29 +66,24 @@ public class Team5capsJUnitTests {
 		assertEquals("Stephen", u.getFirstName());
 	}
 
-	@Test
-	public void findStudentbyID_Test() {
-		Student s = lectservice.findStudentByStudentID("S00033");
-		assertNotNull(s);
-		assertEquals("Tony", s.getUser().getFirstName());
-	}
+	// Due to Foreign Key Constraints, expect JpaSystemException -
+	// ConstraintViolationException
 
-	//Due to Foreign Key Constraints, expect JpaSystemException - ConstraintViolationException
-	
 	@Test(expected = JpaSystemException.class)
-	public void createCourseDetail_Test() {
-		Coursedetail cd = new Coursedetail();
-		cd.setCourseID("R1111");
-		cd.setCourseName("Running");
-		cd.setCredits(BigDecimal.valueOf(2.2));
-		cd.setDescription("Make you lose weight!");
-		cd.setMaxVacancy(22);
-		cd.setMinVacancy(1);
+	public void createModule_Test() {
+		Module m = new Module();
+		m.setAcademicYear(Calendar.getInstance().getTime());
+		m.setDayofWeek(2);
+		m.setModuleID("Module 1");
+		m.setTimeslot(1);
+		m.setVenue("Test Venue");
 		
-		Coursedetail e = adservice.createCoursedetail(cd);
-		assertNotNull(e);
+		Module e = lectservice.updateModule(m);
+		assertNotNull(m);
 		
-		Coursedetail insert =
+		Module insert = stuservice.findModulebyID(m.getModuleID());
+		assertEquals("Test Venue",insert.getVenue());
+	
 	}
 
 }
