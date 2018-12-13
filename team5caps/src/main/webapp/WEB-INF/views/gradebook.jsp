@@ -4,7 +4,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Course Grade</title>
-<c:url value="/css/style.css" var="ss2" />
+<c:url value="css/style.css" var="ss2" />
 <link rel="STYLESHEET" type="text/css" href="${ss2}" />
 </head>
 <body>
