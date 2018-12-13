@@ -3,20 +3,18 @@ package sg.iss.team5.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
-import java.util.Optional;
-
-import javax.mail.Session;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
@@ -31,13 +29,11 @@ public class LecturerGradeCourseController {
 	private StudentService sService;
 	@Autowired
 	private LecturerService lService;
-//@RequestParam("selectone") Optional<HashMap<String, Module>> selectoneo
 	@RequestMapping(value = "/gradebook", method = RequestMethod.GET)
 	public ModelAndView listAllStudentcourse() {
-		ModelAndView mav = new ModelAndView("gradebook");
+		ModelAndView mav = new ModelAndView("gradebook6");
 		String lid = "L00007";
 		// String lid =session.getAttribute("USERSESSION").toString();
-
 		// Show courses taught by lecture in dropdownlist
 		ArrayList<Module> sm = new ArrayList<>();
 		HashMap<String, Module> cList = new HashMap<>();
@@ -49,25 +45,18 @@ public class LecturerGradeCourseController {
 		}
 		//to
 		mav.addObject("courselist", cList);
-
 		return mav;
 	}
 	
-	@RequestMapping(value = "/gradebook", method = RequestMethod.POST)
+	@RequestMapping(value = "/gradebook/exact", method = RequestMethod.POST)
 	public ModelAndView listAllStudent(@RequestParam("selectone") String moduleID) {
 		// Get list of students from module(dropdownlist selected)
-		   ModelAndView mav = new ModelAndView("gradebook");
-		    Module selectone=sService.findModulebyID(moduleID);
-		    System.out.println(selectone);
+		    ModelAndView mav = new ModelAndView("gradebook");
+		    Module selectone=sService.findModulebyID("0117A0006");	
 			List<Studentcourse> scList = new ArrayList<>();
-			ArrayList<Student> stuList = new ArrayList<>();
 			scList = selectone.getStudentcourses();
 			//get the  student list of exact course
-			for (Studentcourse studentcourse : scList) {
-				Student student = studentcourse.getStudent();
-				stuList.add(student);
-			}
-			mav.addObject("scList", stuList);
+			mav.addObject("scList", scList);			
 			return mav;
 		   
 	}
