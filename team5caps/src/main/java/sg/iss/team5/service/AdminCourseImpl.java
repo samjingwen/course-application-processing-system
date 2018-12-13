@@ -29,7 +29,7 @@ public class AdminCourseImpl implements AdminCourse {
 	}
 	@Override
 	public ArrayList<Coursedetail> findAllCoursedetails() {
-		return coursedetailRepository.findAllCoursedetail();
+		return (ArrayList<Coursedetail>) coursedetailRepository.findAll();
 	}
 	
 	@Override

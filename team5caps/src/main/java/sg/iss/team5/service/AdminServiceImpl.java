@@ -110,7 +110,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Coursedetail createCoursedetail(Coursedetail cd) {
-		cdRepository.saveAndFlush(cd);
+		coursedetailRepository.saveAndFlush(cd);
 		return cd;
 	}
 

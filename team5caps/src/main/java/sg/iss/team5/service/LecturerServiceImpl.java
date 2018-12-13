@@ -106,7 +106,7 @@ public class LecturerServiceImpl implements LecturerService {
 
 	@Override
 	public ArrayList<Studentcourse> findModulesByLecturerId(String lid) {
-		return (ArrayList<Studentcourse>) studentcourseRepository.findModulesByLecturerId(lid);
+		return (ArrayList<Studentcourse>) studentcourseRepository.findByModule_Lecturer_LecturerID(lid);
 	}
 
 	@Override

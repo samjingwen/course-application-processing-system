@@ -37,6 +37,8 @@ public interface StudentcourseRepository extends JpaRepository<Studentcourse, St
 	Studentcourse findFirstByModule_ModuleIDAndStudent_StudentID(String mid, String sid);
 
 	ArrayList<Studentcourse> findByEnrollStatus(String status);
+	
+	ArrayList<Studentcourse> findByModule_Lecturer_LecturerID(String lid);
 
 	// ArrayList<Studentcourse> findByModule_ModuleIDContaining(String cid);
 	
