@@ -75,8 +75,11 @@ public class AdminManageLecController {
 		System.out.println("lecturer"+lecturer.toString());
 		if (result.hasErrors())
 			return new ModelAndView("FormLecturerEdit");
-		lecturer.getUser().setUserID(lecturer.getLecturerID());
-		adminlecturer.updateLecturer(lecturer);
+		User user = lecturer.getUser();
+		user.setUserID(lecturer.getLecturerID());
+		user.setAccessLevel(adminlecturer.findLecturer(lecturer.getLecturerID()).getUser().getAccessLevel());
+		user.setPassword(adminlecturer.findLecturer(lecturer.getLecturerID()).getUser().getPassword());		
+		adminlecturer.createLecturer(lecturer, user);
 		ModelAndView mav = new ModelAndView("redirect:/lecturer/lecturelist");
 		String message = "Lecturer" + lecturer.getLecturerID() + " was successfully updated.";
 		redirectAttributes.addFlashAttribute("message", message);

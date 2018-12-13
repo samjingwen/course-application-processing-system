@@ -29,8 +29,7 @@ public class TimetableController {
 	@Transactional
 	public ModelAndView studentTimetable(HttpSession session) {
 		 ModelAndView mav = new ModelAndView(" ");	
-		 //String id =session.getAttribute("USERSESSION").toString();
-		 String id="S00003";
+			String id = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 				mav = new ModelAndView("Timetable");
 				TreeMap<Integer, String> morcourse=new TreeMap<>();
 				TreeMap<Integer, String> aftcourse=new TreeMap<>();

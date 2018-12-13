@@ -47,5 +47,9 @@ public interface StudentService {
 	ArrayList<FormattedSC> getFormatSC(ArrayList<Studentcourse> sc);
 	
 	ArrayList<Studentcourse> findSCbyStuandYear(String sid);
+	
+	Coursedetail getCDbyCID(String cid);
+	
+	ArrayList<Studentcourse> findCourseByCourseId(String cid);
 
 }

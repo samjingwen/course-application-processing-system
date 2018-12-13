@@ -26,7 +26,7 @@ public class Lecturer implements Serializable {
 	private User user;
 
 	//bi-directional many-to-one association to Module
-	@OneToMany
+	@OneToMany(mappedBy="lecturer")
 	private List<Module> modules;
 
 	public Lecturer() {

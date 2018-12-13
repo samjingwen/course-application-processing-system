@@ -102,16 +102,16 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	public String getTime(Module mods) {
-		String Time = "Morning";
+		String Time = "9:00-11:30";
 		switch (mods.getTimeslot()) {
 		case 1:
-			Time = "Morning";
+			Time = "9:00-11:30";
 			break;
 		case 2:
-			Time = "Afternoon";
+			Time = "14:00-5:30";
 			break;
 		case 3:
-			Time = "Evening";
+			Time = "18:00-21:30";
 			break;
 		default:
 			break;
@@ -192,6 +192,18 @@ public class StudentServiceImpl implements StudentService {
 	public ArrayList<Studentcourse> findSCbyStuandYear(String sid){
 		ArrayList<Studentcourse> sc = studentcourseRepository.findModbyStuandYear(sid);
 		return sc;
+	}
+
+	@Override
+	public Coursedetail getCDbyCID(String cid) {
+
+		Coursedetail cd = coursedetailRepository.findCoursesById(cid);
+		return cd;
+	}
+	
+	public ArrayList<Studentcourse> findCourseByCourseId(String cid){
+		 ArrayList<Studentcourse> sc = studentcourseRepository.findCourseByCourseId(cid);
+		 return sc;
 	}
 
 }

@@ -67,7 +67,7 @@ public class LecturerServiceImpl implements LecturerService {
 	public ArrayList<Module> findModuleIdbyLectid(String lid) {
 		return (ArrayList<Module>) moduleRepository.findModuleByLecturerId(lid);
 	}
-	
+
 	@Override
 	public ArrayList<Studentcourse> findAllStudentcourse() {
 		return (ArrayList<Studentcourse>) studentcourseRepository.findAll();
@@ -82,8 +82,7 @@ public class LecturerServiceImpl implements LecturerService {
 	public Studentcourse createStudentcourse(Studentcourse studentcourse) {
 		return studentcourseRepository.save(studentcourse);
 	}
-	
-	
+
 	@Override
 	public ArrayList<Module> findPastModuleByLectId(String lid) {
 		return (ArrayList<Module>) moduleRepository.findPastModuleByLectId(lid);
@@ -93,7 +92,7 @@ public class LecturerServiceImpl implements LecturerService {
 	public Module updateModule(Module module) {
 		return moduleRepository.save(module);
 	}
-	
+
 	@Override
 	public ArrayList<String> getAllModuleID() {
 		return moduleRepository.getAllModuleID();
@@ -118,29 +117,30 @@ public class LecturerServiceImpl implements LecturerService {
 	@Override
 	public Studentcourse updateStudentcourse(Studentcourse sc) {
 		return studentcourseRepository.saveAndFlush(sc);
-		
+
 	}
-	
+
 	@Override
 	public Studentcourse findStudentcourseByPK(String sid, String mid) {
-		return studentcourseRepository.findFirstByModule_ModuleIDAndStudent_StudentID(mid, sid);
+		return studentcourseRepository.findStudentcourseByPK(mid, sid);
 	}
-	
+
 	@Override
 	public ArrayList<String> getAllModuleIDForCurrentYear() {
 		ArrayList<String> mList = new ArrayList<String>();
 		ArrayList<String> newList = new ArrayList<String>();
 		mList = moduleRepository.getAllModuleID();
-		DateFormat df = new SimpleDateFormat("yy"); 
+		DateFormat df = new SimpleDateFormat("yy");
 		String formattedDate = df.format(Calendar.getInstance().getTime());
 		int num = mList.size();
-		for (int i=0; i < num; i++) {
-			if (mList.get(i).substring(2, 4).equals(formattedDate)){
+		for (int i = 0; i < num; i++) {
+			if (mList.get(i).substring(2, 4).equals(formattedDate)) {
 				newList.add(mList.get(i));
 			}
 		}
 		return newList;
 	}
+
 	
-	
+
 }

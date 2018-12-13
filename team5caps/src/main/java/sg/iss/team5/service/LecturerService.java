@@ -48,4 +48,5 @@ public interface LecturerService {
 	Studentcourse updateStudentcourse(Studentcourse sc);
 	
 	ArrayList<String> getAllModuleIDForCurrentYear();
+	
 }

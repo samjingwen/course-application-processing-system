@@ -19,8 +19,9 @@
 				</tr>
 				
 				<tr>
-				   <td><s:message code="LecturerID" /> *</td>
-				   <td><form:input path="lecturerID"/>
+				   <td><s:message code="LecturerID"/> *</td>
+				   <td><form:input path="lecturerID"  />
+				   
 				   <form:errors path="lecturerID" cssStyle="color: red;" /></td>
 				 </tr>
 				<tr>
