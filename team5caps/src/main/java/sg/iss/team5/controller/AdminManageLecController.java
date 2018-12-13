@@ -43,7 +43,11 @@ public class AdminManageLecController {
 	
 	@RequestMapping(value = { "/create"}, method = RequestMethod.GET)
 	public ModelAndView newCoursepage() {
+		String lid = adminlecturer.findAllLecturers().get(adminlecturer.findAllLecturers().size()-1).getLecturerID();
+		int num = Integer.parseInt(lid.substring(1, 6));
+		String id = "L"+String.format("%05d", num+1);
 		ModelAndView mav = new ModelAndView("FormLecturer", "lecturer", new Lecturer());
+		mav.addObject("LID", id);
 		return mav;
 	}
 	@RequestMapping(value = { "/create"}, method = RequestMethod.POST)
@@ -51,8 +55,7 @@ public class AdminManageLecController {
 			final RedirectAttributes redirectAttributes) {
 		if (result.hasErrors())
 			return new ModelAndView("FormLecturer");
-		
-		
+				
 		lecturer.getUser().setUserID(lecturer.getLecturerID());
 		lecturer.getUser().setPassword("Password");
 		lecturer.getUser().setAccessLevel("Lecturer");
