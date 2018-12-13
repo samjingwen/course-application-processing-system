@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import sg.iss.team5.model.Module;
+import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
 
 public interface LecturerService {
