@@ -39,8 +39,19 @@ public class StudentEnrollCourseController {
 		// View available modules to enroll
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		Date date = Calendar.getInstance().getTime();
-		ArrayList<FormattedModule> mlist = (ArrayList<FormattedModule>) stuservice
+		ArrayList<FormattedModule> dlist = (ArrayList<FormattedModule>) stuservice
 				.getFormat(stuservice.findModuleNotEnrolled(sid, date));
+		ArrayList<FormattedModule> mlist = new ArrayList<FormattedModule>();
+
+		// Do not display modules with no vacancy
+		for (FormattedModule current : dlist) {
+			if ((stuservice.findCourseByCourseId(current.getModuleID())
+					.size()) < (stuservice.getCDbyCID(current.getModuleID()
+							.substring(current.getModuleID().length() - 5, current.getModuleID().length()))
+							.getMaxVacancy())) {
+				mlist.add(current);
+			}
+		}
 
 		ModelAndView mav = new ModelAndView("availablemods");
 
@@ -58,14 +69,15 @@ public class StudentEnrollCourseController {
 		ArrayList<Module> mlist = new ArrayList<Module>();
 		int check = 0;
 		int curcount = stuservice.findSCbyStuandYear(sid).size();
-		
-		//create list of already enrolled modules for current year
+
+		// create list of already enrolled modules for current year
 		ArrayList<Module> enmlist = new ArrayList<Module>();
 		for (Studentcourse sc : stuservice.findSCbyStuandYear(sid)) {
 			enmlist.add(stuservice.findModulebyID(sc.getModule().getModuleID()));
 		}
 
-		//check if selected modules have conflicting time with previously enrolled modules
+		// check if selected modules have conflicting time with previously enrolled
+		// modules
 		for (String current : modid) {
 			if (enmlist.contains(stuservice.findModulebyID(current))) {
 				check = 0;
@@ -99,6 +111,7 @@ public class StudentEnrollCourseController {
 			JOptionPane.showMessageDialog(null, "You may only add up to 5 modules per year.", "Too many modules!",
 					JOptionPane.WARNING_MESSAGE);
 		}
+
 		// enroll student in module
 		if (check > 0) {
 			clist = stuservice.enrollCourse(mlist, s);
