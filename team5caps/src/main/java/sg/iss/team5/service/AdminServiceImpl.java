@@ -58,7 +58,6 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	@Transactional
 	public Student createStudent(Student student, User user) {
-		userRepository.saveAndFlush(user);
 		return studentRepository.saveAndFlush(student);
 	}
 

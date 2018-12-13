@@ -44,4 +44,6 @@ public interface LecturerService {
 	ArrayList<Studentcourse> findModulesByLecturerId(String lid);
 
 	ArrayList<Module> findCurentModuleByLectId(String lid);
+	
+	ArrayList<String> getAllModuleIDForCurrentYear();
 }

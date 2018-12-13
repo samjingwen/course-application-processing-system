@@ -1,5 +1,7 @@
 package sg.iss.team5.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -8,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,8 +58,7 @@ public class SjwController {
 		mv.setViewName("testing");
 		mv.addObject("cdList", cdList);
 		ArrayList<String> mList = lecturerService.getAllModuleID();
-		for (String mid : mList)
-			System.out.println(mid);
+		
 		mv.addObject("modules", mList);
 		return mv;
 	}
@@ -79,7 +79,7 @@ public class SjwController {
 	public ModelAndView showRequest(@ModelAttribute("request") Request request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		Studentcourse sc = lecturerService.findStudentcourseByPK(request.getStudentID(), request.getModuleID());
-		if (sc != null) {
+		if (sc != null || request.getModuleID().substring(2, 4) == "18") {
 			mav.setViewName("redirect:/sjw/home");
 			return mav;
 		}

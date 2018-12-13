@@ -1,7 +1,12 @@
 package sg.iss.team5.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.transaction.Transactional;
 
@@ -16,7 +21,7 @@ import sg.iss.team5.repository.StudentRepository;
 import sg.iss.team5.repository.StudentcourseRepository;
 
 @Service
-@Transactional
+//@Transactional
 public class LecturerServiceImpl implements LecturerService {
 
 	@Autowired
@@ -58,19 +63,16 @@ public class LecturerServiceImpl implements LecturerService {
 
 	@Override
 	public String findAttendanceByModuleId(String mid) {
-		// TODO Auto-generated method stub
 		return studentcourseRepository.findAttendanceByModuleId(mid);
 	}
 
 	@Override
 	public ArrayList<Studentcourse> findCourseByModuleId(String mid) {
-		// TODO Auto-generated method stub
 		return (ArrayList<Studentcourse>) studentcourseRepository.findByModule_ModuleIDContaining(mid);
 	}
 
 	@Override
 	public ArrayList<Module> findModuleIdbyLectid(String lid) {
-		// TODO Auto-generated method stub
 		return (ArrayList<Module>) moduleRepository.findModuleByLecturerId(lid);
 	}
 	
@@ -117,14 +119,29 @@ public class LecturerServiceImpl implements LecturerService {
 	}
 	@Override
 	public ArrayList<Studentcourse> findModulesByLecturerId(String lid) {
-		// TODO Auto-generated method stub
 		return (ArrayList<Studentcourse>) studentcourseRepository.findModulesByLecturerId(lid);
 	}
 
 	@Override
 	public ArrayList<Module> findCurentModuleByLectId(String lid) {
-		// TODO Auto-generated method stub
 		return (ArrayList<Module>) moduleRepository.findCurentModuleByLectId(lid);
 	}
+
+	@Override
+	public ArrayList<String> getAllModuleIDForCurrentYear() {
+		ArrayList<String> mList = new ArrayList<String>();
+		ArrayList<String> newList = new ArrayList<String>();
+		mList = moduleRepository.getAllModuleID();
+		DateFormat df = new SimpleDateFormat("yy"); 
+		String formattedDate = df.format(Calendar.getInstance().getTime());
+		int num = mList.size();
+		for (int i=0; i < num; i++) {
+			if (mList.get(i).substring(2, 4).equals(formattedDate)){
+				newList.add(mList.get(i));
+			}
+		}
+		return newList;
+	}
+	
 
 }
