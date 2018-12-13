@@ -194,4 +194,16 @@ public class StudentServiceImpl implements StudentService {
 		return sc;
 	}
 
+	@Override
+	public Coursedetail getCDbyCID(String cid) {
+
+		Coursedetail cd = coursedetailRepository.findCoursesById(cid);
+		return cd;
+	}
+	
+	public ArrayList<Studentcourse> findCourseByCourseId(String cid){
+		 ArrayList<Studentcourse> sc = studentcourseRepository.findCourseByCourseId(cid);
+		 return sc;
+	}
+
 }
