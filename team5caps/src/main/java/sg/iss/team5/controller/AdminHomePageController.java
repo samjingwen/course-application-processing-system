@@ -1,31 +1,21 @@
 package sg.iss.team5.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sun.java.swing.plaf.windows.WindowsInternalFrameTitlePane.ScalableIconUIResource;
-
-import sg.iss.team5.model.ChartData;
+import sg.iss.team5.caps.SecurityConfigurations;
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
@@ -42,8 +32,11 @@ public class AdminHomePageController {
 	Logger logger = LoggerFactory.getLogger(AdminHomePageController.class);
 
 	@RequestMapping(value = "/homepage")
-	public ModelAndView listStudentsNotEnrolled() {
-		
+	public ModelAndView listStudentsNotEnrolled(HttpSession session) {
+		//Security
+		if (!SecurityConfigurations.CheckAdminAuth(session))
+			return new ModelAndView("redirect:/home/login");
+		//Security
 		//get top 7 courses
 //		ArrayList<ChartData> chartDataList=adminService.findChartData();
 //		int sum=0;
@@ -65,8 +58,9 @@ public class AdminHomePageController {
 	}
 
 	@RequestMapping(value = "/manage/courses")
-	public ModelAndView listAllCourses() {
-		
+	public ModelAndView listAllCourses(HttpSession session) {
+		if (!SecurityConfigurations.CheckAdminAuth(session))
+			return new ModelAndView("redirect:/home/login");
 		ModelAndView mav = new ModelAndView("admin_courselist");
 		ArrayList<Coursedetail> listAllCourse = adminService.getCourseDetailList();
 		mav.addObject("listAllCourse", listAllCourse);
