@@ -153,6 +153,7 @@ public class Module implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((academicYear == null) ? 0 : academicYear.hashCode());
 		result = prime * result + dayofWeek;
 		result = prime * result + timeslot;
 		return result;
@@ -168,12 +169,20 @@ public class Module implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Module other = (Module) obj;
+		if (academicYear == null) {
+			if (other.academicYear != null)
+				return false;
+		} else if (!academicYear.equals(other.academicYear))
+			return false;
 		if (dayofWeek != other.dayofWeek)
 			return false;
 		if (timeslot != other.timeslot)
 			return false;
 		return true;
 	}
+
+
+
 
 	
 	

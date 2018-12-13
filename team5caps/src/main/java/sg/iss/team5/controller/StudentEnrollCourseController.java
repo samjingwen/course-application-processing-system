@@ -78,6 +78,7 @@ public class StudentEnrollCourseController {
 				sc.setId(new StudentcoursePK(sc.getModule().getModuleID(), sc.getStudent().getStudentID()));
 				stuservice.saveStudentCourse(sc);
 			}
+				JOptionPane.showMessageDialog(null, "Successfully enrolled in module(s)!", "Success!", JOptionPane.INFORMATION_MESSAGE);
 			ArrayList<FormattedSC> sclist = (ArrayList<FormattedSC>) stuservice
 					.getFormatSC(stuservice.findCourseByStudentId(sid));
 			ModelAndView mav = new ModelAndView("studentenrollment");
