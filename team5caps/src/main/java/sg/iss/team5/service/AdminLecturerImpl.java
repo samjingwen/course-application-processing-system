@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,9 +19,9 @@ import sg.iss.team5.repository.UserRepository;
 @Service
 public class AdminLecturerImpl implements AdminLecturer {
 
-	@Resource
+	@Autowired
 	LecturerRepository LecturerRepository;
-	@Resource
+	@Autowired
 	UserRepository userRepository;
 
 	@Override
