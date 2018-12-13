@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 <script
@@ -19,7 +22,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
+
 <body>
+	<div class="container">
 	<h1>Student List</h1>
 	<%-- <form:form modelAttribute="user" method="POST" cssClass="maingrid"
 	action="${pageContext.request.contextPath}/student/create"> --%>
@@ -58,5 +63,6 @@
 		</tbody>
 	</table>
 	<%-- </form:form> --%>
+	</div>
 </body>
 </html>

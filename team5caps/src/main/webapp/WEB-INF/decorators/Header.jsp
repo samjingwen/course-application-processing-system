@@ -18,41 +18,60 @@
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
+					<li><a href="#">About Us</a></li>
 					<c:if test="${not empty sessionScope.USERSESSION}">
 						<c:choose>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Administrator' }">
-								<li><a href="#">Admin Btn1</a></li>
-								<li><a href="#">Admin Btn2</a></li>
-								<li><a href="#">Admin Btn3</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/homepage">Dash board</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/manage/courses">Manage Courses</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/manage/approval">Manage Request Approval</a></li>
 							</c:when>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Lecturer' }">
-								<li><a href="${pageContext.request.contextPath}/lecturer/request">Lect Btn1</a></li>
+								<li><a
+									href="${pageContext.request.contextPath}/lecturer/request">Lect
+										Btn1</a></li>
 								<li><a href="#">Lect Btn2</a></li>
 								<li><a href="#">Lect Btn3</a></li>
 							</c:when>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Student' }">
-								<li><a href="${pageContext.request.contextPath}/studentenroll/modules">View Available Modules</a></li>
-								<li><a href="${pageContext.request.contextPath}/studentenroll/currenroll">Current Enrollment</a></li>
-								<li><a href="${pageContext.request.contextPath}/studentGrade/">View GPA</a></li>
+								<li><a href="${pageContext.request.contextPath}/Timetable">Timetable</a></li>
+								<li><a
+									href="${pageContext.request.contextPath}/studentenroll/modules">View
+										Available Modules</a></li>
+								<li><a
+									href="${pageContext.request.contextPath}/studentenroll/currenroll">Current
+										Enrollment</a></li>
+								<li><a
+									href="${pageContext.request.contextPath}/studentGrade/">View
+										GPA</a></li>
 							</c:when>
 						</c:choose>
 					</c:if>
+					<c:if test="${empty sessionScope.USERSESSION }">
+						<li><a href="#">Anon Btn1</a></li>
+						<li><a href="#">Anon Btn2</a></li>
+						<li><a href="#">Anon Btn3</a></li>
 
-
-
-
-
+					</c:if>
 
 
 				</ul>
+
+
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Welcome	${sessionScope.USERSESSION.user.accessLevel} ${sessionScope.USERSESSION.user.firstName }</a></li>
-					<li><a href="#">Link</a></li>
+					<c:if test="${empty sessionScope.USERSESSION }">
+						<li><a href="${pageContext.request.contextPath}/home/login">Login</a>
+					</c:if>
+
+					<c:if test="${not empty sessionScope.USERSESSION }">
+						<li><a href="#">Welcome
+								${sessionScope.USERSESSION.user.accessLevel}
+								${sessionScope.USERSESSION.user.firstName }</a></li>
+						<li><a href="${pageContext.request.contextPath}/home/logout">Logout</a></li>
+					</c:if>
 				</ul>
 			</div>
 		</div>

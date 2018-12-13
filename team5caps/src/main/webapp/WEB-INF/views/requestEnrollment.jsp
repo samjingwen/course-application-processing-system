@@ -6,11 +6,15 @@
 
 <html>
 <head>
+<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 <c:url value="/css/bootstrap.css" var="ss" />
 <link rel="STYLESHEET" type="text/css" href="${ss}" />
 
 </head>
 <body>
+	<div class="container">
 	<h1>THIS IS REQUEST ENROLLMENT</h1>
 	<div>
 		<form:form modelAttribute="request" method="POST" cssClass="maingrid"
@@ -45,6 +49,7 @@
 				</table>
 			</div>
 		</form:form>
+	</div>
 	</div>
 </body>
 </html>

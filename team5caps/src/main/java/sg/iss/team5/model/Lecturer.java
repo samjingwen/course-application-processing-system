@@ -22,7 +22,7 @@ public class Lecturer implements Serializable {
 
 	//bi-directional one-to-one association to User
 	@OneToOne
-	@JoinColumn(name="LecturerID")
+	@JoinColumn(name="LecturerID", insertable = false, updatable = false)
 	private User user;
 
 	//bi-directional many-to-one association to Module

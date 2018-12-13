@@ -4,18 +4,24 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import sg.iss.team5.mail.MyConstants;
 import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.FormattedSC;
 import sg.iss.team5.model.Module;
@@ -29,6 +35,8 @@ import sg.iss.team5.service.StudentService;
 @RequestMapping(value = "/studentenroll")
 public class StudentEnrollCourseController {
 
+    @Autowired
+    public JavaMailSender emailSender;
 	@Autowired
 	StudentService stuservice;
 	@Autowired
@@ -60,8 +68,8 @@ public class StudentEnrollCourseController {
 	}
 
 	@RequestMapping(value = "/enrollin", method = RequestMethod.POST)
-	public ModelAndView enrollStudent(@RequestParam("modid") String[] modid, HttpServletRequest request,
-			HttpSession session) {
+	public ModelAndView enrollStudent (@RequestParam("modid") String[] modid, HttpServletRequest request,
+			HttpSession session) throws MessagingException{
 		// Student enrollment
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		Student s = adService.findStudentById(sid);
@@ -115,17 +123,29 @@ public class StudentEnrollCourseController {
 		// enroll student in module
 		if (check > 0) {
 			clist = stuservice.enrollCourse(mlist, s);
-
+			
+//			//Email code
+//			MimeMessage message = emailSender.createMimeMessage();
+//	        boolean multipart = true;
+//	        MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
+//	        String htmlMsg = "<h3>Dear Student,</h3><p>You are currently enrolled in the courses. Thank you</p>"
+//	                +"<img src='https://myaces.nus.edu.sg/passfail/images/pf_banner2008.gif'>";
+//	         
+//	        message.setContent(htmlMsg, "text/html");   
+//	        helper.setTo("elaine.chan@u.nus.edu");//This will be changed to real email during production
+//	        helper.setSubject("Reminder for Subject Registration");
+//	        this.emailSender.send(message);
+//	        ///
 			for (Studentcourse sc : clist) {
 				sc.setId(new StudentcoursePK(sc.getModule().getModuleID(), sc.getStudent().getStudentID()));
 				stuservice.saveStudentCourse(sc);
 			}
-			JOptionPane.showMessageDialog(null, "Successfully enrolled in module(s)!", "Success!",
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Successfully enrolled in module(s)!");
 			ArrayList<FormattedSC> sclist = (ArrayList<FormattedSC>) stuservice
 					.getFormatSC(stuservice.findCourseByStudentId(sid));
 			ModelAndView mav = new ModelAndView("studentenrollment");
 			mav.addObject("sclist", sclist);
+			
 			return mav;
 
 			// if any of the above fails, return to module selection page

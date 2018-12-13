@@ -6,12 +6,16 @@
 
 <html>
 <head>
+<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 <c:url value="/css/bootstrap.css" var="ss" />
 <link rel="STYLESHEET" type="text/css" href="${ss}" />
 
 </head>
 <body>
 <div>
+	<div class="container">
 <form:form modelAttribute="user" method="POST" cssClass="maingrid"
 	action="${pageContext.request.contextPath}/home/authenticate">
 	<div align="center">
@@ -39,6 +43,7 @@
 	</table>
 	</div>
 </form:form>
+</div>
 </div>
 </body>
 </html>

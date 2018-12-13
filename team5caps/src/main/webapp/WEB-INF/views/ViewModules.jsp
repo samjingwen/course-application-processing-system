@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
@@ -22,6 +25,7 @@
 </head>
 
 <body>
+	<div class="container">
 	<table id="ModuleTaught" class="table table-stripeds">
 	<thead>
 		<tr>
@@ -44,6 +48,7 @@
 		</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </body>
 
 </html>
