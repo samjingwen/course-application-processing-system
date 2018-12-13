@@ -106,8 +106,8 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Coursedetail createCoursedetail(Coursedetail cd) {
-		// TODO Auto-generated method stub
-		return null;
+		cdRepository.saveAndFlush(cd);
+		return cd;
 	}
 
 	@Override
