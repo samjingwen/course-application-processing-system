@@ -36,7 +36,7 @@
 		<c:forEach items="${modules}" var="module" varStatus="status">
 			<tr>
 				<td align="center">${status.index+1}</td>
-				<td align="center">${module.moduleID}</td>
+				<td align="center"><a href="${pageContext.request.contextPath}/lecturer/enrollist/${module.moduleID}">${module.moduleID}</a></td>
 				<td align="center">${module.coursedetail.courseName}</td>
 				<td align="center">${ratings[status.index]}</td>
 				<td align="center">${attendance[status.index]}</td>
@@ -45,4 +45,5 @@
 		</tbody>
 	</table>
 </body>
+
 </html>

@@ -59,14 +59,14 @@ public class LecturerViewCourseController {
 		return mav;
 	}*/
 
-/*	@RequestMapping(value = "/enrollist/{mid}", method = RequestMethod.GET)
+	@RequestMapping(value = "/enrollist/{mid}", method = RequestMethod.GET)
 	public ModelAndView findCourseByModuleId(@PathVariable String mid) {
 		ArrayList<Studentcourse> mlist = lectservice.findCourseByModuleId(mid);
 		ModelAndView mav = new ModelAndView("ViewEnrolment");
 		mav.addObject("modules", mlist);
 		return mav;
 	}
-	*/
+	
 /*	@RequestMapping(value = "/enrollist/{lid}", method = RequestMethod.GET)
 	public ModelAndView findModulesByLecturerId(@PathVariable String lid) {
 		ArrayList<Studentcourse> mlist = lectservice.findModulesByLecturerId(lid);
@@ -75,7 +75,7 @@ public class LecturerViewCourseController {
 	return mav;
 	}*/
 	
-	@RequestMapping(value = "/enrollist", method = RequestMethod.GET)
+/*	@RequestMapping(value = "/enrollist", method = RequestMethod.GET)
 	public ModelAndView findModuleByLectId(HttpSession session) {
 		String lid = ((UserSession)session.getAttribute("USERSESSION")).getUser().getUserID();
 		ArrayList<Module> mlist = lectservice.findCurentModuleByLectId(lid);
@@ -93,7 +93,7 @@ public class LecturerViewCourseController {
 		mav.addObject("courses", scourse);
 			
 		return mav;
-	}
+	}*/
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String home() {
