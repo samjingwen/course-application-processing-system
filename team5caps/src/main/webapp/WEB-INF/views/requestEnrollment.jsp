@@ -11,6 +11,7 @@
 
 </head>
 <body>
+	<div class="container">
 	<h1>THIS IS REQUEST ENROLLMENT</h1>
 	<div>
 		<form:form modelAttribute="request" method="POST" cssClass="maingrid"
@@ -45,6 +46,7 @@
 				</table>
 			</div>
 		</form:form>
+	</div>
 	</div>
 </body>
 </html>

@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="container">
 	<form:form modelAttribute="request" method="POST" action="${pageContext.request.contextPath}/sjw/confirm/${newRequest.getModuleID()}">
 		<table>
 		<tr>
@@ -48,5 +49,6 @@
 			</tr>
 		</table>
 	</form:form>
+	</div>
 </body>
 </html>

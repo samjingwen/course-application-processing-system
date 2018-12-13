@@ -22,6 +22,7 @@
 <title>Current Modules</title>
 </head>
 <body>
+	<div class="container">
 	<form:form method="GET" modelAttribute="curr"
 		action="${pageContext.request.contextPath}/studentenroll/curr">
 	<div name="currm">
@@ -58,6 +59,7 @@
 		</table>
 	</div>
 	</form:form>
+	</div>
 </body>
 
 </html>

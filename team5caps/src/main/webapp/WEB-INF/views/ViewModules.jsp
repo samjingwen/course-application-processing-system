@@ -22,6 +22,7 @@
 </head>
 
 <body>
+	<div class="container">
 	<table id="ModuleTaught" class="table table-stripeds">
 	<thead>
 		<tr>
@@ -44,6 +45,7 @@
 		</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </body>
 
 </html>

@@ -9,7 +9,7 @@
 	type="text/css" />
 </head>
 <body>
-
+	<div class="container">
 <form:form method="POST" modelAttribute="student"
 	action="${pageContext.request.contextPath}/student/edit/${student.studentID}">
 		<center>
@@ -53,5 +53,6 @@
 		</center>
 	
 	</form:form>
+	</div>
 </body>
 </html>

@@ -5,6 +5,7 @@
 <head>
 
 </head>
+	<div class="container">
 <div class="containerhome" align="center">
 <!-- 	<h1>Home page</h1> -->
  	<section >
@@ -18,6 +19,7 @@
 		<h4><a href="/team5caps/home/login">LOG IN ></a> </h4><br />
 	</div>
 	</section>
+</div>
 </div>
 
 </html>

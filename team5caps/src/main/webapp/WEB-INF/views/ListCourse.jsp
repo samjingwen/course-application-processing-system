@@ -20,6 +20,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="container">
 	<h1>
 		<b>Course List</b>
 	</h1>
@@ -64,5 +65,6 @@
 			</tbody>
 		</table>
 	</form:form>
+	</div>
 </body>
 </html>

@@ -8,6 +8,7 @@
 	type="text/css" />
 </head>
 <body>
+	<div class="container">
 <h1><center><u>ADD NEW LECTURER</u></center></h1>
 <form:form method="POST" modelAttribute="lecturer"
 	action="${pageContext.request.contextPath}/lecturer/create">
@@ -57,5 +58,6 @@
 		</center>
 	
 	</form:form>
+	</div>
 </body>
 </html>

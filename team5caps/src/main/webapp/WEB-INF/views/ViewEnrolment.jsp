@@ -28,6 +28,7 @@
      <option>${module.moduleID}</option>
     </c:forEach>
 </select> --%>
+	<div class="container">
 	<table id="Enrolment" class="table table-stripeds">
 		<thead>
 			<tr>
@@ -49,5 +50,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </body>
 </html>

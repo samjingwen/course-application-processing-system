@@ -20,6 +20,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="container">
 	<h1>Lecturer List</h1>
 		<a href="${pageContext.request.contextPath}/lecturer/create">Add LECTURER</a>
 	<table id="example" class="display">
@@ -55,5 +56,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </body>
 </html>

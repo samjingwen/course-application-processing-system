@@ -11,6 +11,7 @@
 	href="${ss2}" />
 </head>
 <body>
+	<div class="container">
 <table>
 <tr>
 <th>#</th>
@@ -26,5 +27,6 @@
 </c:forEach>
 <tr ><td colspan="3" >GPA: ${gpa}</td></tr>
 </table>
+</div>
 </body>
 </html>

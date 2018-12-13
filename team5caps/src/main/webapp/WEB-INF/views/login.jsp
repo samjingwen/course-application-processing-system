@@ -12,6 +12,7 @@
 </head>
 <body>
 <div>
+	<div class="container">
 <form:form modelAttribute="user" method="POST" cssClass="maingrid"
 	action="${pageContext.request.contextPath}/home/authenticate">
 	<div align="center">
@@ -39,6 +40,7 @@
 	</table>
 	</div>
 </form:form>
+</div>
 </div>
 </body>
 </html>

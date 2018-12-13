@@ -20,6 +20,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="container">
 	<h1>Student List</h1>
 	<table id="example" class="display">
 
@@ -49,5 +50,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </body>
 </html>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import sg.iss.team5.model.Coursedetail;
@@ -46,8 +47,9 @@ public class SjwController {
 		return studentService.findAllModule();
 	}
 
+	@ResponseBody
 	@RequestMapping(value = { "/sjw/home" }, method = RequestMethod.GET)
-	public ModelAndView showTesting() {
+	public String showTesting() {
 		ArrayList<Coursedetail> cdList = new ArrayList<Coursedetail>();
 		cdList = studentService.findAllCoursedetail();
 		for (Coursedetail cd : cdList) {
@@ -60,7 +62,7 @@ public class SjwController {
 		ArrayList<String> mList = lecturerService.getAllModuleID();
 		
 		mv.addObject("modules", mList);
-		return mv;
+		return "Error: Redirection method to be implemented";
 	}
 
 	@RequestMapping(value = { "/sjw/request" }, method = RequestMethod.GET)

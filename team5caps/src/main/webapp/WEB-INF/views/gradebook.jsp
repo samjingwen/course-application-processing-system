@@ -8,6 +8,7 @@
 <link rel="STYLESHEET" type="text/css" href="${ss2}" />
 </head>
 <body>
+	<div class="container">
 	<form:form modelAttribute="module" method="POST"
 		action="${pageContext.request.contextPath}/grade/gradebook/gradeconfirm">
 		<form:button type="submit" name="submit" value="s">SUBMIT</form:button>
@@ -49,5 +50,6 @@
 
 		</table>
 	</form:form>
+	</div>
 </body>
 </html>

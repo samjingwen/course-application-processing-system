@@ -9,6 +9,7 @@
 <title>Request New Student</title>
 </head>
 <body>
+	<div class="container">
 <form:form method="POST" modelAttribute="student"
 	action="${pageContext.request.contextPath}/student/create.html">
 		<center>
@@ -75,5 +76,6 @@
 		</center>
 	
 	</form:form>
+	</div>
 </body>
 </html>

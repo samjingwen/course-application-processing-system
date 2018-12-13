@@ -8,6 +8,7 @@
 	type="text/css" />
 </head>
 <body>
+	<div class="container">
 <h1>THIS IS NEW STUDENT PAGE</h1>
 <form:form method="POST" modelAttribute="newUser"
 	action="${pageContext.request.contextPath}/lynn/newstudent">
@@ -47,5 +48,6 @@
 		</center>
 	
 	</form:form>
+	</div>
 </body>
 </html>

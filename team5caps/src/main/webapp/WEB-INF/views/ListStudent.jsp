@@ -19,7 +19,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
+
 <body>
+	<div class="container">
 	<h1>Student List</h1>
 	<%-- <form:form modelAttribute="user" method="POST" cssClass="maingrid"
 	action="${pageContext.request.contextPath}/student/create"> --%>
@@ -58,5 +60,6 @@
 		</tbody>
 	</table>
 	<%-- </form:form> --%>
+	</div>
 </body>
 </html>
