@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import sg.iss.team5.model.Module;
+import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
 
 public interface LecturerService {
@@ -33,4 +34,10 @@ public interface LecturerService {
 	Module updateModule(Module module);
 	
 	ArrayList<Module> findPastModuleByLectId(String lid);
+	
+	ArrayList<String> getAllModuleID();
+	
+	Student findStudentByStudentID(String sid);
+	
+	Studentcourse findStudentcourseByPK(String sid, String mid);
 }

@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form modelAttribute="module" method="POST" action="${pageContext.request.contextPath}/sjw/confirm/${newRequest.getModuleID()}">
+	<form:form modelAttribute="request" method="POST" action="${pageContext.request.contextPath}/sjw/confirm/${newRequest.getModuleID()}">
 		<table>
 			<tr>
 				<td>Module ID :</td>

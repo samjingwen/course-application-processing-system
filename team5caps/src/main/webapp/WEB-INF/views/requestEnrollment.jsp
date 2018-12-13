@@ -11,30 +11,40 @@
 
 </head>
 <body>
-<h1>THIS IS REQUEST ENROLLMENT</h1>
-<div>
-<form:form modelAttribute="module" method="POST" cssClass="maingrid"
-	action="${pageContext.request.contextPath}/sjw/request">
+	<h1>THIS IS REQUEST ENROLLMENT</h1>
 	<div>
-	<table>
-		<tr>
-			<td>Module ID : </td>
-			<td><form:input path="moduleID" size="40" /></td>
-		</tr>
-			
-		
-		<tr>
-			
-			<td><form:button name="submit" type="submit" value="s">
+		<form:form modelAttribute="request" method="POST" cssClass="maingrid"
+			action="${pageContext.request.contextPath}/sjw/request">
+			<div>
+				<table>
+					<tr>
+						<td>Module ID :</td>
+						<td>
+							<form:select name="mList" path="moduleID" >
+								<c:forEach items="${modules}" var="mid">
+									<option value="${mid}"><c:out value="${mid}" /></option>
+								</c:forEach>
+							</form:select>
+						</td>
+					</tr>
+					<tr>
+						<td>Student ID:</td>
+						<td><form:input path="studentID" size="40" /></td>
+					</tr>
+
+
+					<tr>
+
+						<td><form:button name="submit" type="submit" value="s">
 						Submit
 					</form:button></td>
-			<td><form:button name="clear" type="reset" value="r">
+						<td><form:button name="clear" type="reset" value="r">
 						Clear
 					</form:button></td>
-		</tr>
-	</table>
+					</tr>
+				</table>
+			</div>
+		</form:form>
 	</div>
-</form:form>
-</div>
 </body>
 </html>

@@ -59,5 +59,13 @@
 			</c:forEach>
 		</tbody>
 	</table>
+
+
+	<select name="mList">
+		<c:forEach items="${modules}" var="mid">
+			<option value="${mid}"><c:out value="${mid}" /></option>
+		</c:forEach>
+	</select>
+
 </body>
 </html>

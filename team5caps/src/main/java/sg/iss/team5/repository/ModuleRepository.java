@@ -36,4 +36,7 @@ public interface ModuleRepository extends JpaRepository<Module, String> {
 	ArrayList<Module> findPastModuleByLectId(@Param("lid") String lid);
 	
 	Module findByModuleID(String mid);
+	
+	@Query(value = "select moduleid from modules", nativeQuery = true)
+	ArrayList<String> getAllModuleID();
 }
