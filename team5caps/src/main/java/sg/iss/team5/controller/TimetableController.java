@@ -29,35 +29,46 @@ public class TimetableController {
 	@RequestMapping(value = "/Timetable")
 	@Transactional
 	public ModelAndView studentTimetable(HttpSession session) {
-		 ModelAndView mav = new ModelAndView(" ");	
-			String id = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
+		     ModelAndView mav = new ModelAndView(" ");	
+		     //get user id
+		     
+			 String id = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 				mav = new ModelAndView("Timetable");
+				//define module in different time
+				
 				TreeMap<Integer, String> morcourse=new TreeMap<>();
 				TreeMap<Integer, String> aftcourse=new TreeMap<>();
 				TreeMap<Integer, String> evecourse=new TreeMap<>();
-				 ArrayList<sg.iss.team5.model.Module> allcourse=new ArrayList<>();
+				 ArrayList<sg.iss.team5.model.Module> allModule=new ArrayList<>();
+				 //get the first char of user
+				 
 				 String firstLetter = String.valueOf(id.charAt(0));
-				 ArrayList<sg.iss.team5.model.Module> sm=new ArrayList<>();
-				 Date date=new Date();
-				 int year = date.getYear();
+				 ArrayList<sg.iss.team5.model.Module> thisYearModule=new ArrayList<>();
 				 //judge id is student id or lecturer id 
+				 
 				 if(firstLetter.equalsIgnoreCase("S"))
 				 {
-					 allcourse=sService.findModuleByStudentId(id);
+					 allModule=sService.findModuleByStudentId(id);
 				 }
 				 if(firstLetter=="L")
 				 {
-					 allcourse=lService.findModuleByLecturerId(id);
+					 allModule=lService.findModuleByLecturerId(id);
 				 }
-				 for (Module module : allcourse) {
+				 //get current year
+				 
+				 Date date=new Date();
+				 int year = date.getYear();
+				 //get modulelist in this year
+				 
+				 for (Module module : allModule) {
 					if (module.getAcademicYear().getYear()==year) {
-						sm.add(module);			
+						thisYearModule.add(module);			
 					}
 				}
 				 
 				 //divide all the courses into 3 parts
 				 
-				 for (sg.iss.team5.model.Module module : sm) {
+				 for (sg.iss.team5.model.Module module : thisYearModule) {
 					if (module.getTimeslot()==1)
 					{
 						morcourse.put(module.getDayofWeek(), module.getCoursedetail().getCourseName()+"("+module.getVenue()+")");
