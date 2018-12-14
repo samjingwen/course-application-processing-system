@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 <script
@@ -20,6 +23,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="container">
 	<h1>
 		<b>Course List</b>
 	</h1>
@@ -64,5 +68,6 @@
 			</tbody>
 		</table>
 	</form:form>
+	</div>
 </body>
 </html>

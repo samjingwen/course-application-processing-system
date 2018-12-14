@@ -23,17 +23,16 @@
 						<c:choose>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Administrator' }">
-								<li><a href="#">Admin Btn1</a></li>
-								<li><a href="#">Admin Btn2</a></li>
-								<li><a href="#">Admin Btn3</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/homepage">Dash board</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/manage/courses">Manage Courses</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/manage/approval">Manage Request Approval</a></li>
 							</c:when>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Lecturer' }">
 								<li><a
-									href="${pageContext.request.contextPath}/lecturer/request">Lect
-										Btn1</a></li>
-								<li><a href="#">Lect Btn2</a></li>
-								<li><a href="#">Lect Btn3</a></li>
+									href="${pageContext.request.contextPath}/lecturer/request">Request Enrollment</a></li>
+								<li><a href="${pageContext.request.contextPath}/lecturer/courselist">View Course History</a></li>
+								<li><a href="${pageContext.request.contextPath}/grade/gradebook">Grade</a></li>
 							</c:when>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Student' }">

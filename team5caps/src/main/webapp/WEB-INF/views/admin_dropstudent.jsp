@@ -9,7 +9,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>List of all courses</title>
-<script src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -44,7 +44,7 @@
 		</form:form>
 		
 		<form:form method="GET" modelAttribute="cancel"
-			action="${pageContext.request.contextPath}admin/sendHtmlEmailReminder">
+			action="javascript:history.back()">
 			<input type="submit" name="back" value="Cancel" class="button" />
 		</form:form>
 		

@@ -23,7 +23,7 @@
 </head>
 
 <body>
-
+	<div class="container">
 	<form:form method="POST" modelAttribute="enroll"
 		action="${pageContext.request.contextPath}/studentenroll/enrollin">
 		<div name="availm">
@@ -65,6 +65,7 @@
 
 		<input type="submit" name="enroll" value="Enroll" class="button" />
 	</form:form>
+	</div>
 </body>
 
 </html>

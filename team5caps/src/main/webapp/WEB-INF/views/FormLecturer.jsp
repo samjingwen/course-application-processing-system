@@ -6,8 +6,12 @@
 <head>
 <link href="<c:url value='/css/style.css'/>" rel="stylesheet"
 	type="text/css" />
+	<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 </head>
 <body>
+	<div class="container">
 <h1><center><u>ADD NEW LECTURER</u></center></h1>
 <form:form method="POST" modelAttribute="lecturer"
 	action="${pageContext.request.contextPath}/lecturer/create">
@@ -57,5 +61,6 @@
 		</center>
 	
 	</form:form>
+	</div>
 </body>
 </html>

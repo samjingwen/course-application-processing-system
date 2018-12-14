@@ -4,9 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
+<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 </head>
 <body>
+	<div class="container">
 <h1><center><u>ADD NEW STUDENT</u></center></h1>
 <form:form method="POST" modelAttribute="student"
 	action="${pageContext.request.contextPath}/student/create">
@@ -57,5 +60,6 @@
 		</center>
 	
 	</form:form>
+	</div>
 </body>
 </html>

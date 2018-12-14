@@ -5,10 +5,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
+<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Request New Student</title>
 </head>
 <body>
+	<div class="container">
 <form:form method="POST" modelAttribute="student"
 	action="${pageContext.request.contextPath}/student/create.html">
 		<center>
@@ -75,5 +79,6 @@
 		</center>
 	
 	</form:form>
+	</div>
 </body>
 </html>

@@ -4,10 +4,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Course Grade</title>
-<c:url value="/css/style.css" var="ss2" />
+<c:url value="css/style.css" var="ss2" />
 <link rel="STYLESHEET" type="text/css" href="${ss2}" />
+<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 </head>
 <body>
+	<div class="container">
 	<form:form modelAttribute="module" method="POST"
 		action="${pageContext.request.contextPath}/grade/gradebook/gradeconfirm">
 		<form:button type="submit" name="submit" value="s">SUBMIT</form:button>
@@ -49,5 +53,6 @@
 
 		</table>
 	</form:form>
+	</div>
 </body>
 </html>

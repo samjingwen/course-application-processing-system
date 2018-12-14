@@ -9,7 +9,6 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>List of all courses</title>
-<script src="webjars/jquery/3.3.1-1/jquery.min.js"></script>
 <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -30,8 +29,9 @@
 </head>
 <body>
 
-	<h1>Request for modules approval</h1>
+
 	<div class="container">
+		<h1>Request for modules approval</h1>
 		<table id="pagination" class="table table-striped">
 			<caption>List of students</caption>
 			<thead>

@@ -4,10 +4,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 <link href="<c:url value='/css/bootstrap.css'/>" rel="stylesheet"
 	type="text/css" />
 </head>
 <body>
+	<div class="container">
 <h1>THIS IS NEW STUDENT PAGE</h1>
 <form:form method="POST" modelAttribute="newUser"
 	action="${pageContext.request.contextPath}/lynn/newstudent">
@@ -47,5 +51,6 @@
 		</center>
 	
 	</form:form>
+	</div>
 </body>
 </html>

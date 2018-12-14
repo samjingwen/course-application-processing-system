@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import sg.iss.team5.caps.SecurityConfigurations;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.service.LecturerService;
@@ -39,6 +40,10 @@ public class LecturerGradeCourseController {
 
 	@RequestMapping(value = "/gradebook", method = RequestMethod.GET)
 	public ModelAndView listAllStudentcourse(HttpSession session) {
+		// Security
+		if (!SecurityConfigurations.CheckLectAuth(session))
+			return new ModelAndView("redirect:/home/login");
+		// Security
 		ModelAndView mav = new ModelAndView("gradebook6");
 		String lid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		ArrayList<Module> sm = new ArrayList<Module>();

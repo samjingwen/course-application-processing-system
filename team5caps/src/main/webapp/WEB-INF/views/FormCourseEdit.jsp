@@ -7,9 +7,12 @@
 
 <link href="<c:url value='/styles/style.css'/>" rel="stylesheet"
 	type="text/css" />
+	<script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css"
+	rel="stylesheet">
 </head>
 <body>
-
+	<div class="container">
 <form:form method="POST" modelAttribute="course"
 	action="${pageContext.request.contextPath}/course/edit/${course.courseID}">
 		<center>
@@ -50,5 +53,6 @@
 		</center>
 	
 	</form:form>
+	</div>
 </body>
 </html>

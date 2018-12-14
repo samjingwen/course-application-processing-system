@@ -54,6 +54,11 @@ public class CommonController {
 		model.addAttribute("user", new User());
 		return "login";
 	}
+	
+	@RequestMapping(value = "/404", method = RequestMethod.GET)
+	public String errorRedirect() {
+		return "404";
+	}
 
 	@RequestMapping(value = "/home/authenticate", method = RequestMethod.POST)
 	public ModelAndView authenticate(@ModelAttribute User user, HttpSession session, BindingResult result) {
