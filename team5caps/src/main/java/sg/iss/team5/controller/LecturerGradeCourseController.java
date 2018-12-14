@@ -94,7 +94,7 @@ public class LecturerGradeCourseController {
 
 	@RequestMapping(value = "/gradebook/gradeconfirm", method = RequestMethod.POST)
 	public ModelAndView showGradeStudent(@ModelAttribute("module") Module module, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("testing");
+		ModelAndView mav = new ModelAndView("gradeconfirm");
 		String mid = module.getModuleID();
 		module = sService.findModulebyID(mid);
 		Map<String, String[]> parameters = request.getParameterMap();
