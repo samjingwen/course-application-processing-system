@@ -48,4 +48,8 @@ public interface ModuleRepository extends JpaRepository<Module, String> {
 
 	@Query(value = "select * from modules m where m.moduleid = :mid", nativeQuery = true)
 	Module findModuleById(@Param("mid") String mid);
+	
+	//ChartData
+	@Query(value = "SELECT distinct courseid FROM modules",nativeQuery=true)
+	ArrayList<String> findAvailableModuleID();
 }

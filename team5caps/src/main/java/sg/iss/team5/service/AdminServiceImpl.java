@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
+import net.bytebuddy.asm.Advice.Return;
 import sg.iss.team5.model.ChartData;
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Lecturer;
@@ -125,7 +126,10 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	public Integer getEnrolledCapacity(String courseId) {
-		return coursedetailRepository.getCurrentEnrolledCapacity(courseId);
+		System.out.println(courseId);
+		ArrayList<Object> count = coursedetailRepository.getCurrentEnrolledCapacity(courseId);
+		System.out.println(count.size());
+		return count.size();
 	}
 
 	public ArrayList<Studentcourse> findCourseByCourseId(String cid) {
@@ -178,6 +182,18 @@ public class AdminServiceImpl implements AdminService {
 	
 	public void save(Studentcourse sc) {
 		studentcourseRepository.save(sc);
+	}
+	
+	//for chart data
+	public ArrayList<String> findAvailableModuleID(){
+		return moduleRepository.findAvailableModuleID();
+	}
+	public int getCountStudentByCourseID(String cid) {
+		System.out.println(cid);
+		ArrayList<Studentcourse> count = studentcourseRepository.findByModuleIDLike(cid);
+		System.out.println(count.size());
+		int size = count.size();
+		return size;
 	}
 	
 }

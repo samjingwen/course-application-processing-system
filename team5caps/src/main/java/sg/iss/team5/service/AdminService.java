@@ -65,4 +65,8 @@ public interface AdminService {
 	ArrayList<Studentcourse> findByEnrollStatus(String status);
 	
 	void save(Studentcourse sc);
+	
+	ArrayList<String> findAvailableModuleID();
+	
+	int getCountStudentByCourseID(String cid);
 }

@@ -22,6 +22,4 @@ public interface AdminLecturer {
 	Lecturer createLecturer(Lecturer l);
 
 	Lecturer createLecturer(Lecturer student, User user);
-
-	
 }
