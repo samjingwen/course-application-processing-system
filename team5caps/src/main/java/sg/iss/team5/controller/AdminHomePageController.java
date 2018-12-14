@@ -36,9 +36,10 @@ public class AdminHomePageController {
 
 	@RequestMapping(value = "/homepage")
 	public ModelAndView listStudentsNotEnrolled(HttpSession session) {
+		//Security
 		if (!SecurityConfigurations.CheckAdminAuth(session))
 			return new ModelAndView("redirect:/home/login");
-
+		//Security
 		ArrayList<Student> studentNotEnrolledList = adminService.findNotEnrolled();
 		ModelAndView mav = new ModelAndView("admin_homepage");
 		

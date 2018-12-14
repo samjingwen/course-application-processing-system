@@ -28,8 +28,10 @@ public class AdminManageCourseController {
 
 	@RequestMapping(value = { "/manage/courses" }, method = RequestMethod.GET)
 	public ModelAndView showTesting(HttpSession session) {
+		//Security
 		if (!SecurityConfigurations.CheckAdminAuth(session))
 			return new ModelAndView("redirect:/home/login");
+		//Security
 		ArrayList<Coursedetail> courselist = new ArrayList<Coursedetail>();
 		courselist = adminCourse.findAllCoursedetails();
 		for (Coursedetail course : courselist) {
@@ -43,8 +45,10 @@ public class AdminManageCourseController {
 
 	@RequestMapping(value = "/courses/create", method = RequestMethod.GET)
 	public ModelAndView newCoursepage(HttpSession session) {
+		//Security
 		if (!SecurityConfigurations.CheckAdminAuth(session))
 			return new ModelAndView("redirect:/home/login");
+		//Security
 		ModelAndView mav = new ModelAndView("FormCourse", "course", new Coursedetail());
 		return mav;
 	}
@@ -52,16 +56,13 @@ public class AdminManageCourseController {
 	@RequestMapping(value = "/courses/create", method = RequestMethod.POST)
 	public ModelAndView createNewCourse(@ModelAttribute @Valid Coursedetail course, BindingResult result, HttpSession session,
 			final RedirectAttributes redirectAttributes) {
+		//Security
 		if (!SecurityConfigurations.CheckAdminAuth(session))
 			return new ModelAndView("redirect:/home/login");
+		//Security
 		if (result.hasErrors())
 			return new ModelAndView("FormCourse");
-		// course.getUser().setUserID(course.getCourseID());
-		/*
-		 * course.getUser().setPassword("Password");
-		 * course.getUser().setAccessLevel("Course");
-		 * adminCourse.createCoursedetail(course, course.getUser());
-		 */
+
 		adminCourse.updateCoursedetail(course);
 		ModelAndView mav = new ModelAndView("redirect:/admin/manage/courses");
 		return mav;
@@ -70,8 +71,10 @@ public class AdminManageCourseController {
 
 	@RequestMapping(value = "courses/edit/{courseID}", method = RequestMethod.GET)
 	public ModelAndView editCoursePage(@PathVariable String courseID, HttpSession session) {
+		//Security
 		if (!SecurityConfigurations.CheckAdminAuth(session))
 			return new ModelAndView("redirect:/home/login");
+		//Security
 		ModelAndView mav = new ModelAndView("FormCourseEdit");
 		mav.addObject("course", adminCourse.findCoursedetail(courseID));
 		return mav;
@@ -80,9 +83,10 @@ public class AdminManageCourseController {
 	@RequestMapping(value = "courses/edit/{courseID}", method = RequestMethod.POST)
 	public ModelAndView editCourse(@ModelAttribute @Valid Coursedetail course, BindingResult result,
 			@PathVariable String courseID, HttpSession session, final RedirectAttributes redirectAttributes) {
+		//Security
 		if (!SecurityConfigurations.CheckAdminAuth(session))
 			return new ModelAndView("redirect:/home/login");
-		System.out.println("course" + course.toString());
+		//Security
 		if (result.hasErrors())
 			return new ModelAndView("FormCourseEdit");
 		course.setCredits(adminCourse.findCoursedetailById(course.getCourseID()).getCredits());
@@ -93,45 +97,3 @@ public class AdminManageCourseController {
 		return mav;
 	}
 }
-
-//	// create new form
-//	@RequestMapping(value = "/create", method = RequestMethod.GET)
-//	public ModelAndView newCoursePage() {
-//		ModelAndView mav = new ModelAndView("FormCourse", "course", new Course());
-//		return mav;
-//	}
-//
-//	@RequestMapping(value = "/create", method = RequestMethod.POST)
-//	public ModelAndView createNewCourse(@ModelAttribute @Valid Course course, BindingResult result,
-//			final RedirectAttributes redirectAttributes) {
-//		if (result.hasErrors())
-//			return new ModelAndView("FormCourse");
-//		ModelAndView mav = new ModelAndView();
-//
-//		admincourse.createCourse(course);
-//		// String message = "New course " + course.getCourseID() + " was successfully
-//		// created.";
-//		mav.setViewName("redirect:/lynn/home");
-//		return mav;
-//	}
-//
-//	// edit
-//	@RequestMapping(value = "/edit/{cid}", method = RequestMethod.GET)
-//	public ModelAndView editStudentPage(@PathVariable String cid) {
-//		ModelAndView mav = new ModelAndView("FormCourse");
-//		mav.addObject("course", admincourse.findCourse(cid));
-//		return mav;
-//	}
-//
-//	@RequestMapping(value = "/edit/{cid}", method = RequestMethod.POST)
-//	public ModelAndView editStudent(@ModelAttribute @Valid Course student, @PathVariable String cid,
-//			BindingResult result, final RedirectAttributes redirectAttributes) {
-//		System.out.println("course" + course.toString());
-//		if (result.hasErrors())
-//			return new ModelAndView("FormCourse");
-//		admincourse.updateCourse(course);
-//		ModelAndView mav = new ModelAndView("redirect:/lynn/home");
-//		String message = "Course" + student.getCourseID() + " was successfully updated.";
-//		redirectAttributes.addFlashAttribute("message", message);
-//		return mav;
-//	}

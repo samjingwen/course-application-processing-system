@@ -52,19 +52,19 @@ public class LecturerGradeCourseController {
 		HashMap<String, Module> cList = new HashMap<>();
 		ArrayList<Module> allmodule = new ArrayList<Module>();
 		thisyearmodule = lService.findModuleByLecturerId(lid);
-		//Get current Year
-		
-		 Date date=new Date();
-		 int year = date.getYear();
-		 //get current year module
-		 
-		 for (Module module : allmodule) {
-				if (module.getAcademicYear().getYear()==year) {
-					thisyearmodule.add(module);			
-				}
+		// Get current Year
+
+		Date date = new Date();
+		int year = date.getYear();
+		// get current year module
+
+		for (Module module : allmodule) {
+			if (module.getAcademicYear().getYear() == year) {
+				thisyearmodule.add(module);
 			}
-		 //get hashmap ,key is coursename ,value is module
-		 
+		}
+		// get hashmap ,key is coursename ,value is module
+
 		for (Module module : thisyearmodule) {
 			String eachcourse = module.getCoursedetail().getCourseName();
 			Module eachmodule = module;
@@ -76,12 +76,16 @@ public class LecturerGradeCourseController {
 
 	@RequestMapping(value = "/gradebook/exact", method = RequestMethod.POST)
 	public ModelAndView listAllStudent(@ModelAttribute("module") Module module, HttpSession session) {
+		// Security
+		if (!SecurityConfigurations.CheckLectAuth(session))
+			return new ModelAndView("redirect:/home/login");
+		// Security
+
 		// Get list of students from module(dropdownlist selected)
-		
 		ModelAndView mav = new ModelAndView("gradebook");
 		module = sService.findModulebyID(module.getModuleID());
-		
-		//module = sService.findModulebyID("0617H0007");
+
+		// module = sService.findModulebyID("0617H0007");
 		List<Studentcourse> scList = module.getStudentcourses();
 		// module = sService.findModulebyID("0117A0006");
 
@@ -93,7 +97,12 @@ public class LecturerGradeCourseController {
 	}
 
 	@RequestMapping(value = "/gradebook/gradeconfirm", method = RequestMethod.POST)
-	public ModelAndView showGradeStudent(@ModelAttribute("module") Module module, HttpServletRequest request) {
+	public ModelAndView showGradeStudent(@ModelAttribute("module") Module module, HttpServletRequest request, HttpSession session) {
+		// Security
+		if (!SecurityConfigurations.CheckLectAuth(session))
+			return new ModelAndView("redirect:/home/login");
+		// Security
+
 		ModelAndView mav = new ModelAndView("gradeSuccess");
 		String mid = module.getModuleID();
 		module = sService.findModulebyID(mid);
@@ -106,35 +115,12 @@ public class LecturerGradeCourseController {
 			if (arr[0] == null)
 				return new ModelAndView("gradeFail");
 			String grade = arr[0];
-			if (grade.equals("A") || grade.equals("B") || grade.equals("C")
-					|| grade.equals("D") || grade.equals("E") || grade.equals("F")) {
+			if (grade.equals("A") || grade.equals("B") || grade.equals("C") || grade.equals("D") || grade.equals("E")
+					|| grade.equals("F")) {
 				sc.setGrade(grade);
 				lService.updateStudentcourse(sc);
 			}
 		}
-		
-		
-//		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
-//			System.out.println(entry.getKey().toString() + "/" + entry.getValue().toString());
-//		}
-//
-//		String mid = module.getModuleID();
-//		module = sService.findModulebyID(mid);
-//		
-//		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
-//			if (entry.getValue()[0].equals("A") || entry.getValue()[0].equals("B") || entry.getValue()[0].equals("C")
-//					|| entry.getValue()[0].equals("D") || entry.getValue()[0].equals("E")) {
-//				Studentcourse sc = iter.next();
-//				sc.setGrade(entry.getValue()[0]);
-//				lService.updateStudentcourse(sc);
-//			}
-//
-//		}
-
-//		Studentcourse sc = lService.findStudentcourseByPK("S00006", "0117A0006");
-//		sc.setGrade(parameters.get("S00006")[0]);
-//		lService.updateStudentcourse(sc);
-//		System.out.println(sc.getModule().getModuleID());
 		return mav;
 	}
 
@@ -142,5 +128,4 @@ public class LecturerGradeCourseController {
 	public String home() {
 		return "index";
 	}
-
 }
