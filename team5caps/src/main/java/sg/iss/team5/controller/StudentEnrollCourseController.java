@@ -85,6 +85,7 @@ public class StudentEnrollCourseController {
 		ArrayList<Studentcourse> clist = new ArrayList<Studentcourse>();
 		ArrayList<Module> mlist = new ArrayList<Module>();
 		int check = 0;
+		String m="";
 		int curcount = stuservice.findSCbyStuandYear(sid).size();
 
 		// create list of already enrolled modules for current year
@@ -98,8 +99,7 @@ public class StudentEnrollCourseController {
 		for (String current : modid) {
 			if (enmlist.contains(stuservice.findModulebyID(current))) {
 				check = 0;
-/*				JOptionPane.showMessageDialog(null, "You have added modules with conflicting times!", "Conflicts",
-						JOptionPane.WARNING_MESSAGE);*/
+				m = "You have added modules with conflicting times!";
 			}
 
 			else if (mlist.size() < 1) {
@@ -111,8 +111,7 @@ public class StudentEnrollCourseController {
 
 			else if (mlist.contains(stuservice.findModulebyID(current))) {
 				check = 0;
-/*				JOptionPane.showMessageDialog(null, "You have added modules with conflicting times!", "Conflicts",
-						JOptionPane.WARNING_MESSAGE);*/
+				m = "You have added modules with conflicting times!";
 
 			}
 			// add module to list for enrollment
@@ -125,8 +124,7 @@ public class StudentEnrollCourseController {
 		// check if amount of modules added for the year exceeds 5
 		if ((mlist.size() > 5) || (mlist.size() > (5 - curcount))) {
 			check = 0;
-/*			JOptionPane.showMessageDialog(null, "You may only add up to 5 modules per year.", "Too many modules!",
-					JOptionPane.WARNING_MESSAGE);*/
+			m = "You may only add up to 5 modules per year!";
 		}
 
 		// enroll student in module
@@ -151,13 +149,12 @@ public class StudentEnrollCourseController {
 				sc.setId(new StudentcoursePK(sc.getModule().getModuleID(), sc.getStudent().getStudentID()));
 				stuservice.saveStudentCourse(sc);
 			}
-/*			JOptionPane.showMessageDialog(null, "Successfully enrolled in module(s)!");*/
-			System.out.println("Successfully enrolled in module(s)!");
+			m = "Successfully enrolled!";
 			ArrayList<FormattedSC> sclist = (ArrayList<FormattedSC>) stuservice
 					.getFormatSC(stuservice.findCourseByStudentId(sid));
 			ModelAndView mav = new ModelAndView("studentenrollment");
 			mav.addObject("sclist", sclist);
-
+			mav.addObject("message",m);
 			return mav;
 
 			// if any of the above fails, return to module selection page
@@ -167,7 +164,7 @@ public class StudentEnrollCourseController {
 					.getFormat(stuservice.findModuleNotEnrolled(sid, date));
 
 			ModelAndView mav = new ModelAndView("availablemods");
-
+			mav.addObject("message",m);
 			mav.addObject("formattedmodules", m2list);
 			return mav;
 		}
@@ -222,9 +219,10 @@ public class StudentEnrollCourseController {
 			scLect.get(i).setLecturerRating(Integer.parseInt(LRate[i]));
 			stuservice.saveStudentCourse(scLect.get(i));
 		}
-
+		String m = "Rating saved!";
 		ModelAndView mav = new ModelAndView("studentenrollment");
 		mav.addObject("sclist", dislist);
+		mav.addObject("message",m);
 		return mav;
 	}
 

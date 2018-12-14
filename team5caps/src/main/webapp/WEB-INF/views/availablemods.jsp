@@ -24,48 +24,51 @@
 
 <body>
 	<div class="container">
-	<form:form method="POST" modelAttribute="enroll"
-		action="${pageContext.request.contextPath}/studentenroll/enrollin">
-		<div name="availm">
-			<table id="AvailMods" class="display">
-				<caption>List of available modules:</caption>
-				<br>
-				<thead>
-					<tr>
-						<td><b>Academic Year</b></td>
-						<td><b>Module ID</b></td>
-						<td><b>Module Name</b></td>
-						<td><b>Lecturer</b></td>
-						<td><b>Day of Week</b></td>
-						<td><b>Time Slot</b></td>
-						<td><b>Venue</b></td>
-						<td><b>Enroll</b></td>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${formattedmodules}" var="formattedmodules"
-						varStatus="index">
-
+		<form:form method="POST" modelAttribute="enroll"
+			action="${pageContext.request.contextPath}/studentenroll/enrollin">
+			<div name="availm">
+				<b><c:if test="${not empty message}">
+					<c:out value="${message}" />
+				</c:if></b>
+				<table id="AvailMods" class="display">
+					<caption>List of available modules:</caption>
+					<br>
+					<thead>
 						<tr>
-							<td>${formattedmodules.getYear()}</td>
-							<td>${formattedmodules.moduleID}</td>
-							<td>${formattedmodules.coursedetail.courseName}</td>
-							<td>${formattedmodules.lecturer.user.firstName}
-								${formattedmodules.lecturer.user.lastName}</td>
-							<td>${formattedmodules.getDay()}</td>
-							<td>${formattedmodules.getTime()}</td>
-							<td>${formattedmodules.venue}</td>
-							<td align="center"><input type="checkbox" name="modid"
-								value="${formattedmodules.moduleID}"></td>
+							<td><b>Academic Year</b></td>
+							<td><b>Module ID</b></td>
+							<td><b>Module Name</b></td>
+							<td><b>Lecturer</b></td>
+							<td><b>Day of Week</b></td>
+							<td><b>Time Slot</b></td>
+							<td><b>Venue</b></td>
+							<td><b>Enroll</b></td>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			
-		</div>
+					</thead>
+					<tbody>
+						<c:forEach items="${formattedmodules}" var="formattedmodules"
+							varStatus="index">
 
-		<input type="submit" name="enroll" value="Enroll" class="button" />
-	</form:form>
+							<tr>
+								<td>${formattedmodules.getYear()}</td>
+								<td>${formattedmodules.moduleID}</td>
+								<td>${formattedmodules.coursedetail.courseName}</td>
+								<td>${formattedmodules.lecturer.user.firstName}
+									${formattedmodules.lecturer.user.lastName}</td>
+								<td>${formattedmodules.getDay()}</td>
+								<td>${formattedmodules.getTime()}</td>
+								<td>${formattedmodules.venue}</td>
+								<td align="center"><input type="checkbox" name="modid"
+									value="${formattedmodules.moduleID}"></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+
+			</div>
+
+			<input type="submit" name="enroll" value="Enroll" class="button" />
+		</form:form>
 	</div>
 </body>
 
