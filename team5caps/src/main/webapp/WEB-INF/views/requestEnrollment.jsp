@@ -20,7 +20,7 @@
 			<div>
 				<table>
 					<tr>
-						<td>Module ID :</td>
+						<td><a>Module ID : </a></td>
 						<td>
 							<form:select name="mList" path="moduleID">
 								<c:forEach items="${modules}" var="mid">
@@ -30,7 +30,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>Student ID:</td>
+						<td><a>Student ID: </a></td>
 						<td><form:input path="studentID" size="40" /></td>
 					</tr>
 

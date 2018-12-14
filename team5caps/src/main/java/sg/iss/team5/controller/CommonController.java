@@ -15,17 +15,9 @@ import sg.iss.team5.caps.SecurityConfigurations;
 import sg.iss.team5.model.User;
 import sg.iss.team5.service.UserService;
 
-
 @Controller
 public class CommonController {
 
-//	@InitBinder
-//    public void initBinder(WebDataBinder binder) {
-//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-//        sdf.setLenient(true);
-//        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-//    }
-	
 	@Autowired
 	private UserService uService;
 
@@ -33,34 +25,24 @@ public class CommonController {
 	public String showHome() {
 		return "index";
 	}
-	
+
 	@RequestMapping("/home/logout")
 	public String showHome(HttpSession session) {
 		session.setAttribute("USERSESSION", null);
 		return "index";
 	}
-	
+
 	@RequestMapping("/home/aboutus")
 	public String showAboutUs() {
 		return "aboutUs";
 	}
-	
-	
-
-//	@RequestMapping("/testing")
-//	public ModelAndView getTestData() {
-//		ModelAndView mv = new ModelAndView();
-//		mv.setViewName("testing");
-//		mv.getModel().put("data", "welcome hahaha");
-//		return mv;
-//	}
 
 	@RequestMapping(value = "/home/login", method = RequestMethod.GET)
 	public String showLogin(Model model) {
 		model.addAttribute("user", new User());
 		return "login";
 	}
-	
+
 	@RequestMapping(value = "/404", method = RequestMethod.GET)
 	public String errorRedirect() {
 		return "404";
@@ -78,9 +60,9 @@ public class CommonController {
 			// PUT CODE FOR SETTING SESSION ID
 			us.setSessionId(session.getId());
 			session.setAttribute("USERSESSION", us);
-			if (SecurityConfigurations.CheckAdminAuth(session)) 
+			if (SecurityConfigurations.CheckAdminAuth(session))
 				mav = new ModelAndView("redirect:/admin/homepage");
-			if (SecurityConfigurations.CheckLectAuth(session)) 
+			if (SecurityConfigurations.CheckLectAuth(session))
 				mav = new ModelAndView("redirect:/Timetable");
 			if (SecurityConfigurations.CheckStudAuth(session))
 				mav = new ModelAndView("redirect:/Timetable");

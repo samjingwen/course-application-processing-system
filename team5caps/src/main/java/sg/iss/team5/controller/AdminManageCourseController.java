@@ -1,8 +1,8 @@
 package sg.iss.team5.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import sg.iss.team5.model.Coursedetail;
-import sg.iss.team5.model.Student;
-import sg.iss.team5.service.AdminCourse;
 
+import sg.iss.team5.caps.SecurityConfigurations;
+import sg.iss.team5.model.Coursedetail;
+import sg.iss.team5.service.AdminCourse;;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -27,7 +27,9 @@ public class AdminManageCourseController {
 	private AdminCourse adminCourse;
 
 	@RequestMapping(value = { "/manage/courses" }, method = RequestMethod.GET)
-	public ModelAndView showTesting() {
+	public ModelAndView showTesting(HttpSession session) {
+		if (!SecurityConfigurations.CheckAdminAuth(session))
+			return new ModelAndView("redirect:/home/login");
 		ArrayList<Coursedetail> courselist = new ArrayList<Coursedetail>();
 		courselist = adminCourse.findAllCoursedetails();
 		for (Coursedetail course : courselist) {
@@ -38,38 +40,49 @@ public class AdminManageCourseController {
 		mv.addObject("cList", courselist);
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/courses/create", method = RequestMethod.GET)
-	public ModelAndView newCoursepage() {
+	public ModelAndView newCoursepage(HttpSession session) {
+		if (!SecurityConfigurations.CheckAdminAuth(session))
+			return new ModelAndView("redirect:/home/login");
 		ModelAndView mav = new ModelAndView("FormCourse", "course", new Coursedetail());
 		return mav;
 	}
+
 	@RequestMapping(value = "/courses/create", method = RequestMethod.POST)
-	public ModelAndView createNewCourse(@ModelAttribute @Valid Coursedetail course, BindingResult result,
+	public ModelAndView createNewCourse(@ModelAttribute @Valid Coursedetail course, BindingResult result, HttpSession session
 			final RedirectAttributes redirectAttributes) {
+		if (!SecurityConfigurations.CheckAdminAuth(session))
+			return new ModelAndView("redirect:/home/login");
 		if (result.hasErrors())
 			return new ModelAndView("FormCourse");
-		//course.getUser().setUserID(course.getCourseID());
-	/*	course.getUser().setPassword("Password");
-		course.getUser().setAccessLevel("Course");
-		adminCourse.createCoursedetail(course, course.getUser());*/
+		// course.getUser().setUserID(course.getCourseID());
+		/*
+		 * course.getUser().setPassword("Password");
+		 * course.getUser().setAccessLevel("Course");
+		 * adminCourse.createCoursedetail(course, course.getUser());
+		 */
 		adminCourse.updateCoursedetail(course);
 		ModelAndView mav = new ModelAndView("redirect:/admin/manage/courses");
 		return mav;
-	
+
 	}
-	
+
 	@RequestMapping(value = "courses/edit/{courseID}", method = RequestMethod.GET)
-	public ModelAndView editCoursePage(@PathVariable String courseID) {
+	public ModelAndView editCoursePage(@PathVariable String courseID, HttpSession session) {
+		if (!SecurityConfigurations.CheckAdminAuth(session))
+			return new ModelAndView("redirect:/home/login");
 		ModelAndView mav = new ModelAndView("FormCourseEdit");
 		mav.addObject("course", adminCourse.findCoursedetail(courseID));
 		return mav;
 	}
 
 	@RequestMapping(value = "courses/edit/{courseID}", method = RequestMethod.POST)
-	public ModelAndView editCourse(@ModelAttribute @Valid Coursedetail course, BindingResult result, @PathVariable String courseID,
-			 final RedirectAttributes redirectAttributes) {
-		System.out.println("course"+course.toString());
+	public ModelAndView editCourse(@ModelAttribute @Valid Coursedetail course, BindingResult result,
+			@PathVariable String courseID, HttpSession session, final RedirectAttributes redirectAttributes) {
+		if (!SecurityConfigurations.CheckAdminAuth(session))
+			return new ModelAndView("redirect:/home/login");
+		System.out.println("course" + course.toString());
 		if (result.hasErrors())
 			return new ModelAndView("FormCourseEdit");
 		course.setCredits(adminCourse.findCoursedetailById(course.getCourseID()).getCredits());
@@ -80,7 +93,6 @@ public class AdminManageCourseController {
 		return mav;
 	}
 }
-
 
 //	// create new form
 //	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -123,4 +135,3 @@ public class AdminManageCourseController {
 //		redirectAttributes.addFlashAttribute("message", message);
 //		return mav;
 //	}
-

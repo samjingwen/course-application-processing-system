@@ -1,8 +1,8 @@
 package sg.iss.team5.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -15,21 +15,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import sg.iss.team5.caps.SecurityConfigurations;
 import sg.iss.team5.model.Lecturer;
-import sg.iss.team5.model.Student;
 import sg.iss.team5.model.User;
 import sg.iss.team5.service.AdminLecturer;
 
 @Controller
 @Transactional
-@RequestMapping(value="/admin")
+@RequestMapping(value = "/admin")
 public class AdminManageLecController {
 
 	@Autowired
 	private AdminLecturer adminlecturer;
 
 	@RequestMapping(value = { "/manage/lecturer" }, method = RequestMethod.GET)
-	public ModelAndView showTesting() {
+	public ModelAndView showTesting(HttpSession session) {
+		if (!SecurityConfigurations.CheckAdminAuth(session))
+			return new ModelAndView("redirect:/home/login");
 		ArrayList<Lecturer> lecturerList = new ArrayList<Lecturer>();
 		lecturerList = adminlecturer.findAllLecturers();
 		for (Lecturer s : lecturerList) {
@@ -40,22 +43,27 @@ public class AdminManageLecController {
 		mv.addObject("lList", lecturerList);
 		return mv;
 	}
-	
-	@RequestMapping(value = { "lecturer/create"}, method = RequestMethod.GET)
-	public ModelAndView newCoursepage() {
-		String lid = adminlecturer.findAllLecturers().get(adminlecturer.findAllLecturers().size()-1).getLecturerID();
+
+	@RequestMapping(value = { "lecturer/create" }, method = RequestMethod.GET)
+	public ModelAndView newCoursepage(HttpSession session) {
+		if (!SecurityConfigurations.CheckAdminAuth(session))
+			return new ModelAndView("redirect:/home/login");
+		String lid = adminlecturer.findAllLecturers().get(adminlecturer.findAllLecturers().size() - 1).getLecturerID();
 		int num = Integer.parseInt(lid.substring(1, 6));
-		String id = "L"+String.format("%05d", num+1);
+		String id = "L" + String.format("%05d", num + 1);
 		ModelAndView mav = new ModelAndView("FormLecturer", "lecturer", new Lecturer());
 		mav.addObject("LID", id);
 		return mav;
 	}
-	@RequestMapping(value = { "lecturer/create"}, method = RequestMethod.POST)
-	public ModelAndView createNewLecturer(@ModelAttribute @Valid Lecturer lecturer, BindingResult result,
+
+	@RequestMapping(value = { "lecturer/create" }, method = RequestMethod.POST)
+	public ModelAndView createNewLecturer(@ModelAttribute @Valid Lecturer lecturer, BindingResult result, HttpSession session
 			final RedirectAttributes redirectAttributes) {
+		if (!SecurityConfigurations.CheckAdminAuth(session))
+			return new ModelAndView("redirect:/home/login");
 		if (result.hasErrors())
 			return new ModelAndView("FormLecturer");
-				
+
 		lecturer.getUser().setUserID(lecturer.getLecturerID());
 		lecturer.getUser().setPassword("Password");
 		lecturer.getUser().setAccessLevel("Lecturer");
@@ -63,8 +71,7 @@ public class AdminManageLecController {
 		ModelAndView mav = new ModelAndView("redirect:/admin/manage/lecturer");
 		return mav;
 	}
-	
-	
+
 	@RequestMapping(value = "lecturer/edit/{lecturerID}", method = RequestMethod.GET)
 	public ModelAndView editStudentPage(@PathVariable String lecturerID) {
 		ModelAndView mav = new ModelAndView("FormLecturerEdit");
@@ -73,15 +80,15 @@ public class AdminManageLecController {
 	}
 
 	@RequestMapping(value = "lecturer/edit/{lecturerID}", method = RequestMethod.POST)
-	public ModelAndView editLecturer(@ModelAttribute @Valid Lecturer lecturer, BindingResult result,  @PathVariable String lecturerID, 
-			final RedirectAttributes redirectAttributes) {
-		System.out.println("lecturer"+lecturer.toString());
+	public ModelAndView editLecturer(@ModelAttribute @Valid Lecturer lecturer, BindingResult result,
+			@PathVariable String lecturerID, final RedirectAttributes redirectAttributes) {
+		System.out.println("lecturer" + lecturer.toString());
 		if (result.hasErrors())
 			return new ModelAndView("FormLecturerEdit");
 		User user = lecturer.getUser();
 		user.setUserID(lecturer.getLecturerID());
 		user.setAccessLevel(adminlecturer.findLecturer(lecturer.getLecturerID()).getUser().getAccessLevel());
-		user.setPassword(adminlecturer.findLecturer(lecturer.getLecturerID()).getUser().getPassword());		
+		user.setPassword(adminlecturer.findLecturer(lecturer.getLecturerID()).getUser().getPassword());
 		adminlecturer.createLecturer(lecturer, user);
 		ModelAndView mav = new ModelAndView("redirect:/admin/manage/lecturer");
 		String message = "Lecturer" + lecturer.getLecturerID() + " was successfully updated.";
@@ -90,49 +97,40 @@ public class AdminManageLecController {
 	}
 }
 
-
-	//create lecturer
+// create lecturer
 //	@RequestMapping(value = "/lynn/lectnew", method = RequestMethod.GET)
 //	public ModelAndView createLecturer() {
 //		
 //	}
-	
-	
-	
-	/*@RequestMapping(value = "/leccreate", method = RequestMethod.POST)
-	public ModelAndView createNewStudent(@ModelAttribute @Valid Lecturer lecturer, BindingResult result,
-			final RedirectAttributes redirectAttributes) {
-		if (result.hasErrors())
-			return new ModelAndView("FormStudent");
-		ModelAndView mav = new ModelAndView();
 
-		adminlecturer.createLecturer(lecturer);
-		String message = "New Lecturer " + lecturer.getLecturerID() + " was successfully created.";
-		mav.setViewName("redirect:/lynn/home");
-		return mav;
-	}
-
-	// edit
-	@RequestMapping(value = "/edit/{lid}", method = RequestMethod.GET)
-	public ModelAndView editStudentPage(@PathVariable String lid) {
-		ModelAndView mav = new ModelAndView("FormLecture");
-		mav.addObject("lecturer", adminlecturer.findLecturer(lid));
-		return mav;
-	}
-
-	@RequestMapping(value = "/edit/{lid}", method = RequestMethod.POST)
-	public ModelAndView editStudent(@ModelAttribute @Valid Lecturer lecturer, @PathVariable String lid,
-			BindingResult result, final RedirectAttributes redirectAttributes) {
-		System.out.println("lecturer" + lecturer.toString());
-		if (result.hasErrors())
-			return new ModelAndView("FormLecture");
-		adminlecturer.updateLecturer(lecturer);
-		ModelAndView mav = new ModelAndView("redirect:/lynn/home");
-		String message = "Lecturer" + lecturer.getLecturerID() + " was successfully updated.";
-		redirectAttributes.addFlashAttribute("message", message);
-		return mav;
-	}
-*/
+/*
+ * @RequestMapping(value = "/leccreate", method = RequestMethod.POST) public
+ * ModelAndView createNewStudent(@ModelAttribute @Valid Lecturer lecturer,
+ * BindingResult result, final RedirectAttributes redirectAttributes) { if
+ * (result.hasErrors()) return new ModelAndView("FormStudent"); ModelAndView mav
+ * = new ModelAndView();
+ * 
+ * adminlecturer.createLecturer(lecturer); String message = "New Lecturer " +
+ * lecturer.getLecturerID() + " was successfully created.";
+ * mav.setViewName("redirect:/lynn/home"); return mav; }
+ * 
+ * // edit
+ * 
+ * @RequestMapping(value = "/edit/{lid}", method = RequestMethod.GET) public
+ * ModelAndView editStudentPage(@PathVariable String lid) { ModelAndView mav =
+ * new ModelAndView("FormLecture"); mav.addObject("lecturer",
+ * adminlecturer.findLecturer(lid)); return mav; }
+ * 
+ * @RequestMapping(value = "/edit/{lid}", method = RequestMethod.POST) public
+ * ModelAndView editStudent(@ModelAttribute @Valid Lecturer
+ * lecturer, @PathVariable String lid, BindingResult result, final
+ * RedirectAttributes redirectAttributes) { System.out.println("lecturer" +
+ * lecturer.toString()); if (result.hasErrors()) return new
+ * ModelAndView("FormLecture"); adminlecturer.updateLecturer(lecturer);
+ * ModelAndView mav = new ModelAndView("redirect:/lynn/home"); String message =
+ * "Lecturer" + lecturer.getLecturerID() + " was successfully updated.";
+ * redirectAttributes.addFlashAttribute("message", message); return mav; }
+ */
 //	@RequestMapping(value = "/student")
 //	@Controller
 //	public class StudentController {
@@ -199,4 +197,3 @@ public class AdminManageLecController {
 //		}
 //
 //	}
-
