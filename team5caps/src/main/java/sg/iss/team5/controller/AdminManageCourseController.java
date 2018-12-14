@@ -50,7 +50,7 @@ public class AdminManageCourseController {
 	}
 
 	@RequestMapping(value = "/courses/create", method = RequestMethod.POST)
-	public ModelAndView createNewCourse(@ModelAttribute @Valid Coursedetail course, BindingResult result, HttpSession session
+	public ModelAndView createNewCourse(@ModelAttribute @Valid Coursedetail course, BindingResult result, HttpSession session,
 			final RedirectAttributes redirectAttributes) {
 		if (!SecurityConfigurations.CheckAdminAuth(session))
 			return new ModelAndView("redirect:/home/login");

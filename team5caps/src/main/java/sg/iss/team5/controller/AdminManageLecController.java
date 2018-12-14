@@ -57,7 +57,7 @@ public class AdminManageLecController {
 	}
 
 	@RequestMapping(value = { "lecturer/create" }, method = RequestMethod.POST)
-	public ModelAndView createNewLecturer(@ModelAttribute @Valid Lecturer lecturer, BindingResult result, HttpSession session
+	public ModelAndView createNewLecturer(@ModelAttribute @Valid Lecturer lecturer, BindingResult result, HttpSession session,
 			final RedirectAttributes redirectAttributes) {
 		if (!SecurityConfigurations.CheckAdminAuth(session))
 			return new ModelAndView("redirect:/home/login");
