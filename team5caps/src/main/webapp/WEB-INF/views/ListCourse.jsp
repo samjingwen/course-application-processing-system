@@ -28,8 +28,8 @@
 		<b>Course List</b>
 	</h1>
 	<form:form modelAttribute="course" method="POST" cssClass="maingrid"
-		action="${pageContext.request.contextPath}/course/create">
-		<a href="${pageContext.request.contextPath}/course/create">ADD
+		action="${pageContext.request.contextPath}/admin/courses/create">
+		<a href="${pageContext.request.contextPath}/admin/courses/create">ADD
 			COURSE</a>
 
 		<table id="example" class="display">
@@ -60,7 +60,7 @@
 						<td>${course.getMaxVacancy()}</td>
 						<td>${course.getCredits()}</td>
 						<td align="center"><a
-							href="${pageContext.request.contextPath}/course/edit/${course.getCourseID()}">
+							href="${pageContext.request.contextPath}/admin/courses/edit/${course.getCourseID()}">
 								Edit </a></td>
 					</tr>
 				</c:forEach>

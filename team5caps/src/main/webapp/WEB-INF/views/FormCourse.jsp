@@ -14,7 +14,7 @@
 	<div class="container">
 <h1><center><u>ADD NEW COURSE</u></center></h1>
 <form:form method="POST" modelAttribute="course"
-	action="${pageContext.request.contextPath}/course/create.html">
+	action="${pageContext.request.contextPath}/admin/courses/create.html">
 		<center>
 			<table cellpadding=4 cellspacing=2 border=0>
 				<tr>
