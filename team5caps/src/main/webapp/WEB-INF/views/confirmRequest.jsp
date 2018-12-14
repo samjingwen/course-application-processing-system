@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="container">
-	<form:form modelAttribute="request" method="POST" action="${pageContext.request.contextPath}/sjw/confirm/${newRequest.getModuleID()}">
+	<form:form modelAttribute="request" method="POST" action="${pageContext.request.contextPath}/lecturer/confirm/${newRequest.getModuleID()}">
 		<table>
 		<tr>
 				<td>Student ID :</td>
