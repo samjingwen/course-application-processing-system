@@ -85,9 +85,7 @@ public class LecturerGradeCourseController {
 		ModelAndView mav = new ModelAndView("gradebook");
 		module = sService.findModulebyID(module.getModuleID());
 
-		// module = sService.findModulebyID("0617H0007");
 		List<Studentcourse> scList = module.getStudentcourses();
-		// module = sService.findModulebyID("0117A0006");
 
 		// get the student list of exact course
 		mav.addObject("scList", scList);
