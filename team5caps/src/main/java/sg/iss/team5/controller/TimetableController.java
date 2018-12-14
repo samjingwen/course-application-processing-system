@@ -1,11 +1,10 @@
 package sg.iss.team5.controller;
 
+
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map.Entry;
+
+import java.util.Date;
+
 import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import sg.iss.team5.model.Module;
 import sg.iss.team5.service.LecturerService;
 import sg.iss.team5.service.StudentService;
 
@@ -34,19 +35,25 @@ public class TimetableController {
 				TreeMap<Integer, String> morcourse=new TreeMap<>();
 				TreeMap<Integer, String> aftcourse=new TreeMap<>();
 				TreeMap<Integer, String> evecourse=new TreeMap<>();
-				 ArrayList<sg.iss.team5.model.Module> sm=new ArrayList<>();
+				 ArrayList<sg.iss.team5.model.Module> allcourse=new ArrayList<>();
 				 String firstLetter = String.valueOf(id.charAt(0));
-				 
+				 ArrayList<sg.iss.team5.model.Module> sm=new ArrayList<>();
+				 Date date=new Date();
+				 int year = date.getYear();
 				 //judge id is student id or lecturer id 
 				 if(firstLetter.equalsIgnoreCase("S"))
 				 {
-					 sm=sService.findModuleByStudentId(id);
+					 allcourse=sService.findModuleByStudentId(id);
 				 }
-				 System.out.println(sm);
 				 if(firstLetter=="L")
 				 {
-					 sm=lService.findModuleByLecturerId(id);
+					 allcourse=lService.findModuleByLecturerId(id);
 				 }
+				 for (Module module : allcourse) {
+					if (module.getAcademicYear().getYear()==year) {
+						sm.add(module);			
+					}
+				}
 				 
 				 //divide all the courses into 3 parts
 				 
