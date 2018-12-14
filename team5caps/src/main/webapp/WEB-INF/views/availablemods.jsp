@@ -61,6 +61,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			
 		</div>
 
 		<input type="submit" name="enroll" value="Enroll" class="button" />
