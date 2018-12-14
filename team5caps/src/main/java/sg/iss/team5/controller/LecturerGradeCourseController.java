@@ -72,24 +72,41 @@ public class LecturerGradeCourseController {
 	@RequestMapping(value = "/gradebook/gradeconfirm", method = RequestMethod.POST)
 	public ModelAndView showGradeStudent(@ModelAttribute("module") Module module, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("testing");
-		Map<String, String[]> parameters = request.getParameterMap();
-		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
-			System.out.println(entry.getKey().toString() + "/" + entry.getValue().toString());
-		}
-
 		String mid = module.getModuleID();
 		module = sService.findModulebyID(mid);
+		Map<String, String[]> parameters = request.getParameterMap();
 		List<Studentcourse> scList = module.getStudentcourses();
 		Iterator<Studentcourse> iter = scList.iterator();
-		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
-			if (entry.getValue()[0].equals("A") || entry.getValue()[0].equals("B") || entry.getValue()[0].equals("C")
-					|| entry.getValue()[0].equals("D") || entry.getValue()[0].equals("E")) {
-				Studentcourse sc = iter.next();
-				sc.setGrade(entry.getValue()[0]);
+		while (iter.hasNext()) {
+			Studentcourse sc = iter.next();
+			String[] arr = parameters.get(sc.getStudent().getStudentID());
+			if (arr[0] == null)
+				return new ModelAndView("testingeidt");
+			String grade = arr[0];
+			if (grade.equals("A") || grade.equals("B") || grade.equals("C")
+					|| grade.equals("D") || grade.equals("E") || grade.equals("F")) {
+				sc.setGrade(grade);
 				lService.updateStudentcourse(sc);
 			}
-
 		}
+		
+		
+//		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
+//			System.out.println(entry.getKey().toString() + "/" + entry.getValue().toString());
+//		}
+//
+//		String mid = module.getModuleID();
+//		module = sService.findModulebyID(mid);
+//		
+//		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
+//			if (entry.getValue()[0].equals("A") || entry.getValue()[0].equals("B") || entry.getValue()[0].equals("C")
+//					|| entry.getValue()[0].equals("D") || entry.getValue()[0].equals("E")) {
+//				Studentcourse sc = iter.next();
+//				sc.setGrade(entry.getValue()[0]);
+//				lService.updateStudentcourse(sc);
+//			}
+//
+//		}
 
 //		Studentcourse sc = lService.findStudentcourseByPK("S00006", "0117A0006");
 //		sc.setGrade(parameters.get("S00006")[0]);
