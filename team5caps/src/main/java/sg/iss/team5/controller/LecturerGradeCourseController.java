@@ -1,6 +1,8 @@
 package sg.iss.team5.controller;
 
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -44,12 +46,24 @@ public class LecturerGradeCourseController {
 		if (!SecurityConfigurations.CheckLectAuth(session))
 			return new ModelAndView("redirect:/home/login");
 		// Security
+		
 		ModelAndView mav = new ModelAndView("gradebook6");
 		String lid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
-		ArrayList<Module> sm = new ArrayList<Module>();
+		ArrayList<Module> thisyearmodule = new ArrayList<Module>();
 		HashMap<String, Module> cList = new HashMap<>();
-		sm = lService.findModuleByLecturerId(lid);
-		for (Module module : sm) {
+		ArrayList<Module> allmodule = new ArrayList<Module>();
+		thisyearmodule = lService.findModuleByLecturerId(lid);
+		//Get current Year
+		 Date date=new Date();
+		 int year = date.getYear();
+		 //get current year module
+		 for (Module module : allmodule) {
+				if (module.getAcademicYear().getYear()==year) {
+					thisyearmodule.add(module);			
+				}
+			}
+		 //get hashmap ,key is coursename ,value is module
+		for (Module module : thisyearmodule) {
 			String eachcourse = module.getCoursedetail().getCourseName();
 			Module eachmodule = module;
 			cList.put(eachcourse, eachmodule);
