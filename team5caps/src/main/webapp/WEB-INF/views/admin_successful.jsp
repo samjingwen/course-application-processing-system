@@ -33,7 +33,7 @@ body {
 
 .moving-zone {
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   width: 300px;
   height: 120px;
@@ -85,6 +85,7 @@ body {
   color: coral;
   font-weight: 300;
 }
+
 </style>
 <script>
 var moveForce = 30; // max popup movement in pixels

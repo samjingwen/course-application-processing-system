@@ -9,8 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>404 Page no found</title>
 <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="/css/404.css">
-  <style>*, *:after, *:before {
+<link rel="stylesheet" href="/css/404.css">
+<style>
+*, *:after, *:before {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
@@ -227,7 +228,8 @@ html {
 .error-back:hover {
 	color: #EB957D;
 	text-shadow: 0 0 3px black;
-}</style>
+}
+</style>
 </head>
 <body>
 	<div class="error-page-wrap">
@@ -236,7 +238,8 @@ html {
 				<h1>404</h1>
 				<h2>oops! page not found</h2>
 			</hgroup>
-			<a href="javascript:history.back()" title="Back to site" class="error-back">back</a>
+			<a href="javascript:history.back()" title="Back to site"
+				class="error-back">back</a>
 		</article>
 	</div>
 </body>
