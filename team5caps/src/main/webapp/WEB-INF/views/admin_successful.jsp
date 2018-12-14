@@ -33,7 +33,7 @@ body {
 
 .moving-zone {
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   width: 300px;
   height: 120px;
