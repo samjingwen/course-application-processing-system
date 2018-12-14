@@ -154,8 +154,14 @@ public class StudentEnrollCourseController {
 			m = "Successfully enrolled!";
 			ArrayList<FormattedSC> sclist = (ArrayList<FormattedSC>) stuservice
 					.getFormatSC(stuservice.findCourseByStudentId(sid));
+			ArrayList<FormattedSC> dislist = new ArrayList<FormattedSC>();
+			for (FormattedSC current : sclist) {
+				if (current.getMod().getAcademicYear().getYear() == Calendar.getInstance().getTime().getYear()) {
+					dislist.add(current);
+				}
+			}
 			ModelAndView mav = new ModelAndView("studentenrollment");
-			mav.addObject("sclist", sclist);
+			mav.addObject("sclist", dislist);
 			mav.addObject("message", m);
 			return mav;
 
