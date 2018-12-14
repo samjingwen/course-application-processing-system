@@ -1481,7 +1481,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 500;
 	line-height: 1.2;
-	color: #317eac;
+	color: #093f8e;
 }
 
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small,
@@ -9547,6 +9547,9 @@ div .headergrid { grid-area: header; }
 div .maingrid { grid-area: main;}
 .footergrid { grid-area: footer; }
 
+
+/* homepage CSS starts from here */
+
 .containerhome{
 	width:100%;
 	margin:50px;
@@ -9557,7 +9560,7 @@ div .maingrid { grid-area: main;}
 .left {
 	float: left;
 	position:relative;
-	width: 680px;
+	width: 620px;
  }
 
 .right {
@@ -9567,7 +9570,7 @@ div .maingrid { grid-area: main;}
 	border-radius: 8px;
 	background: #e5e5e5;
 	padding: 20px;
-	margin-left:58px;
+	margin-left:26px;
 	margin-top:55px;
 	height: 150px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -9579,6 +9582,7 @@ div .maingrid { grid-area: main;}
 	color:#093f8e;
 	font-style: italic;
 }
+
 
 .right h4{
 	text-decoration: underline;
@@ -9595,12 +9599,11 @@ div .maingrid { grid-area: main;}
 }
 
 .footer{
-	position:relative;
+	position: relative;
+    left: 0;
+    height: 50px;
 	float:left;
 	width:100%;
-	height: 89px;
-	bottom: 0;
-  	left: 0;
   	margin-top: 50px;
 }
 
@@ -9617,7 +9620,3 @@ div .maingrid { grid-area: main;}
 
 
 
-
-
-
-/* CALENDAR CSS starts from here */
