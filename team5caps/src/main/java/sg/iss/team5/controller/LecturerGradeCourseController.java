@@ -1,6 +1,8 @@
 package sg.iss.team5.controller;
 
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -46,10 +48,24 @@ public class LecturerGradeCourseController {
 		// Security
 		ModelAndView mav = new ModelAndView("gradebook6");
 		String lid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
-		ArrayList<Module> sm = new ArrayList<Module>();
+		ArrayList<Module> thisyearmodule = new ArrayList<Module>();
 		HashMap<String, Module> cList = new HashMap<>();
-		sm = lService.findModuleByLecturerId(lid);
-		for (Module module : sm) {
+		ArrayList<Module> allmodule = new ArrayList<Module>();
+		thisyearmodule = lService.findModuleByLecturerId(lid);
+		//Get current Year
+		
+		 Date date=new Date();
+		 int year = date.getYear();
+		 //get current year module
+		 
+		 for (Module module : allmodule) {
+				if (module.getAcademicYear().getYear()==year) {
+					thisyearmodule.add(module);			
+				}
+			}
+		 //get hashmap ,key is coursename ,value is module
+		 
+		for (Module module : thisyearmodule) {
 			String eachcourse = module.getCoursedetail().getCourseName();
 			Module eachmodule = module;
 			cList.put(eachcourse, eachmodule);
@@ -61,8 +77,10 @@ public class LecturerGradeCourseController {
 	@RequestMapping(value = "/gradebook/exact", method = RequestMethod.POST)
 	public ModelAndView listAllStudent(@ModelAttribute("module") Module module, HttpSession session) {
 		// Get list of students from module(dropdownlist selected)
+		
 		ModelAndView mav = new ModelAndView("gradebook");
 		// module = sService.findModulebyID(module.getModuleID());
+		
 		module = sService.findModulebyID("0617H0007");
 		List<Studentcourse> scList = module.getStudentcourses();
 		// module = sService.findModulebyID("0117A0006");
@@ -76,7 +94,7 @@ public class LecturerGradeCourseController {
 
 	@RequestMapping(value = "/gradebook/gradeconfirm", method = RequestMethod.POST)
 	public ModelAndView showGradeStudent(@ModelAttribute("module") Module module, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("testing");
+		ModelAndView mav = new ModelAndView("gradeconfirm");
 		String mid = module.getModuleID();
 		module = sService.findModulebyID(mid);
 		Map<String, String[]> parameters = request.getParameterMap();

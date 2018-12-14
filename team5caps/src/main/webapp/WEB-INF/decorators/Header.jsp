@@ -12,7 +12,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="${pageContext.request.contextPath}">SJW</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath}">CAPS</a>
 			</div>
 
 			<div class="collapse navbar-collapse"
@@ -25,6 +25,8 @@
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Administrator' }">
 								<li><a href="${pageContext.request.contextPath}/admin/homepage">Dash board</a></li>
 								<li><a href="${pageContext.request.contextPath}/admin/manage/courses">Manage Courses</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/manage/student">Manage Student</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/manage/lecturer">Manage Lecturer</a></li>
 								<li><a href="${pageContext.request.contextPath}/admin/manage/approval">Manage Request Approval</a></li>
 							</c:when>
 							<c:when
