@@ -10,7 +10,8 @@
 <style>
 img.image {
 	height: 100px;
-	width: 90px;
+	width: 80px;
+	
 }
 </style>
 
@@ -18,8 +19,9 @@ img.image {
 <title>Insert title here</title>
 </head>
 <body>
-
-<table >
+<div align="center">
+			
+<table>
 <th>Team-5</th>
 <tr>
 <td><img src="../image/EC.PNG" alt="CYL" class="image"></td>
@@ -42,7 +44,7 @@ img.image {
 <td>ZAN TUN KHINE</td>
 </tr>
 </table>
-	
+</div>	
 	
 <!-- 	CHAN YULING ELAINE<br>
 	CHENG ZONGPEI<br>

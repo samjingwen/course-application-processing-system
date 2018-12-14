@@ -14,16 +14,22 @@
 </head>
 <body>
 	<div class="container">
-	<form:form name="selectoneww" method="POST" modelAttribute="module"
-		action="${pageContext.request.contextPath}/grade/gradebook/exact">
-		<form:select name="selectone" path="moduleID">
-			<c:forEach var="cl" items="${courselist}">
-				<option value="${cl.value.getModuleID()}">${cl.key}</option>
-			</c:forEach>
-		</form:select>
-		<input type='submit' name=submit value='Search' />
+		<form:form name="selectoneww" method="POST" modelAttribute="module"
+			action="${pageContext.request.contextPath}/grade/gradebook/exact">
+			<table>
+				<tr>
+					<td><form:select name="selectone" path="moduleID">
+							<c:forEach var="cl" items="${courselist}">
+								<option value="${cl.value.getModuleID()}">${cl.key}</option>
+							</c:forEach>
+						</form:select></td>
 
-	</form:form>
+					<td><input type='submit' name=submit value='Search'
+						class="btn btn-primary" /></td>
+				</tr>
+			</table>
+
+		</form:form>
 	</div>
 </body>
 </html>

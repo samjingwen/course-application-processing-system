@@ -12,7 +12,7 @@
 
 
 <body>
-	<div class="container">
+	<div class="container" align="center">
 	<h1>Request for Student Enrollment</h1>
 	<div>
 		<form:form modelAttribute="request" method="POST" cssClass="maingrid"

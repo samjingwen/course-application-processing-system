@@ -12,12 +12,21 @@
 </head>
 <body>
 	<div class="container">
-	<form:form modelAttribute="module" method="POST"
-		action="${pageContext.request.contextPath}/grade/gradebook/gradeconfirm">
-		<form:button type="submit" name="submit" value="s">SUBMIT</form:button>
-		<form:input type="text" readonly="readonly" value="${moduleID}"
-			path="moduleID" />
-		<table>
+	
+		<form:form modelAttribute="module" method="POST"
+			action="${pageContext.request.contextPath}/grade/gradebook/gradeconfirm">
+			
+			<table>
+				<tr>
+					<td><form:input type="text" readonly="readonly" value="${moduleID}"
+					path="moduleID" class="form-control"/></td>
+
+					<td><form:button type="submit" name="submit" value="s"
+					class="btn btn-primary">SUBMIT</form:button></td>
+				</tr>
+			</table>
+			
+			<table>
 			<thead>
 				<tr>
 					<th>#</th>
@@ -50,8 +59,10 @@
 				</c:forEach>
 			</tbody>
 
-
 		</table>
+		
+		
+			
 	</form:form>
 	</div>
 </body>
