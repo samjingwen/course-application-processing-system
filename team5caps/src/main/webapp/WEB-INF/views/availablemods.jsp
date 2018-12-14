@@ -28,8 +28,8 @@
 			action="${pageContext.request.contextPath}/studentenroll/enrollin">
 			<div name="availm">
 				<b><c:if test="${not empty message}">
-					<c:out value="${message}" />
-				</c:if></b>
+						<c:out value="${message}" />
+					</c:if></b>
 				<table id="AvailMods" class="display">
 					<caption>List of available modules:</caption>
 					<br>
