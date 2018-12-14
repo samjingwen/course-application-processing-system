@@ -79,9 +79,9 @@ public class LecturerGradeCourseController {
 		// Get list of students from module(dropdownlist selected)
 		
 		ModelAndView mav = new ModelAndView("gradebook");
-		// module = sService.findModulebyID(module.getModuleID());
+		module = sService.findModulebyID(module.getModuleID());
 		
-		module = sService.findModulebyID("0617H0007");
+		//module = sService.findModulebyID("0617H0007");
 		List<Studentcourse> scList = module.getStudentcourses();
 		// module = sService.findModulebyID("0117A0006");
 
@@ -94,7 +94,7 @@ public class LecturerGradeCourseController {
 
 	@RequestMapping(value = "/gradebook/gradeconfirm", method = RequestMethod.POST)
 	public ModelAndView showGradeStudent(@ModelAttribute("module") Module module, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("gradeconfirm");
+		ModelAndView mav = new ModelAndView("gradeSuccess");
 		String mid = module.getModuleID();
 		module = sService.findModulebyID(mid);
 		Map<String, String[]> parameters = request.getParameterMap();
@@ -104,7 +104,7 @@ public class LecturerGradeCourseController {
 			Studentcourse sc = iter.next();
 			String[] arr = parameters.get(sc.getStudent().getStudentID());
 			if (arr[0] == null)
-				return new ModelAndView("testingeidt");
+				return new ModelAndView("gradeFail");
 			String grade = arr[0];
 			if (grade.equals("A") || grade.equals("B") || grade.equals("C")
 					|| grade.equals("D") || grade.equals("E") || grade.equals("F")) {
