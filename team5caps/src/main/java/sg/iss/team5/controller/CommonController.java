@@ -39,6 +39,11 @@ public class CommonController {
 		return "index";
 	}
 	
+	@RequestMapping("/home/aboutus")
+	public String showAboutUs() {
+		return "aboutUs";
+	}
+	
 	
 
 //	@RequestMapping("/testing")

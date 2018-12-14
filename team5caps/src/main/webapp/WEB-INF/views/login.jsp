@@ -16,7 +16,7 @@
 <body>
 <div>
 	<div class="container">
-<form:form modelAttribute="user" method="POST" cssClass="maingrid"
+<form:form modelAttribute="user" method="POST" 
 	action="${pageContext.request.contextPath}/home/authenticate">
 	<div align="center">
 	<table>
@@ -33,10 +33,10 @@
 	
 		<tr>
 			<td>&nbsp;</td>
-			<td><form:button name="submit" type="submit" value="s" class="button1">
+			<td><form:button name="submit" type="submit" value="s" cssClass="btn btn-default">
 						Submit
 					</form:button></td>
-			<td><form:button name="clear" type="reset" value="r" class="button1">
+			<td><form:button name="clear" type="reset" value="r" cssClass="btn btn-default">
 						Clear
 					</form:button></td>
 		</tr>

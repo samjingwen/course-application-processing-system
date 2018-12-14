@@ -25,7 +25,7 @@
 <body>
 	<div class="container">
 	<h1>Lecturer List</h1>
-		<a href="${pageContext.request.contextPath}/lecturer/create">Add LECTURER</a>
+		<a href="${pageContext.request.contextPath}/admin/lecturer/create">Add LECTURER</a>
 	<table id="example" class="display">
 		
 
@@ -52,7 +52,7 @@
 					<td>${lec.getUser().getEmailAddress()}</td>
 					<td>${lec.getPosition()}</td>
 					<td align="center"><a
-					href="${pageContext.request.contextPath}/lecturer/edit/${lec.getLecturerID()}">
+					href="${pageContext.request.contextPath}/admin/lecturer/edit/${lec.getLecturerID()}">
 						Edit
 				</a></td>
 				</tr>

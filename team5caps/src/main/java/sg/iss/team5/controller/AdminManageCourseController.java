@@ -20,13 +20,13 @@ import sg.iss.team5.service.AdminCourse;
 
 
 @Controller
-@RequestMapping(value = "/course")
+@RequestMapping(value = "/admin")
 public class AdminManageCourseController {
 
 	@Autowired
 	private AdminCourse adminCourse;
 
-	@RequestMapping(value = { "/courselist" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/manage/courses" }, method = RequestMethod.GET)
 	public ModelAndView showTesting() {
 		ArrayList<Coursedetail> courselist = new ArrayList<Coursedetail>();
 		courselist = adminCourse.findAllCoursedetails();
@@ -39,12 +39,12 @@ public class AdminManageCourseController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/courses/create", method = RequestMethod.GET)
 	public ModelAndView newCoursepage() {
 		ModelAndView mav = new ModelAndView("FormCourse", "course", new Coursedetail());
 		return mav;
 	}
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@RequestMapping(value = "/courses/create", method = RequestMethod.POST)
 	public ModelAndView createNewCourse(@ModelAttribute @Valid Coursedetail course, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
 		if (result.hasErrors())
@@ -54,19 +54,19 @@ public class AdminManageCourseController {
 		course.getUser().setAccessLevel("Course");
 		adminCourse.createCoursedetail(course, course.getUser());*/
 		adminCourse.updateCoursedetail(course);
-		ModelAndView mav = new ModelAndView("redirect:/course/courselist");
+		ModelAndView mav = new ModelAndView("redirect:/admin/manage/courses");
 		return mav;
 	
 	}
 	
-	@RequestMapping(value = "/edit/{courseID}", method = RequestMethod.GET)
+	@RequestMapping(value = "courses/edit/{courseID}", method = RequestMethod.GET)
 	public ModelAndView editCoursePage(@PathVariable String courseID) {
 		ModelAndView mav = new ModelAndView("FormCourseEdit");
 		mav.addObject("course", adminCourse.findCoursedetail(courseID));
 		return mav;
 	}
 
-	@RequestMapping(value = "/edit/{courseID}", method = RequestMethod.POST)
+	@RequestMapping(value = "courses/edit/{courseID}", method = RequestMethod.POST)
 	public ModelAndView editCourse(@ModelAttribute @Valid Coursedetail course, BindingResult result, @PathVariable String courseID,
 			 final RedirectAttributes redirectAttributes) {
 		System.out.println("course"+course.toString());
@@ -74,7 +74,7 @@ public class AdminManageCourseController {
 			return new ModelAndView("FormCourseEdit");
 		course.setCredits(adminCourse.findCoursedetailById(course.getCourseID()).getCredits());
 		adminCourse.updateCoursedetail(course);
-		ModelAndView mav = new ModelAndView("redirect:/course/courselist");
+		ModelAndView mav = new ModelAndView("redirect:/admin/manage/courses");
 		String message = "Course" + course.getCourseID() + " was successfully updated.";
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
