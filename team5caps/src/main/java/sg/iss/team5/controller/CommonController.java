@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import sg.iss.team5.caps.SecurityConfigurations;
 import sg.iss.team5.model.User;
 import sg.iss.team5.service.UserService;
 
@@ -76,11 +77,15 @@ public class CommonController {
 			us.setUser(u);
 			// PUT CODE FOR SETTING SESSION ID
 			us.setSessionId(session.getId());
-			System.out.println(u == null);
-			mav = new ModelAndView("redirect:/sjw/home");
 			session.setAttribute("USERSESSION", us);
-			return mav;
+			if (SecurityConfigurations.CheckAdminAuth(session)) 
+				mav = new ModelAndView("redirect:/admin/homepage");
+			if (SecurityConfigurations.CheckLectAuth(session)) 
+				mav = new ModelAndView("redirect:/Timetable");
+			if (SecurityConfigurations.CheckStudAuth(session))
+				mav = new ModelAndView("redirect:/Timetable");
 		}
+		return mav;
 	}
 
 }

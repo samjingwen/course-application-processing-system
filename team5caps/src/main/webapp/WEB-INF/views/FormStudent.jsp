@@ -12,7 +12,7 @@
 	<div class="container">
 <h1><center><u>ADD NEW STUDENT</u></center></h1>
 <form:form method="POST" modelAttribute="student"
-	action="${pageContext.request.contextPath}/student/create">
+	action="${pageContext.request.contextPath}/admin/student/create">
 		<center>
 			<table cellpadding=4 cellspacing=2 border=0>
 				<tr>
