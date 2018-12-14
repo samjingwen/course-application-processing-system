@@ -1,7 +1,5 @@
 package sg.iss.team5.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -22,6 +20,7 @@ import sg.iss.team5.model.Request;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.model.StudentcoursePK;
+import sg.iss.team5.model.User;
 import sg.iss.team5.service.LecturerService;
 import sg.iss.team5.service.StudentService;
 
@@ -107,21 +106,31 @@ public class LecturerViewCourseController {
 	 */
 
 	@RequestMapping(value = { "/request" }, method = RequestMethod.GET)
-	public ModelAndView showRequest(Model model) {
+	public ModelAndView showRequest(Model model, HttpSession session) {
+		String lid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		model.addAttribute("request", new Request());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("requestEnrollment");
+		ArrayList<String> newList = new ArrayList<String>();
 		ArrayList<String> mList = lectservice.getAllModuleIDForCurrentYear();
-		mav.addObject("modules", mList);
+		for (String moduleid: mList) {
+			if (moduleid.startsWith(lid.substring(4, 6))) {
+				newList.add(moduleid);
+			}
+		}
+		mav.addObject("modules", newList);
 		return mav;
 	}
 
 	@RequestMapping(value = { "/request" }, method = RequestMethod.POST)
 	public ModelAndView showRequest(@ModelAttribute("request") Request request, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
+		Student student = lectservice.findStudentByStudentID(request.getStudentID());
+		if (student == null)
+			return new ModelAndView("requestFail");
 		Studentcourse sc = lectservice.findStudentcourseByPK(request.getStudentID(), request.getModuleID());
 		if (sc != null) {
-			mav.setViewName("redirect:/sjw/home");
+			mav.setViewName("requestFail");
 			return mav;
 		}
 		Module module = lectservice.findModuleByModuleID(request.getModuleID());
@@ -131,8 +140,8 @@ public class LecturerViewCourseController {
 				module.getLecturer().getUser().getFirstName() + " " + module.getLecturer().getUser().getLastName());
 		request.setModuleID(module.getModuleID());
 		request.setVenue(module.getVenue());
-		Student student = lectservice.findStudentByStudentID(request.getStudentID());
-		request.setStudentName(student.getUser().getFirstName() + " " + student.getUser().getLastName());
+		User user = lectservice.findUserByStudentID(request.getStudentID());
+		request.setStudentName(user.getFirstName() + " " + user.getLastName());
 		mav.addObject("newRequest", request);
 		mav.setViewName("confirmRequest");
 		session.setAttribute("REQUEST", request);
