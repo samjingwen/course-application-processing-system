@@ -28,7 +28,7 @@
 	<h1>Student List</h1>
 	<%-- <form:form modelAttribute="user" method="POST" cssClass="maingrid"
 	action="${pageContext.request.contextPath}/student/create"> --%>
-	<a href="${pageContext.request.contextPath}/student/create">Add Student</a>
+	<a href="${pageContext.request.contextPath}/admin/student/create">Add Student</a>
 	<table id="example" class="display">
 
 		<thead>
@@ -55,7 +55,7 @@
 					<td>${stu.getEnrollmentDate()}</td>
 					<td>${stu.getStatus()}</td>
 					<td align="center"><a
-					href="${pageContext.request.contextPath}/student/edit/${stu.getStudentID()}">
+					href="${pageContext.request.contextPath}/admin/student/edit/${stu.getStudentID()}">
 					Edit
 				</a></td>
 				</tr>
