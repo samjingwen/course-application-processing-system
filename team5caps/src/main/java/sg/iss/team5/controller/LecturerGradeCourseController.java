@@ -102,13 +102,14 @@ public class LecturerGradeCourseController {
 		if (!SecurityConfigurations.CheckLectAuth(session))
 			return new ModelAndView("redirect:/home/login");
 		// Security
-
+		
 		ModelAndView mav = new ModelAndView("gradeSuccess");
 		String mid = module.getModuleID();
 		module = sService.findModulebyID(mid);
 		Map<String, String[]> parameters = request.getParameterMap();
 		List<Studentcourse> scList = module.getStudentcourses();
 		Iterator<Studentcourse> iter = scList.iterator();
+		//Update grade for studentcourse
 		while (iter.hasNext()) {
 			Studentcourse sc = iter.next();
 			String[] arr = parameters.get(sc.getStudent().getStudentID());
@@ -122,10 +123,5 @@ public class LecturerGradeCourseController {
 			}
 		}
 		return mav;
-	}
-
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home() {
-		return "index";
 	}
 }

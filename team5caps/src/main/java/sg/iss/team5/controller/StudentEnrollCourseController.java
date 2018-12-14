@@ -44,9 +44,10 @@ public class StudentEnrollCourseController {
 
 	@RequestMapping(value = "/modules", method = RequestMethod.GET)
 	public ModelAndView listAllNotTaken(HttpSession session) throws ParseException {
-		if (!SecurityConfigurations.CheckStudAuth(session)) {
+		// Security
+		if (!SecurityConfigurations.CheckStudAuth(session))
 			return new ModelAndView("redirect:/home/login");
-		}
+		// Security
 
 		// View available modules to enroll
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
@@ -75,9 +76,10 @@ public class StudentEnrollCourseController {
 	@RequestMapping(value = "/enrollin", method = RequestMethod.POST)
 	public ModelAndView enrollStudent(@RequestParam("modid") String[] modid, HttpServletRequest request,
 			HttpSession session) throws MessagingException {
-		if (!SecurityConfigurations.CheckStudAuth(session)) {
+		//Security
+		if (!SecurityConfigurations.CheckStudAuth(session)) 
 			return new ModelAndView("redirect:/home/login");
-		}
+		//Security
 
 		// Student enrollment
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
@@ -85,7 +87,7 @@ public class StudentEnrollCourseController {
 		ArrayList<Studentcourse> clist = new ArrayList<Studentcourse>();
 		ArrayList<Module> mlist = new ArrayList<Module>();
 		int check = 0;
-		String m="";
+		String m = "";
 		int curcount = stuservice.findSCbyStuandYear(sid).size();
 
 		// create list of already enrolled modules for current year
@@ -154,7 +156,7 @@ public class StudentEnrollCourseController {
 					.getFormatSC(stuservice.findCourseByStudentId(sid));
 			ModelAndView mav = new ModelAndView("studentenrollment");
 			mav.addObject("sclist", sclist);
-			mav.addObject("message",m);
+			mav.addObject("message", m);
 			return mav;
 
 			// if any of the above fails, return to module selection page
@@ -164,7 +166,7 @@ public class StudentEnrollCourseController {
 					.getFormat(stuservice.findModuleNotEnrolled(sid, date));
 
 			ModelAndView mav = new ModelAndView("availablemods");
-			mav.addObject("message",m);
+			mav.addObject("message", m);
 			mav.addObject("formattedmodules", m2list);
 			return mav;
 		}
@@ -193,13 +195,12 @@ public class StudentEnrollCourseController {
 	}
 
 	@RequestMapping(value = "/currenroll", method = RequestMethod.POST)
-	public ModelAndView changeLectRate(@RequestParam("LRate") String[] LRate,
-			HttpSession session) {
+	public ModelAndView changeLectRate(@RequestParam("LRate") String[] LRate, HttpSession session) {
 		if (!SecurityConfigurations.CheckStudAuth(session)) {
 			return new ModelAndView("redirect:/home/login");
 		}
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
-		//Display
+		// Display
 		ArrayList<FormattedSC> sclist = (ArrayList<FormattedSC>) stuservice
 				.getFormatSC(stuservice.findCourseByStudentId(sid));
 		ArrayList<FormattedSC> dislist = new ArrayList<FormattedSC>();
@@ -208,13 +209,13 @@ public class StudentEnrollCourseController {
 				dislist.add(current);
 			}
 		}
-		//Save Rating
+		// Save Rating
 		ArrayList<Studentcourse> scLect = new ArrayList<Studentcourse>();
-		for (FormattedSC current: dislist) {
-			scLect.add(adService.findByModuleIDCourseID(current.getModuleID(),sid));
-			
+		for (FormattedSC current : dislist) {
+			scLect.add(adService.findByModuleIDCourseID(current.getModuleID(), sid));
+
 		}
-		for(int i=0;i<scLect.size();i++) {
+		for (int i = 0; i < scLect.size(); i++) {
 			System.out.println(scLect.get(i).getStudent());
 			scLect.get(i).setLecturerRating(Integer.parseInt(LRate[i]));
 			stuservice.saveStudentCourse(scLect.get(i));
@@ -222,7 +223,7 @@ public class StudentEnrollCourseController {
 		String m = "Rating saved!";
 		ModelAndView mav = new ModelAndView("studentenrollment");
 		mav.addObject("sclist", dislist);
-		mav.addObject("message",m);
+		mav.addObject("message", m);
 		return mav;
 	}
 

@@ -22,8 +22,10 @@ public class StudentViewGradeController {
 	StudentService studentService;
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView listGrade(HttpSession session) {
+		//Security
 		if (!SecurityConfigurations.CheckStudAuth(session))
 		{return new ModelAndView("redirect:/home/login");}
+		//Security
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		ArrayList<Studentcourse> cl = studentService.findCourseByStudentId(sid);
 		ArrayList<Studentcourse> c2 = new ArrayList<Studentcourse>();

@@ -40,7 +40,7 @@ public class LecturerViewCourseController {
 		// Security
 		if (!SecurityConfigurations.CheckLectAuth(session))
 			return new ModelAndView("redirect:/home/login");
-		// Security		
+		// Security
 		String lid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		ArrayList<Module> mlist = lectservice.findPastModuleByLectId(lid);
 		ModelAndView mav = new ModelAndView("ViewModules");
@@ -72,7 +72,11 @@ public class LecturerViewCourseController {
 	 */
 
 	@RequestMapping(value = "/enrollist/{mid}", method = RequestMethod.GET)
-	public ModelAndView findCourseByModuleId(@PathVariable String mid) {
+	public ModelAndView findCourseByModuleId(@PathVariable String mid, HttpSession session) {
+		// Security
+		if (!SecurityConfigurations.CheckLectAuth(session))
+			return new ModelAndView("redirect:/home/login");
+		// Security
 		ArrayList<Studentcourse> mlist = lectservice.findCourseByModuleId(mid);
 		ModelAndView mav = new ModelAndView("ViewEnrolment");
 		mav.addObject("modules", mlist);
@@ -107,13 +111,17 @@ public class LecturerViewCourseController {
 
 	@RequestMapping(value = { "/request" }, method = RequestMethod.GET)
 	public ModelAndView showRequest(Model model, HttpSession session) {
+		// Security
+		if (!SecurityConfigurations.CheckLectAuth(session))
+			return new ModelAndView("redirect:/home/login");
+		// Security
 		String lid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		model.addAttribute("request", new Request());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("requestEnrollment");
 		ArrayList<String> newList = new ArrayList<String>();
 		ArrayList<String> mList = lectservice.getAllModuleIDForCurrentYear();
-		for (String moduleid: mList) {
+		for (String moduleid : mList) {
 			if (moduleid.startsWith(lid.substring(4, 6))) {
 				newList.add(moduleid);
 			}
@@ -124,6 +132,10 @@ public class LecturerViewCourseController {
 
 	@RequestMapping(value = { "/request" }, method = RequestMethod.POST)
 	public ModelAndView showRequest(@ModelAttribute("request") Request request, HttpSession session) {
+		// Security
+		if (!SecurityConfigurations.CheckLectAuth(session))
+			return new ModelAndView("redirect:/home/login");
+		// Security
 		ModelAndView mav = new ModelAndView();
 		Student student = lectservice.findStudentByStudentID(request.getStudentID());
 		if (student == null)
@@ -151,7 +163,10 @@ public class LecturerViewCourseController {
 	@RequestMapping(value = { "/confirm/{mid}" }, method = RequestMethod.POST)
 	public String showConfirmRequest(@ModelAttribute("request") Request request, HttpSession session,
 			@PathVariable String mid) {
-
+		// Security
+		if (!SecurityConfigurations.CheckLectAuth(session))
+			return "redirect:/home/login";
+		// Security
 		Studentcourse sc = new Studentcourse();
 		StudentcoursePK scPK = new StudentcoursePK();
 		Module module = new Module();
@@ -170,10 +185,4 @@ public class LecturerViewCourseController {
 		lectservice.createStudentcourse(sc);
 		return "requestSuccess";
 	}
-
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String home() {
-		return "index";
-	}
-
 }
