@@ -14,7 +14,7 @@
 	<div class="container">
 <h1><center><u>ADD NEW LECTURER</u></center></h1>
 <form:form method="POST" modelAttribute="lecturer"
-	action="${pageContext.request.contextPath}/lecturer/create">
+	action="${pageContext.request.contextPath}/admin/lecturer/create">
 		<center>
 			<table cellpadding=4 cellspacing=2 border=0>
 				<tr>

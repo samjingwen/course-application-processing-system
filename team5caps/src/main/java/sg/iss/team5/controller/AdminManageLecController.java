@@ -22,13 +22,13 @@ import sg.iss.team5.service.AdminLecturer;
 
 @Controller
 @Transactional
-@RequestMapping(value="/lecturer")
+@RequestMapping(value="/admin")
 public class AdminManageLecController {
 
 	@Autowired
 	private AdminLecturer adminlecturer;
 
-	@RequestMapping(value = { "/lecturelist" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/manage/lecturer" }, method = RequestMethod.GET)
 	public ModelAndView showTesting() {
 		ArrayList<Lecturer> lecturerList = new ArrayList<Lecturer>();
 		lecturerList = adminlecturer.findAllLecturers();
@@ -41,7 +41,7 @@ public class AdminManageLecController {
 		return mv;
 	}
 	
-	@RequestMapping(value = { "/create"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "lecturer/create"}, method = RequestMethod.GET)
 	public ModelAndView newCoursepage() {
 		String lid = adminlecturer.findAllLecturers().get(adminlecturer.findAllLecturers().size()-1).getLecturerID();
 		int num = Integer.parseInt(lid.substring(1, 6));
@@ -50,7 +50,7 @@ public class AdminManageLecController {
 		mav.addObject("LID", id);
 		return mav;
 	}
-	@RequestMapping(value = { "/create"}, method = RequestMethod.POST)
+	@RequestMapping(value = { "lecturer/create"}, method = RequestMethod.POST)
 	public ModelAndView createNewLecturer(@ModelAttribute @Valid Lecturer lecturer, BindingResult result,
 			final RedirectAttributes redirectAttributes) {
 		if (result.hasErrors())
@@ -60,19 +60,19 @@ public class AdminManageLecController {
 		lecturer.getUser().setPassword("Password");
 		lecturer.getUser().setAccessLevel("Lecturer");
 		adminlecturer.createLecturer(lecturer, lecturer.getUser());
-		ModelAndView mav = new ModelAndView("redirect:/lecturer/lecturelist");
+		ModelAndView mav = new ModelAndView("redirect:/admin/manage/lecturer");
 		return mav;
 	}
 	
 	
-	@RequestMapping(value = "/edit/{lecturerID}", method = RequestMethod.GET)
+	@RequestMapping(value = "lecturer/edit/{lecturerID}", method = RequestMethod.GET)
 	public ModelAndView editStudentPage(@PathVariable String lecturerID) {
 		ModelAndView mav = new ModelAndView("FormLecturerEdit");
 		mav.addObject("lecturer", adminlecturer.findLecturer(lecturerID));
 		return mav;
 	}
 
-	@RequestMapping(value = "/edit/{lecturerID}", method = RequestMethod.POST)
+	@RequestMapping(value = "lecturer/edit/{lecturerID}", method = RequestMethod.POST)
 	public ModelAndView editLecturer(@ModelAttribute @Valid Lecturer lecturer, BindingResult result,  @PathVariable String lecturerID, 
 			final RedirectAttributes redirectAttributes) {
 		System.out.println("lecturer"+lecturer.toString());
@@ -83,7 +83,7 @@ public class AdminManageLecController {
 		user.setAccessLevel(adminlecturer.findLecturer(lecturer.getLecturerID()).getUser().getAccessLevel());
 		user.setPassword(adminlecturer.findLecturer(lecturer.getLecturerID()).getUser().getPassword());		
 		adminlecturer.createLecturer(lecturer, user);
-		ModelAndView mav = new ModelAndView("redirect:/lecturer/lecturelist");
+		ModelAndView mav = new ModelAndView("redirect:/admin/manage/lecturer");
 		String message = "Lecturer" + lecturer.getLecturerID() + " was successfully updated.";
 		redirectAttributes.addFlashAttribute("message", message);
 		return mav;
