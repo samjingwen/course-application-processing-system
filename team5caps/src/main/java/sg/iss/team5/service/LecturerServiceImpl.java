@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,11 @@ import org.springframework.stereotype.Service;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.model.User;
 import sg.iss.team5.repository.ModuleRepository;
 import sg.iss.team5.repository.StudentRepository;
 import sg.iss.team5.repository.StudentcourseRepository;
+import sg.iss.team5.repository.UserRepository;
 
 @Service
 //@Transactional
@@ -26,6 +29,8 @@ public class LecturerServiceImpl implements LecturerService {
 	private ModuleRepository moduleRepository;
 	@Autowired
 	private StudentRepository studentRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	@Override
 	public ArrayList<Module> findModuleByLecturerId(String lid) {
@@ -110,7 +115,6 @@ public class LecturerServiceImpl implements LecturerService {
 
 	@Override
 	public ArrayList<Module> findCurentModuleByLectId(String lid) {
-		// TODO Auto-generated method stub
 		return (ArrayList<Module>) moduleRepository.findCurentModuleByLectId(lid);
 	}
 
@@ -139,6 +143,11 @@ public class LecturerServiceImpl implements LecturerService {
 			}
 		}
 		return newList;
+	}
+
+	@Override
+	public User findUserByStudentID(String sid) {
+		return userRepository.findUserByUserId(sid);
 	}
 
 	

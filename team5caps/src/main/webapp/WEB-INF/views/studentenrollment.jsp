@@ -26,8 +26,8 @@
 </head>
 <body>
 	<div class="container">
-	<form:form method="GET" modelAttribute="curr"
-		action="${pageContext.request.contextPath}/studentenroll/curr">
+	<form:form method="POST" modelAttribute="currenroll" cssClass="maingrid"
+		action="${pageContext.request.contextPath}/studentenroll/currenroll">
 	<div name="currm">
 		<table id="CurrMods" class="display">
 			<caption>Current Enrollment:</caption>
@@ -40,7 +40,7 @@
 					<td><b>Day of Week</b></td>
 					<td><b>Time Slot</b></td>
 					<td><b>Venue</b></td>
-					<td><b>Grade</b></td>
+					<td><b>Lecturer Rating</b></td>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,12 +54,19 @@
 						<td>${sclist.getDay()}</td>
 						<td>${sclist.getTime()}</td>
 						<td>${sclist.venue}</td>
-						<td>${sclist.grade}</td>
+						<td align = "center"><select name = "LRate">
+						<option value = "1">1</option>
+						<option value = "2">2</option>
+						<option value = "3">3</option>
+						<option value = "4">4</option>
+						<option value = "5">5</option>
+						</select></td>
 						<td></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		<input type ="submit" name="subLectRate" value = "Rate Lecturers"> 
 	</div>
 	</form:form>
 	</div>

@@ -18,7 +18,7 @@
 	<h1>THIS IS REQUEST ENROLLMENT</h1>
 	<div>
 		<form:form modelAttribute="request" method="POST" cssClass="maingrid"
-			action="${pageContext.request.contextPath}/sjw/request">
+			action="${pageContext.request.contextPath}/lecturer/request">
 			<div>
 				<table>
 					<tr>

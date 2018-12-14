@@ -6,6 +6,7 @@ import java.util.Date;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
+import sg.iss.team5.model.User;
 
 public interface LecturerService {
 	
@@ -48,5 +49,7 @@ public interface LecturerService {
 	Studentcourse updateStudentcourse(Studentcourse sc);
 	
 	ArrayList<String> getAllModuleIDForCurrentYear();
+	
+	User findUserByStudentID(String sid);
 	
 }

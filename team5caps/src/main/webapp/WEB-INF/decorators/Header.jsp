@@ -24,7 +24,10 @@
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Administrator' }">
 								<li><a href="${pageContext.request.contextPath}/admin/homepage">Dash board</a></li>
-								<li><a href="${pageContext.request.contextPath}/admin/manage/courselist">Manage Courses</a></li>
+																<li><a href="${pageContext.request.contextPath}/admin/manage/courses">Manage Courses</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/manage/student">Manage Student</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/manage/lecturer">Manage Lecturer</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/manage/courselist">View Student Enrollment</a></li>
 								<li><a href="${pageContext.request.contextPath}/admin/manage/approval">Manage Request Approval</a></li>
 							</c:when>
 							<c:when
