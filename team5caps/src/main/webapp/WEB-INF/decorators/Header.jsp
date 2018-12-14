@@ -36,6 +36,7 @@
 									href="${pageContext.request.contextPath}/lecturer/request">Request Enrollment</a></li>
 								<li><a href="${pageContext.request.contextPath}/lecturer/courselist">View Course History</a></li>
 								<li><a href="${pageContext.request.contextPath}/grade/gradebook">Grade</a></li>
+								<li><a href="${pageContext.request.contextPath}/Timetable">Timetable</a></li>
 							</c:when>
 							<c:when
 								test="${sessionScope.USERSESSION.user.accessLevel eq 'Student' }">
