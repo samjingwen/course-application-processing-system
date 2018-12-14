@@ -33,7 +33,7 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	exportEnabled: true,
 	animationEnabled: true,
 	title: {
-		text: "Monthly Expenses"
+		text: "Top courses according to popularity"
 	},
 	data: [{
 		type: "pie",
@@ -67,13 +67,8 @@ chart.render();
 <body>
 	<div class="container">
 <h1>Admin Homepage</h1>
----
-<p>--------------------------------------------empty
 	<div id="chartContainer" style="height: 370px; width: 100%;"></div>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-</br>
-container-----------------------------------
-</p>
 
 	<h3>Students not enrolled</h3>
 	</br>

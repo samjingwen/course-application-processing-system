@@ -5,26 +5,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Entity;
-
 public class CanvasjsChartData {
  
 	static Map<Object,Object> map = null;
-	static List<List<Map<Object,Object>>> list = new ArrayList<List<Map<Object,Object>>>();
-	static List<Map<Object,Object>> dataPoints1 = new ArrayList<Map<Object,Object>>();
+	private List<List<Map<Object,Object>>> list = new ArrayList<List<Map<Object,Object>>>();
 	
-	static {
-		map = new HashMap<Object,Object>(); map.put("label", "Accomodation"); map.put("y", 30);dataPoints1.add(map);
-		map = new HashMap<Object,Object>(); map.put("label", "Food & Groceries"); map.put("y", 25);dataPoints1.add(map);
-		map = new HashMap<Object,Object>(); map.put("label", "Utilities"); map.put("y", 5);dataPoints1.add(map);
-		map = new HashMap<Object,Object>(); map.put("label", "Entertainment & Fun"); map.put("y", 20);dataPoints1.add(map);
-		map = new HashMap<Object,Object>(); map.put("label", "Savings"); map.put("y", 10);dataPoints1.add(map);
-		map = new HashMap<Object,Object>(); map.put("label", "Cellphone & Internet"); map.put("y", 10);dataPoints1.add(map);
+	public CanvasjsChartData(ArrayList<String> coursenames, ArrayList<Integer> integers) {
+		
+		map = new HashMap<Object,Object>(); map.put("label", coursenames.get(0)); map.put("y", integers.get(0));dataPoints1.add(map);
+		map = new HashMap<Object,Object>(); map.put("label", coursenames.get(1)); map.put("y", integers.get(1));dataPoints1.add(map);
+		map = new HashMap<Object,Object>(); map.put("label", coursenames.get(2)); map.put("y", integers.get(2));dataPoints1.add(map);
+		map = new HashMap<Object,Object>(); map.put("label", coursenames.get(3)); map.put("y", integers.get(3));dataPoints1.add(map);
+		map = new HashMap<Object,Object>(); map.put("label", coursenames.get(4)); map.put("y", integers.get(4));dataPoints1.add(map);
+		map = new HashMap<Object,Object>(); map.put("label", coursenames.get(5)); map.put("y", integers.get(5));dataPoints1.add(map);
 		
 		list.add(dataPoints1);
 	}
+
+	static List<Map<Object,Object>> dataPoints1 = new ArrayList<Map<Object,Object>>();
  
-	public static List<List<Map<Object, Object>>> getCanvasjsDataList() {
+	public List<List<Map<Object, Object>>> getCanvasjsDataList() {
 		return list;
 	}
 }   

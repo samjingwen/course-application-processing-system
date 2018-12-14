@@ -28,10 +28,9 @@ import sg.iss.team5.service.AdminService;
 @Controller
 @Transactional
 @RequestMapping(value = "/admin")
-public class AdminHomePageController {
+public class AdminHomePageController {	
 	@Autowired
 	AdminService adminService;
-	CanvasjsChartData canvasjsChartData = new CanvasjsChartData();
 
 	Logger logger = LoggerFactory.getLogger(AdminHomePageController.class);
 
@@ -56,14 +55,31 @@ public class AdminHomePageController {
 
 		ArrayList<Student> studentNotEnrolledList = adminService.findNotEnrolled();
 		ModelAndView mav = new ModelAndView("admin_homepage");
+		
+		//for chart
+		ArrayList<Coursedetail> lCourse = adminService.getCourseDetailList();
+		ArrayList<String> lStringsModuleID = new ArrayList<>();
+		for (Coursedetail coursedetail : lCourse) {
+			lStringsModuleID = adminService.findAvailableModuleID();
+		}
+		lStringsModuleID = adminService.findAvailableModuleID();
+		ArrayList<Integer> iString = new ArrayList<>();
+		for (String string : lStringsModuleID) {
+			iString.add(adminService.getCountStudentByCourseID(string));
+		}
+		ArrayList<String> lStringsModuleName = new ArrayList<String>();
+		for (Coursedetail course : lCourse) {
+			lStringsModuleName.add(course.getCourseName());
+		}
+		System.out.println(iString);
+		CanvasjsChartData canvasjsChartData = new CanvasjsChartData(lStringsModuleName, iString);
 		List<List<Map<Object,Object>>> canvasjsDataList = canvasjsChartData.getCanvasjsDataList();
 		mav.addObject("dataPointsList", canvasjsDataList);
 		mav.addObject("listNotEnrolled", studentNotEnrolledList);
-//		mav.addObject("dataPoints", chartDataList);
 		return mav;
 	}
 
-	@RequestMapping(value = "/manage/courses")
+	@RequestMapping(value = "/manage/courselist")
 	public ModelAndView listAllCourses(HttpSession session) {
 		// Security
 		if (!SecurityConfigurations.CheckAdminAuth(session))
@@ -75,9 +91,11 @@ public class AdminHomePageController {
 
 		// get quantity of students enrolled
 		ArrayList<Integer> capacity = new ArrayList<>();
+		System.out.println(listAllCourse);
 		for (Coursedetail current : listAllCourse) {
 			capacity.add(adminService.getEnrolledCapacity(current.getCourseID()));
 		}
+		System.out.println(capacity);
 		mav.addObject("enrolledCapacity", capacity);
 		return mav;
 	}
