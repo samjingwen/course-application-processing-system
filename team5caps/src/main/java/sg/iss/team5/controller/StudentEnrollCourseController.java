@@ -4,17 +4,16 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import java.util.HashMap;
 
-import javax.mail.internet.MimeMessage;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,10 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import sg.iss.team5.caps.SecurityConfigurations;
-import sg.iss.team5.mail.MyConstants;
 import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.FormattedSC;
 import sg.iss.team5.model.Module;
+import sg.iss.team5.model.Request;
 import sg.iss.team5.model.Student;
 import sg.iss.team5.model.Studentcourse;
 import sg.iss.team5.model.StudentcoursePK;
@@ -99,8 +98,8 @@ public class StudentEnrollCourseController {
 		for (String current : modid) {
 			if (enmlist.contains(stuservice.findModulebyID(current))) {
 				check = 0;
-				JOptionPane.showMessageDialog(null, "You have added modules with conflicting times!", "Conflicts",
-						JOptionPane.WARNING_MESSAGE);
+/*				JOptionPane.showMessageDialog(null, "You have added modules with conflicting times!", "Conflicts",
+						JOptionPane.WARNING_MESSAGE);*/
 			}
 
 			else if (mlist.size() < 1) {
@@ -112,8 +111,8 @@ public class StudentEnrollCourseController {
 
 			else if (mlist.contains(stuservice.findModulebyID(current))) {
 				check = 0;
-				JOptionPane.showMessageDialog(null, "You have added modules with conflicting times!", "Conflicts",
-						JOptionPane.WARNING_MESSAGE);
+/*				JOptionPane.showMessageDialog(null, "You have added modules with conflicting times!", "Conflicts",
+						JOptionPane.WARNING_MESSAGE);*/
 
 			}
 			// add module to list for enrollment
@@ -126,8 +125,8 @@ public class StudentEnrollCourseController {
 		// check if amount of modules added for the year exceeds 5
 		if ((mlist.size() > 5) || (mlist.size() > (5 - curcount))) {
 			check = 0;
-			JOptionPane.showMessageDialog(null, "You may only add up to 5 modules per year.", "Too many modules!",
-					JOptionPane.WARNING_MESSAGE);
+/*			JOptionPane.showMessageDialog(null, "You may only add up to 5 modules per year.", "Too many modules!",
+					JOptionPane.WARNING_MESSAGE);*/
 		}
 
 		// enroll student in module
@@ -152,7 +151,8 @@ public class StudentEnrollCourseController {
 				sc.setId(new StudentcoursePK(sc.getModule().getModuleID(), sc.getStudent().getStudentID()));
 				stuservice.saveStudentCourse(sc);
 			}
-			JOptionPane.showMessageDialog(null, "Successfully enrolled in module(s)!");
+/*			JOptionPane.showMessageDialog(null, "Successfully enrolled in module(s)!");*/
+			System.out.println("Successfully enrolled in module(s)!");
 			ArrayList<FormattedSC> sclist = (ArrayList<FormattedSC>) stuservice
 					.getFormatSC(stuservice.findCourseByStudentId(sid));
 			ModelAndView mav = new ModelAndView("studentenrollment");
@@ -193,6 +193,39 @@ public class StudentEnrollCourseController {
 		mav.addObject("sclist", dislist);
 		return mav;
 
+	}
+
+	@RequestMapping(value = "/currenroll", method = RequestMethod.POST)
+	public ModelAndView changeLectRate(@RequestParam("LRate") String[] LRate,
+			HttpSession session) {
+		if (!SecurityConfigurations.CheckStudAuth(session)) {
+			return new ModelAndView("redirect:/home/login");
+		}
+		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
+		//Display
+		ArrayList<FormattedSC> sclist = (ArrayList<FormattedSC>) stuservice
+				.getFormatSC(stuservice.findCourseByStudentId(sid));
+		ArrayList<FormattedSC> dislist = new ArrayList<FormattedSC>();
+		for (FormattedSC current : sclist) {
+			if (current.getMod().getAcademicYear().getYear() == Calendar.getInstance().getTime().getYear()) {
+				dislist.add(current);
+			}
+		}
+		//Save Rating
+		ArrayList<Studentcourse> scLect = new ArrayList<Studentcourse>();
+		for (FormattedSC current: dislist) {
+			scLect.add(adService.findByModuleIDCourseID(current.getModuleID(),sid));
+			
+		}
+		for(int i=0;i<scLect.size();i++) {
+			System.out.println(scLect.get(i).getStudent());
+			scLect.get(i).setLecturerRating(Integer.parseInt(LRate[i]));
+			stuservice.saveStudentCourse(scLect.get(i));
+		}
+
+		ModelAndView mav = new ModelAndView("studentenrollment");
+		mav.addObject("sclist", dislist);
+		return mav;
 	}
 
 }
