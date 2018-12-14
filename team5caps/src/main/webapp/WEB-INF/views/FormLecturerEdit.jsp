@@ -14,7 +14,7 @@
 <body>
 	<div class="container">
 <form:form method="POST" modelAttribute="lecturer"
-	action="${pageContext.request.contextPath}/lecturer/edit/${lecturer.lecturerID}">
+	action="${pageContext.request.contextPath}/admin/lecturer/edit/${lecturer.lecturerID}">
 		<center>
 			<table cellpadding=4 cellspacing=2 border=0>
 				<tr>
