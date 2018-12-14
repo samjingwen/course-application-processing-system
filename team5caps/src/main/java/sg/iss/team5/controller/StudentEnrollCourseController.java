@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import sg.iss.team5.caps.SecurityConfigurations;
 import sg.iss.team5.mail.MyConstants;
 import sg.iss.team5.model.FormattedModule;
 import sg.iss.team5.model.FormattedSC;
@@ -35,8 +36,8 @@ import sg.iss.team5.service.StudentService;
 @RequestMapping(value = "/studentenroll")
 public class StudentEnrollCourseController {
 
-    @Autowired
-    public JavaMailSender emailSender;
+	@Autowired
+	public JavaMailSender emailSender;
 	@Autowired
 	StudentService stuservice;
 	@Autowired
@@ -44,6 +45,10 @@ public class StudentEnrollCourseController {
 
 	@RequestMapping(value = "/modules", method = RequestMethod.GET)
 	public ModelAndView listAllNotTaken(HttpSession session) throws ParseException {
+		if (!SecurityConfigurations.CheckStudAuth(session)) {
+			return new ModelAndView("redirect:/home/login");
+		}
+
 		// View available modules to enroll
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		Date date = Calendar.getInstance().getTime();
@@ -65,11 +70,16 @@ public class StudentEnrollCourseController {
 
 		mav.addObject("formattedmodules", mlist);
 		return mav;
+
 	}
 
 	@RequestMapping(value = "/enrollin", method = RequestMethod.POST)
-	public ModelAndView enrollStudent (@RequestParam("modid") String[] modid, HttpServletRequest request,
-			HttpSession session) throws MessagingException{
+	public ModelAndView enrollStudent(@RequestParam("modid") String[] modid, HttpServletRequest request,
+			HttpSession session) throws MessagingException {
+		if (!SecurityConfigurations.CheckStudAuth(session)) {
+			return new ModelAndView("redirect:/home/login");
+		}
+
 		// Student enrollment
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		Student s = adService.findStudentById(sid);
@@ -123,19 +133,21 @@ public class StudentEnrollCourseController {
 		// enroll student in module
 		if (check > 0) {
 			clist = stuservice.enrollCourse(mlist, s);
-			
-//			//Email code
-//			MimeMessage message = emailSender.createMimeMessage();
-//	        boolean multipart = true;
-//	        MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
-//	        String htmlMsg = "<h3>Dear Student,</h3><p>You are currently enrolled in the courses. Thank you</p>"
-//	                +"<img src='https://myaces.nus.edu.sg/passfail/images/pf_banner2008.gif'>";
-//	         
-//	        message.setContent(htmlMsg, "text/html");   
-//	        helper.setTo("elaine.chan@u.nus.edu");//This will be changed to real email during production
-//	        helper.setSubject("Reminder for Subject Registration");
-//	        this.emailSender.send(message);
-//	        ///
+
+			// Email code
+			/*
+			 * MimeMessage message = emailSender.createMimeMessage(); boolean multipart =
+			 * true; MimeMessageHelper helper = new MimeMessageHelper(message, multipart,
+			 * "utf-8"); String htmlMsg =
+			 * "<h3>Dear Student,</h3><p>You are currently enrolled in the courses. Thank you</p>"
+			 * +"<img src='https://myaces.nus.edu.sg/passfail/images/pf_banner2008.gif'>";
+			 * 
+			 * message.setContent(htmlMsg, "text/html");
+			 * helper.setTo("suria@nus.edu.sg");//This will be changed to real email during
+			 * production helper.setSubject("Reminder for Subject Registration");
+			 * this.emailSender.send(message);
+			 */
+
 			for (Studentcourse sc : clist) {
 				sc.setId(new StudentcoursePK(sc.getModule().getModuleID(), sc.getStudent().getStudentID()));
 				stuservice.saveStudentCourse(sc);
@@ -145,7 +157,7 @@ public class StudentEnrollCourseController {
 					.getFormatSC(stuservice.findCourseByStudentId(sid));
 			ModelAndView mav = new ModelAndView("studentenrollment");
 			mav.addObject("sclist", sclist);
-			
+
 			return mav;
 
 			// if any of the above fails, return to module selection page
@@ -164,12 +176,21 @@ public class StudentEnrollCourseController {
 
 	@RequestMapping(value = "/currenroll", method = RequestMethod.GET)
 	public ModelAndView listAllTaken(HttpSession session) throws ParseException {
+		if (!SecurityConfigurations.CheckStudAuth(session)) {
+			return new ModelAndView("redirect:/home/login");
+		}
 		String sid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		ArrayList<FormattedSC> sclist = (ArrayList<FormattedSC>) stuservice
 				.getFormatSC(stuservice.findCourseByStudentId(sid));
+		ArrayList<FormattedSC> dislist = new ArrayList<FormattedSC>();
+		for (FormattedSC current : sclist) {
+			if (current.getMod().getAcademicYear().getYear() == Calendar.getInstance().getTime().getYear()) {
+				dislist.add(current);
+			}
+		}
 
 		ModelAndView mav = new ModelAndView("studentenrollment");
-		mav.addObject("sclist", sclist);
+		mav.addObject("sclist", dislist);
 		return mav;
 
 	}
