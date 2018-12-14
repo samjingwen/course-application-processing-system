@@ -12,13 +12,13 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">SJW</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath}">SJW</a>
 			</div>
 
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="#">About Us</a></li>
+					<li><a href="${pageContext.request.contextPath}/home/aboutus">About Us</a></li>
 					<c:if test="${not empty sessionScope.USERSESSION}">
 						<c:choose>
 							<c:when
@@ -50,9 +50,9 @@
 						</c:choose>
 					</c:if>
 					<c:if test="${empty sessionScope.USERSESSION }">
-						<li><a href="#">Anon Btn1</a></li>
+						<%-- <li><a href="#">Anon Btn1</a></li>
 						<li><a href="#">Anon Btn2</a></li>
-						<li><a href="#">Anon Btn3</a></li>
+						<li><a href="#">Anon Btn3</a></li> --%>
 
 					</c:if>
 
