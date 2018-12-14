@@ -43,7 +43,7 @@
 				</c:forEach>
 			</tr>
 			<tr>
-				<th>14:00-5:30</th>
+				<th>14:00-17:30</th>
 				<c:forEach var="aftcourse" items="${aftcoursetime}"
 					varStatus="status">
 					<td bgcolor='${aftcourse.value ==" "?"":"#ABC1D1"}'>${aftcourse.value}</td>
