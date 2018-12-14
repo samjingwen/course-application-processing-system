@@ -85,6 +85,7 @@ body {
   color: coral;
   font-weight: 300;
 }
+
 </style>
 <script>
 var moveForce = 30; // max popup movement in pixels
