@@ -69,8 +69,7 @@
 					</c:if>
 
 					<c:if test="${not empty sessionScope.USERSESSION }">
-						<li><a href="#">Welcome
-								${sessionScope.USERSESSION.user.accessLevel}
+						<li><a href="#">${sessionScope.USERSESSION.user.accessLevel}
 								${sessionScope.USERSESSION.user.firstName }</a></li>
 						<li><a href="${pageContext.request.contextPath}/home/logout">Logout</a></li>
 					</c:if>

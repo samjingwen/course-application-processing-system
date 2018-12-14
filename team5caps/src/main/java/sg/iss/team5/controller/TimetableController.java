@@ -30,7 +30,7 @@ public class TimetableController {
 	@Transactional
 	public ModelAndView studentTimetable(HttpSession session) {
 		// Security
-		if (!SecurityConfigurations.CheckStudAuth(session) || !SecurityConfigurations.CheckLectAuth(session))
+		if ((!SecurityConfigurations.CheckStudAuth(session)) || (!SecurityConfigurations.CheckLectAuth(session)))
 			return new ModelAndView("redirect:/home/login");
 		// Security
 
