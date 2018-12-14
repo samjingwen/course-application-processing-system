@@ -46,9 +46,8 @@
 				<td><form:button name="submit" type="submit" value="s">
 						Confirm
 					</form:button></td>
-				<td><form:button name="clear" type="reset" value="r" >
-						Back
-					</form:button></td>
+				<td><a href="javascript:history.back()" title="Back to site"
+				class="error-back">Back</a></td>
 			</tr>
 		</table>
 	</form:form>

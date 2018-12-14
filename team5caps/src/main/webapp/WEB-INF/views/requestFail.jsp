@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Fail
+	Student ID is invalid or request already pending.
 	<form:form method="GET" modelAttribute="drop"
 		action="${pageContext.request.contextPath}/lecturer/request">
 		<input type="submit" name="delete" class="button" value="Back" />
