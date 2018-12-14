@@ -63,9 +63,9 @@ public class CommonController {
 			if (SecurityConfigurations.CheckAdminAuth(session))
 				mav = new ModelAndView("redirect:/admin/homepage");
 			if (SecurityConfigurations.CheckLectAuth(session))
-				mav = new ModelAndView("Timetable");
+				mav = new ModelAndView("redirect:/Timetable");
 			if (SecurityConfigurations.CheckStudAuth(session))
-				mav = new ModelAndView("Timetable");
+				mav = new ModelAndView("redirect:/Timetable");
 		}
 		return mav;
 	}
