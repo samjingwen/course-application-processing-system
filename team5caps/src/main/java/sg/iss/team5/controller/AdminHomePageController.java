@@ -1,6 +1,8 @@
 package sg.iss.team5.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import sg.iss.team5.caps.SecurityConfigurations;
+import sg.iss.team5.model.CanvasjsChartData;
 import sg.iss.team5.model.Coursedetail;
 import sg.iss.team5.model.Module;
 import sg.iss.team5.model.Student;
@@ -28,6 +31,7 @@ import sg.iss.team5.service.AdminService;
 public class AdminHomePageController {
 	@Autowired
 	AdminService adminService;
+	CanvasjsChartData canvasjsChartData = new CanvasjsChartData();
 
 	Logger logger = LoggerFactory.getLogger(AdminHomePageController.class);
 
@@ -52,6 +56,8 @@ public class AdminHomePageController {
 
 		ArrayList<Student> studentNotEnrolledList = adminService.findNotEnrolled();
 		ModelAndView mav = new ModelAndView("admin_homepage");
+		List<List<Map<Object,Object>>> canvasjsDataList = canvasjsChartData.getCanvasjsDataList();
+		mav.addObject("dataPointsList", canvasjsDataList);
 		mav.addObject("listNotEnrolled", studentNotEnrolledList);
 //		mav.addObject("dataPoints", chartDataList);
 		return mav;

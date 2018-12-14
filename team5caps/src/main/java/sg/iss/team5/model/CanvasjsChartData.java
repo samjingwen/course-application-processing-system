@@ -1,9 +1,12 @@
 package sg.iss.team5.model;
+ 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
- 
+
+import javax.persistence.Entity;
+
 public class CanvasjsChartData {
  
 	static Map<Object,Object> map = null;
@@ -24,4 +27,4 @@ public class CanvasjsChartData {
 	public static List<List<Map<Object, Object>>> getCanvasjsDataList() {
 		return list;
 	}
-}     
+}   
