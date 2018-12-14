@@ -31,8 +31,8 @@ public class TimetableController {
 	public ModelAndView studentTimetable(HttpSession session) {
 		     ModelAndView mav = new ModelAndView(" ");	
 		     //get user id
-		     
-			 String id = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
+
+			String id = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 				mav = new ModelAndView("Timetable");
 				//define module in different time
 				
@@ -50,7 +50,7 @@ public class TimetableController {
 				 {
 					 allModule=sService.findModuleByStudentId(id);
 				 }
-				 if(firstLetter=="L")
+				 if(firstLetter.equalsIgnoreCase("L"))
 				 {
 					 allModule=lService.findModuleByLecturerId(id);
 				 }
