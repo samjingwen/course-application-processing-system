@@ -31,17 +31,21 @@ public class TimetableController {
 	public ModelAndView studentTimetable(HttpSession session) {
 		     ModelAndView mav = new ModelAndView(" ");	
 		     //get user id
+		     
 			 String id = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 				mav = new ModelAndView("Timetable");
-				//define modulelist in different time
+				//define module in different time
+				
 				TreeMap<Integer, String> morcourse=new TreeMap<>();
 				TreeMap<Integer, String> aftcourse=new TreeMap<>();
 				TreeMap<Integer, String> evecourse=new TreeMap<>();
 				 ArrayList<sg.iss.team5.model.Module> allModule=new ArrayList<>();
 				 //get the first char of user
+				 
 				 String firstLetter = String.valueOf(id.charAt(0));
 				 ArrayList<sg.iss.team5.model.Module> thisYearModule=new ArrayList<>();
 				 //judge id is student id or lecturer id 
+				 
 				 if(firstLetter.equalsIgnoreCase("S"))
 				 {
 					 allModule=sService.findModuleByStudentId(id);
@@ -51,9 +55,11 @@ public class TimetableController {
 					 allModule=lService.findModuleByLecturerId(id);
 				 }
 				 //get current year
+				 
 				 Date date=new Date();
 				 int year = date.getYear();
 				 //get modulelist in this year
+				 
 				 for (Module module : allModule) {
 					if (module.getAcademicYear().getYear()==year) {
 						thisYearModule.add(module);			

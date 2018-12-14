@@ -46,7 +46,6 @@ public class LecturerGradeCourseController {
 		if (!SecurityConfigurations.CheckLectAuth(session))
 			return new ModelAndView("redirect:/home/login");
 		// Security
-		
 		ModelAndView mav = new ModelAndView("gradebook6");
 		String lid = ((UserSession) session.getAttribute("USERSESSION")).getUser().getUserID();
 		ArrayList<Module> thisyearmodule = new ArrayList<Module>();
@@ -54,15 +53,18 @@ public class LecturerGradeCourseController {
 		ArrayList<Module> allmodule = new ArrayList<Module>();
 		thisyearmodule = lService.findModuleByLecturerId(lid);
 		//Get current Year
+		
 		 Date date=new Date();
 		 int year = date.getYear();
 		 //get current year module
+		 
 		 for (Module module : allmodule) {
 				if (module.getAcademicYear().getYear()==year) {
 					thisyearmodule.add(module);			
 				}
 			}
 		 //get hashmap ,key is coursename ,value is module
+		 
 		for (Module module : thisyearmodule) {
 			String eachcourse = module.getCoursedetail().getCourseName();
 			Module eachmodule = module;
@@ -75,8 +77,10 @@ public class LecturerGradeCourseController {
 	@RequestMapping(value = "/gradebook/exact", method = RequestMethod.POST)
 	public ModelAndView listAllStudent(@ModelAttribute("module") Module module, HttpSession session) {
 		// Get list of students from module(dropdownlist selected)
+		
 		ModelAndView mav = new ModelAndView("gradebook");
 		// module = sService.findModulebyID(module.getModuleID());
+		
 		module = sService.findModulebyID("0617H0007");
 		List<Studentcourse> scList = module.getStudentcourses();
 		// module = sService.findModulebyID("0117A0006");
