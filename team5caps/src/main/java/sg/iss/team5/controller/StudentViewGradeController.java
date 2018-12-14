@@ -36,7 +36,7 @@ public class StudentViewGradeController {
 		
 		ModelAndView mav = new ModelAndView("studentViewGrade");
 		mav.addObject("courseList", c2);
-		double gpa = studentService.getGpa(c2);
+		String gpa = String.format("%.2f", studentService.getGpa(c2));
 		mav.addObject("gpa", gpa);
 		return mav;
 	}
