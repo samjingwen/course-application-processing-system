@@ -126,16 +126,13 @@ public class LecturerViewCourseController {
 		}
 		Module module = lectservice.findModuleByModuleID(request.getModuleID());
 		System.out.println(module.getCoursedetail().getCourseName());
-		System.out.println("HAHAHAHAHA");
 		request.setCourseName(module.getCoursedetail().getCourseName());
 		request.setLecturerName(
 				module.getLecturer().getUser().getFirstName() + " " + module.getLecturer().getUser().getLastName());
 		request.setModuleID(module.getModuleID());
 		request.setVenue(module.getVenue());
 		Student student = lectservice.findStudentByStudentID(request.getStudentID());
-		System.out.println(student);
 		request.setStudentName(student.getUser().getFirstName() + " " + student.getUser().getLastName());
-		System.out.println(request);
 		mav.addObject("newRequest", request);
 		mav.setViewName("confirmRequest");
 		session.setAttribute("REQUEST", request);
