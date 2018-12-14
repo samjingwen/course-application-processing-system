@@ -86,6 +86,10 @@ body {
   font-weight: 300;
 }
 
+.popup-text h1{
+  color:white;
+}
+
 </style>
 <script>
 var moveForce = 30; // max popup movement in pixels
